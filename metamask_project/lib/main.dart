@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:passwordfield/passwordfield.dart';
 void main() {
@@ -30,7 +29,8 @@ class StartPage extends StatelessWidget {
     var screensize = MediaQuery.of(context).size;
     return Scaffold(
         body: Center(
-            child: Column(
+            child: SingleChildScrollView(
+              child:Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                   const SizedBox(height: 22,),
@@ -74,6 +74,7 @@ class StartPage extends StatelessWidget {
                 ],
           )
         )
+        )
     );
   }
 }
@@ -88,117 +89,119 @@ class ImportPage extends StatefulWidget {
 class _ImportState extends State<ImportPage> {
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-      body:Center(
-             child: ListView(
+      body: SingleChildScrollView(
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
+                          const SizedBox(height: 18,),
                           Row (
                             mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                            //crossAxisAlignment: CrossAxisAlignment.start,
                             children:[
                               Expanded(
-                                  flex: 5,
-                                  child:Stack(
-                                      fit: StackFit.loose,
-                                      children:<Widget>[
-                                        const Text(''),
-                                        IconButton( alignment: Alignment.topLeft,
-                                                onPressed: () {Navigator.pop(context);},
-                                                icon: const Icon(Icons.arrow_back,size: 16, )
-                                                    ),
-                                          const Positioned(
-                                                top: 14,
-                                                left: 118,
-                                                child: Text('METAMASK',textAlign:TextAlign.center,style: TextStyle(fontSize: 16, fontFamily:"Roboto Mono", letterSpacing: 5,fontWeight: FontWeight.normal, ),),
-                                    )]))
-                              ]),
-
+                                  flex: 1,
+                                  child: IconButton(
+                                      alignment: Alignment.centerLeft,
+                                      onPressed: () {Navigator.pop(context);},
+                                      icon: const Icon(Icons.arrow_back,size: 16, )
+                                  )),
+                              const Expanded(
+                                  flex: 3,
+                                  child: Text('METAMASK',textAlign:TextAlign.center,style: TextStyle(fontSize: 16, fontFamily:"Roboto Mono", letterSpacing: 5,fontWeight: FontWeight.normal,))
+                              ),
+                              const Expanded(
+                                  flex: 1,
+                                  child: Text(''),
+                              )
+                            ]),
                           const Text("Import from seed",textAlign: TextAlign.center, style: TextStyle(fontSize:16, fontFamily: "Roboto", fontWeight: FontWeight.bold),),
                           const SizedBox(height: 15,),
-                       Container(
-                         padding: const EdgeInsets.fromLTRB(15,0,15,0),
-                         child:Column(
-                           children: [
-                             Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: const <Widget>[
-                                  Text('Secret Recovery Phrase',style: TextStyle(fontFamily: "Roboto", fontSize: 12),),
-                                  Text('' )
-                                ],
-                              ),
-                              PasswordField(
-                                color: Colors.blue,
-                                inputDecoration: PasswordDecoration(),
-                                border: PasswordBorder(
-                                    border: OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                        color: Colors.blueAccent,
-                                      ),
-                                      borderRadius: BorderRadius.circular(10),
-                                    )
-                                ),
-                              ),
-                              const SizedBox(height: 15,),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: const <Widget>[
-                                  Text('New Password',style: TextStyle(fontFamily: "Roboto", fontSize: 12),),
-                                  Text('' )
-                                ],
-                              ),
-                              PasswordField(
-                                  color: Colors.blue,
-                                  inputDecoration: PasswordDecoration(),
-                                  border: PasswordBorder(
-                                    border: OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                        color: Colors.blueAccent,
-                                      ),
-                                      borderRadius: BorderRadius.circular(10),
-                                    )
-                                  ),
-                            ),
-                              const SizedBox(height: 15,),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: const <Widget>[
-                                  Text('Confirm Password',style: TextStyle(fontFamily: "Roboto", fontSize: 12),),
-                                  Text('' )
-                                ],
-                              ),
-                              PasswordField(
-                                color: Colors.blue,
-                                inputDecoration: PasswordDecoration(),
-                                border: PasswordBorder(
-                                    border: OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                        color: Colors.blueAccent,
-                                      ),
-                                      borderRadius: BorderRadius.circular(10),
-                                    )
-                                ),
-                              ),
-                              const SizedBox(height: 20,),
-                            ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  primary: Colors.blue,
-                                  onPrimary: Colors.white,
-                                  minimumSize: const Size(350,35),
-                                  side: const BorderSide(width: 2,color: Colors.blue),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(30)
-                                  )
-                              ),
-                              child: const Text('Import',style: TextStyle(fontSize: 12,fontFamily: "Roboto", color: Colors.white),),
-                              onPressed: () { },
-                            )
-                          ])
-                       ),
+                          Container(
+                                padding: const EdgeInsets.fromLTRB(15,0,15,0),
+                                child:Column(
+                                    children: [
+                                          Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            children: const <Widget>[
+                                              Text('Secret Recovery Phrase',style: TextStyle(fontFamily: "Roboto", fontSize: 12),),
+                                              Text('' )
+                                            ],
+                                          ),
+                                          PasswordField(
+                                            color: Colors.blue,
+                                            floatingText: "Secret Phrases",
+                                            inputDecoration: PasswordDecoration(),
+                                            border: PasswordBorder(
+                                                border: OutlineInputBorder(
+                                                  borderSide: const BorderSide(
+                                                    color: Colors.blueAccent,
+                                                  ),
+                                                  borderRadius: BorderRadius.circular(10),
+                                                )
+                                            ),
+                                          ),
+                                          const SizedBox(height: 15,),
+                                          Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            children: const <Widget>[
+                                              Text('New Password',style: TextStyle(fontFamily: "Roboto", fontSize: 12),),
+                                              Text('' )
+                                            ],
+                                          ),
+                                          PasswordField(
+                                              color: Colors.blue,
+                                              inputDecoration: PasswordDecoration(),
+                                              border: PasswordBorder(
+                                                border: OutlineInputBorder(
+                                                  borderSide: const BorderSide(
+                                                    color: Colors.blueAccent,
+                                                  ),
+                                                  borderRadius: BorderRadius.circular(10),
+                                                )
+                                              ),
+                                        ),
+                                          const SizedBox(height: 15,),
+                                          Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            children: const <Widget>[
+                                              Text('Confirm Password',style: TextStyle(fontFamily: "Roboto", fontSize: 12),),
+                                              Text('' )
+                                            ],
+                                          ),
+                                          PasswordField(
+                                            color: Colors.blue,
+                                            inputDecoration: PasswordDecoration(),
+                                            border: PasswordBorder(
+                                                border: OutlineInputBorder(
+                                                  borderSide: const BorderSide(
+                                                    color: Colors.blueAccent,
+                                                  ),
+                                                  borderRadius: BorderRadius.circular(10),
+                                                )
+                                            ),
+                                          ),
+                                          const SizedBox(height: 20,),
+                                        ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                              primary: Colors.blue,
+                                              onPrimary: Colors.white,
+                                              minimumSize: const Size(350,35),
+                                              side: const BorderSide(width: 2,color: Colors.blue),
+                                              shape: RoundedRectangleBorder(
+                                                  borderRadius: BorderRadius.circular(30)
+                                              )
+                                          ),
+                                          child: const Text('Import',style: TextStyle(fontSize: 12,fontFamily: "Roboto", color: Colors.white),),
+                                          onPressed: () { },
+                                        )
+                                      ])
+                                   ),
                           const SizedBox(height: 15,),
-          ]
+            ]
+          )
         )
-      )
+
     );
   }
   
