@@ -105,11 +105,43 @@ class _CreateWalletState extends State<CreateWalletPage> {
           )
         ),
         Step(
-          title: const Text('Secret Wallet',style: TextStyle(fontSize: 9,fontFamily: "Roboto",color: Colors.blueAccent),
+          title: const Text('Secure wallet',style: TextStyle(fontSize: 9,fontFamily: "Roboto",color: Colors.blueAccent),
               ),
           content: SingleChildScrollView(
               child: Column(
-
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    const Text('Confirm your password', textAlign: TextAlign.left,style: TextStyle(fontSize: 20,fontFamily: "Roboto",color: Colors.black),),
+                    const SizedBox(height:3 ,),
+                    const Text('Before continuing we need to confirm your password',textAlign: TextAlign.left,style: TextStyle(fontFamily: "Roboto",fontSize: 12),),
+                    const SizedBox(height: 3,),
+                    PasswordField(
+                      color: Colors.blue,
+                      inputDecoration: PasswordDecoration(),
+                      border: PasswordBorder(
+                          border: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                              color: Colors.blueAccent,
+                            ),
+                            borderRadius: BorderRadius.circular(10),
+                          )
+                      ),
+                    ),
+                    const SizedBox(height: 20,),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          primary: Colors.blue,
+                          onPrimary: Colors.white,
+                          minimumSize: const Size(350,35),
+                          side: const BorderSide(width: 2,color: Colors.blue),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30)
+                          )
+                      ),
+                      child: const Text('Create Password',style: TextStyle(fontSize: 12,fontFamily: "Roboto", color: Colors.white),),
+                      onPressed: onContinue,
+                    )
+                  ],
           ),
           )
         ),

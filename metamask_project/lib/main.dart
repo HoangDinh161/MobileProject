@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:passwordfield/passwordfield.dart';
+import 'createWallet.dart';
 void main() {
   runApp(const MyApp());
 }
@@ -67,7 +68,9 @@ class StartPage extends StatelessWidget {
                         )
                       ),
                       child: const Text('Create a new wallet',style: TextStyle(fontSize: 12,fontFamily: "Roboto", color: Colors.white),),
-                      onPressed: () { },
+                      onPressed: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>const CreateWalletPage()));
+                      },
                   ),
                   const SizedBox(height: 30),
                   const Text('By proceeding, you agree to these Terms and Conditions',style: TextStyle(fontSize: 11, fontFamily: "Roboto",color: Colors.black26) )
