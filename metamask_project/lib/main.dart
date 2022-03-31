@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:passwordfield/passwordfield.dart';
 void main() {
@@ -90,11 +91,8 @@ class _ImportState extends State<ImportPage> {
 
     return Scaffold(
       body:Center(
-             child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
+             child: ListView(
                         children: <Widget>[
-                          const SizedBox(height: 15,),
                           Row (
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -115,7 +113,7 @@ class _ImportState extends State<ImportPage> {
                                                 child: Text('METAMASK',textAlign:TextAlign.center,style: TextStyle(fontSize: 16, fontFamily:"Roboto Mono", letterSpacing: 5,fontWeight: FontWeight.normal, ),),
                                     )]))
                               ]),
-                          const SizedBox(height: 15,),
+
                           const Text("Import from seed",textAlign: TextAlign.center, style: TextStyle(fontSize:16, fontFamily: "Roboto", fontWeight: FontWeight.bold),),
                           const SizedBox(height: 15,),
                        Container(
