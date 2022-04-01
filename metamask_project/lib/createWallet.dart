@@ -32,7 +32,7 @@ class _CreateWalletState extends State<CreateWalletPage> {
           isActive: _currentstep >=0,
           title: const Text('Create password',overflow: TextOverflow.visible,style: TextStyle(fontSize: 6,fontFamily: "Roboto",color: Colors.blueAccent),),
           content: SingleChildScrollView(
-              child: Column(
+            child:Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children:  [
@@ -55,7 +55,9 @@ class _CreateWalletState extends State<CreateWalletPage> {
                                 Text('' )
                               ],
                             ),
-                            PasswordField(
+                            SizedBox(
+                                height: 70,
+                                child:PasswordField(
                               color: Colors.blue,
                               inputDecoration: PasswordDecoration(),
                               border: PasswordBorder(
@@ -66,7 +68,7 @@ class _CreateWalletState extends State<CreateWalletPage> {
                                     borderRadius: BorderRadius.circular(10),
                                   )
                               ),
-                            ),
+                            )),
                             const SizedBox(height: 15,),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -75,7 +77,9 @@ class _CreateWalletState extends State<CreateWalletPage> {
                                 Text('' )
                               ],
                             ),
-                            PasswordField(
+                            SizedBox(
+                                height :70,
+                                child: PasswordField(
                               color: Colors.blue,
                               inputDecoration: PasswordDecoration(),
                               border: PasswordBorder(
@@ -86,7 +90,8 @@ class _CreateWalletState extends State<CreateWalletPage> {
                                     borderRadius: BorderRadius.circular(10),
                                   )
                               ),
-                            ),
+                            )
+                          ),
                             const SizedBox(height: 20,),
                             ElevatedButton(
                               style: ElevatedButton.styleFrom(
@@ -104,8 +109,8 @@ class _CreateWalletState extends State<CreateWalletPage> {
                           ])
                   ),
                 ],
-              ),
-          )
+            )
+          ),
         ),
         Step(
           state: _currentstep <=1? StepState.editing : StepState.complete,
@@ -113,7 +118,7 @@ class _CreateWalletState extends State<CreateWalletPage> {
           title: const Text('Secure wallet',overflow: TextOverflow.clip,style: TextStyle(fontSize: 6,fontFamily: "Roboto",color: Colors.blueAccent),
               ),
           content: SingleChildScrollView(
-                child:Column(
+              child:Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     const Text('Confirm your password', textAlign: TextAlign.left,style: TextStyle(fontSize: 20,fontFamily: "Roboto",color: Colors.black),),
@@ -147,8 +152,8 @@ class _CreateWalletState extends State<CreateWalletPage> {
                       onPressed: onContinue,
                     )
                   ],
+            )
           ),
-          )
         ),
           Step(
             state: _currentstep <=2? StepState.editing : StepState.complete,
@@ -198,13 +203,13 @@ class _CreateWalletState extends State<CreateWalletPage> {
                   ]),
               const SizedBox(height: 10,),
               Expanded(
-                  child:Stepper(
-                    steps: stepLiLt(),
-                    type: StepperType.horizontal,
-                    currentStep: _currentstep,
-                    controlsBuilder: (BuildContext context, ControlsDetails details) {
-                      return const SizedBox();
-                    },
+                      child:Stepper(
+                          steps: stepLiLt(),
+                          type: StepperType.horizontal,
+                          currentStep: _currentstep,
+                          controlsBuilder: (BuildContext context, ControlsDetails details) {
+                            return const SizedBox();
+                        },
               )
               )
             ]
