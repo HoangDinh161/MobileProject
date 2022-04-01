@@ -28,10 +28,13 @@ class _CreateWalletState extends State<CreateWalletPage> {
 
   List<Step> stepLiLt() => [
         Step(
-          title: const Text('Create password',style: TextStyle(fontSize: 9,fontFamily: "Roboto",color: Colors.blueAccent),),
+          state: _currentstep <=0 ? StepState.editing : StepState.complete ,
+          isActive: _currentstep >=0,
+          title: const Text('Create password',overflow: TextOverflow.visible,style: TextStyle(fontSize: 6,fontFamily: "Roboto",color: Colors.blueAccent),),
           content: SingleChildScrollView(
-              child: Column(
+            child:Column(
                 mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children:  [
                     const Text('Create Password',textAlign: TextAlign.center,
                       style: TextStyle(fontSize: 16, fontFamily: "Roboto",fontWeight: FontWeight.bold),
@@ -52,7 +55,9 @@ class _CreateWalletState extends State<CreateWalletPage> {
                                 Text('' )
                               ],
                             ),
-                            PasswordField(
+                            SizedBox(
+                                height: 70,
+                                child:PasswordField(
                               color: Colors.blue,
                               inputDecoration: PasswordDecoration(),
                               border: PasswordBorder(
@@ -63,7 +68,7 @@ class _CreateWalletState extends State<CreateWalletPage> {
                                     borderRadius: BorderRadius.circular(10),
                                   )
                               ),
-                            ),
+                            )),
                             const SizedBox(height: 15,),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -72,7 +77,9 @@ class _CreateWalletState extends State<CreateWalletPage> {
                                 Text('' )
                               ],
                             ),
-                            PasswordField(
+                            SizedBox(
+                                height :70,
+                                child: PasswordField(
                               color: Colors.blue,
                               inputDecoration: PasswordDecoration(),
                               border: PasswordBorder(
@@ -83,7 +90,8 @@ class _CreateWalletState extends State<CreateWalletPage> {
                                     borderRadius: BorderRadius.circular(10),
                                   )
                               ),
-                            ),
+                            )
+                          ),
                             const SizedBox(height: 20,),
                             ElevatedButton(
                               style: ElevatedButton.styleFrom(
@@ -101,14 +109,16 @@ class _CreateWalletState extends State<CreateWalletPage> {
                           ])
                   ),
                 ],
-              ),
-          )
+            )
+          ),
         ),
         Step(
-          title: const Text('Secure wallet',style: TextStyle(fontSize: 9,fontFamily: "Roboto",color: Colors.blueAccent),
+          state: _currentstep <=1? StepState.editing : StepState.complete,
+          isActive: _currentstep>=1,
+          title: const Text('Secure wallet',overflow: TextOverflow.clip,style: TextStyle(fontSize: 6,fontFamily: "Roboto",color: Colors.blueAccent),
               ),
           content: SingleChildScrollView(
-              child: Column(
+              child:Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     const Text('Confirm your password', textAlign: TextAlign.left,style: TextStyle(fontSize: 20,fontFamily: "Roboto",color: Colors.black),),
@@ -138,29 +148,72 @@ class _CreateWalletState extends State<CreateWalletPage> {
                               borderRadius: BorderRadius.circular(30)
                           )
                       ),
-                      child: const Text('Create Password',style: TextStyle(fontSize: 12,fontFamily: "Roboto", color: Colors.white),),
+                      child: const Text('Confirm',style: TextStyle(fontSize: 12,fontFamily: "Roboto", color: Colors.white),),
                       onPressed: onContinue,
                     )
                   ],
+            )
           ),
-          )
         ),
-        const Step(
-          title: Text('Confirm Secret Recovery Phrase', style: TextStyle(fontSize: 9,fontFamily: "Roboto",color: Colors.blueAccent)),
+          Step(
+            state: _currentstep <=2? StepState.editing : StepState.complete,
+            isActive: _currentstep>=2,
+          title: const Text('Confirm Secret Recovery Phrase',overflow: TextOverflow.clip, style: TextStyle(fontSize: 6,fontFamily: "Roboto",color: Colors.blueAccent)),
           content: SingleChildScrollView(
-
-  )
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: const [
+                    Text('Write down your Secret Recovery Phrase',textAlign: TextAlign.center, style: TextStyle(fontSize: 15, fontFamily: "Roboto",fontWeight: FontWeight.bold)),
+                    SizedBox(height: 5,),
+                    Text("This is your Secret Recovery Phrase. Write it down on a paper or keep in a safe place. You'll be asked to re-enter this phrase (in order) on the next step."
+                    ,textAlign: TextAlign.center, style: TextStyle(fontSize: 9,fontFamily: "Roboto"),)
+                  ],
+                ),
+          )
           ),
         ];
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-      body: Stepper(
-        steps: stepLiLt(),
-        type: StepperType.vertical,
-
-      )
+      body: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              const SizedBox(height: 25),
+              Row (
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  //crossAxisAlignment: CrossAxisAlignment.start,
+                  children:[
+                    Expanded(
+                        flex: 1,
+                        child: IconButton(
+                            alignment: Alignment.centerLeft,
+                            onPressed: () {_currentstep <= 0 ?Navigator.pop(context): onBack();},
+                            icon: const Icon(Icons.arrow_back,size: 16, )
+                        )),
+                    const Expanded(
+                        flex: 3,
+                        child: Text('METAMASK',textAlign:TextAlign.center,style: TextStyle(fontSize: 16, fontFamily:"Roboto Mono", letterSpacing: 5,fontWeight: FontWeight.normal,))
+                    ),
+                    const Expanded(
+                      flex: 1,
+                      child: Text(''),
+                    )
+                  ]),
+              const SizedBox(height: 10,),
+              Expanded(
+                      child:Stepper(
+                          steps: stepLiLt(),
+                          type: StepperType.horizontal,
+                          currentStep: _currentstep,
+                          controlsBuilder: (BuildContext context, ControlsDetails details) {
+                            return const SizedBox();
+                        },
+              )
+              )
+            ]
+        )
     );
   }
 
