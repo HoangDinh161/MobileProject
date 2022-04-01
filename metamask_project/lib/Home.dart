@@ -1,10 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:metamask_project/Purchase.dart';
 
 class MyHomePage extends StatelessWidget {
   final String title;
 
-  const MyHomePage({required this.title});
+  const MyHomePage({Key? key, required this.title}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -116,7 +116,9 @@ class MyHomePage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     buttonInMenu(buttonText: 'receive', onTap: () {  }, icon: const Icon(Icons.arrow_downward, color:Colors.white),),
-                    buttonInMenu(buttonText: 'buy', onTap: () {  }, icon: const Icon(Icons.credit_card, color:Colors.white),),
+                    buttonInMenu(buttonText: 'buy', onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>const PurchasePage())); },
+                      icon: const Icon(Icons.credit_card, color:Colors.white),),
                     buttonInMenu(buttonText: 'send', onTap: () {  }, icon: const Icon(Icons.arrow_upward, color:Colors.white),),
                     buttonInMenu(buttonText: 'swap', onTap: () {  }, icon: const Icon(Icons.arrow_forward, color:Colors.white),),
                   ],
