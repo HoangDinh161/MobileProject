@@ -6,4 +6,4 @@ A new Flutter project.
 
 Màn hình menu nhưng chưa có nav tới do chưa xong login
 
-![ScreenShot](/metamask_project/assets/Screenshot 2022-04-01 143558.png)
+  <img src="metamask_project/assets/Screenshot 2022-04-01 143558.png" >
