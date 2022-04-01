@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:passwordfield/passwordfield.dart';
-import 'createWallet.dart';
+import 'CreateWallet.dart';
 void main() {
   runApp(const MyApp());
 }
