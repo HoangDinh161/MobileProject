@@ -28,12 +28,13 @@ class PurchasePage extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-      appBar: AppBar(title: const Text('Purchase Method', style: TextStyle(fontSize: 16,fontFamily: "Roboto",color: Colors.black),),
+      appBar: AppBar(
+        title: const Text('Purchase Method', style: TextStyle(fontSize: 16,fontFamily: "Roboto",color: Colors.black),),
         backgroundColor: Colors.white,
         centerTitle: true,
         actions:[
           TextButton(child: const Text('Cancel',style: TextStyle(fontSize: 12,fontFamily: "Roboto",color: Colors.blueAccent),),
-          onPressed: (){},)
+          onPressed: (){Navigator.pop(context);},)
         ],
         ),
       body: Container(
