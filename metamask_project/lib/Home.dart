@@ -17,11 +17,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: '123',),
+      home: const MyHomePage(title: '123',),
     );
   }
 }
-*/
+ */
 class MyHomePage extends StatelessWidget {
   final String title;
 
@@ -34,7 +34,7 @@ class MyHomePage extends StatelessWidget {
         appBar: AppBar(
           // The title text which will be shown on the action bar
           toolbarHeight: 47,
-          leading: IconButton(icon: const Icon(Icons.menu, color: Color(0xff1890ff),), onPressed: () {},),
+          //leading: IconButton(icon: const Icon(Icons.menu, color: Color(0xff1890ff),), onPressed: () {},),
           title: Column(
               children:const [
                 Text("Wallet", textAlign: TextAlign.center,
@@ -51,6 +51,7 @@ class MyHomePage extends StatelessWidget {
           ),
           centerTitle: true,
           backgroundColor: Colors.white,
+          foregroundColor: Colors.blue,
         ),
         body:  Padding(
           padding: const EdgeInsets.only(top: 50.0),
