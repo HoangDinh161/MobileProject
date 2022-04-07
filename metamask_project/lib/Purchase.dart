@@ -32,6 +32,7 @@ class PurchasePage extends StatelessWidget {
         title: const Text('Purchase Method', style: TextStyle(fontSize: 16,fontFamily: "Roboto",color: Colors.black),),
         backgroundColor: Colors.white,
         centerTitle: true,
+        toolbarHeight: 47,
         actions:[
           TextButton(child: const Text('Cancel',style: TextStyle(fontSize: 12,fontFamily: "Roboto",color: Colors.blueAccent),),
           onPressed: (){Navigator.pop(context);},)
