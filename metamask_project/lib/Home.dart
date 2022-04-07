@@ -181,9 +181,11 @@ class MyHomePage extends StatelessWidget {
                             ),
                           ),
 
-                        SizedBox(
+                          Padding(
+                            padding: const EdgeInsets.only(top:10),
+                            child:SizedBox(
                               width: 110,
-                              height: 50,
+                              height: 70,
                               child: Column(
                                 children:  [
                                   const Text(
@@ -210,6 +212,7 @@ class MyHomePage extends StatelessWidget {
                                 ],
                               ),
                             ),
+                          )
                         ],
                       ),
                     )
