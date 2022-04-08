@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:metamask_project/Purchase.dart';
 import 'package:metamask_project/SideMenu.dart';
 
-/*void main() {
+import 'ImportTokenPage.dart';
+
+void main() {
   runApp(const MyApp());
 }
 
@@ -21,7 +23,7 @@ class MyApp extends StatelessWidget {
     );
   }
 }
- */
+
 class MyHomePage extends StatelessWidget {
   final String title;
 
@@ -175,33 +177,39 @@ class MyHomePage extends StatelessWidget {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 19.0),
-                child: SizedBox(
-                  width: 110,
-                  height: 39,
-                  child: Column(
-                    children: const [
-                      Text(
-                        "Don’t see your token ?",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Color(0xff979797),
-                          fontSize: 11,
+                  Padding(
+                            padding: const EdgeInsets.only(top:10),
+                            child:SizedBox(
+                              width: 110,
+                              height: 70,
+                              child: Column(
+                                children:  [
+                                  const Text(
+                                    "Don’t see your token ?",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Color(0xff979797),
+                                      fontSize: 11,
+                                      fontFamily: "Roboto",
+                                    ),
+                                  ),
+                                  TextButton(
+
+                                      onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context)=> const ImportTokenPage()));},
+                                      child: const Text(
+                                        "Import Tokens",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          color: Color(0xff1890ff),
+                                          fontSize: 11,
+                                          fontFamily: "Roboto",
+                                        ),
+                                      )
+                                  )
+                                ],
+                              ),
+                            )
                         ),
-                      ),
-                      Text(
-                        "Import Tokens",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Color(0xff1890ff),
-                          fontSize: 11,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              )
             ],
           ),
         )

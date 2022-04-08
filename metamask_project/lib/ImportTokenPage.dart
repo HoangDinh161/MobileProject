@@ -87,12 +87,16 @@ class _ImportTokenState extends State<ImportTokenPage> {
                                 Text('' )
                               ],
                             ),
-                             const TextField(
-                              decoration: InputDecoration(
-                                labelText: 'Enter Token Address',
-                                border: OutlineInputBorder(),
-                              ),
-                            ),
+                             const SizedBox(
+                                 height: 50,
+                                 child: TextField(
+                                    decoration: InputDecoration(
+                                    hintText: 'Enter Token Address',
+                                    border: OutlineInputBorder(),
+                                  ),
+                                   style: TextStyle(fontFamily: "Roboto", fontSize: 11),
+                                )
+                             ),
                             const SizedBox(height: 30,),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -101,11 +105,15 @@ class _ImportTokenState extends State<ImportTokenPage> {
                                 Text('' )
                               ],
                             ),
-                            const TextField(
-                              decoration: InputDecoration(
-                                labelText: 'Enter Token Symbol',
-                                border: OutlineInputBorder(),
-                              ),
+                            const SizedBox(
+                                height: 50,
+                                child: TextField(
+                                  decoration: InputDecoration(
+                                    hintText: 'Enter Token Symbol',
+                                    border: OutlineInputBorder(),
+                                  ),
+                                  style: TextStyle(fontFamily: "Roboto", fontSize: 11),
+                            )
                             ),
                             const SizedBox(height: 30,),
                             Row(
@@ -115,13 +123,15 @@ class _ImportTokenState extends State<ImportTokenPage> {
                                 Text('' )
                               ],
                             ),
-                            const TextField(
-                              decoration: InputDecoration(
-                                border: OutlineInputBorder(),
-                                labelText: 'Enter Token of Precision',
-                              ),
-
-                            ),
+                            const SizedBox(
+                                height: 50,
+                                child: TextField(
+                                  decoration: InputDecoration(
+                                    border: OutlineInputBorder(),
+                                    hintText: 'Enter Token of Precision',
+                                  ),
+                                  style: TextStyle(fontFamily: "Roboto", fontSize: 11),
+                            )),
                             const SizedBox(height: 50,),
                             ElevatedButton(
                               style: ElevatedButton.styleFrom(
