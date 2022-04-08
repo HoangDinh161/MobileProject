@@ -4,7 +4,7 @@ import 'package:metamask_project/SideMenu.dart';
 
 import 'ImportTokenPage.dart';
 
-void main() {
+/*void main() {
   runApp(const MyApp());
 }
 
@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+ */
 
 class MyHomePage extends StatelessWidget {
   final String title;
@@ -194,7 +195,6 @@ class MyHomePage extends StatelessWidget {
                                     ),
                                   ),
                                   TextButton(
-
                                       onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context)=> const ImportTokenPage()));},
                                       child: const Text(
                                         "Import Tokens",
