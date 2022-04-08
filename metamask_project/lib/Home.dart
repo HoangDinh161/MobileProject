@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:metamask_project/ImportTokenPage.dart';
 import 'package:metamask_project/Purchase.dart';
 import 'package:metamask_project/SideMenu.dart';
 
-void main() {
+/*void main() {
   runApp(const MyApp());
 }
 
@@ -22,7 +21,7 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
+ */
 class MyHomePage extends StatelessWidget {
   final String title;
 
@@ -31,7 +30,7 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        drawer: const SideMenu(),
+        drawer: SideMenu(),
         appBar: AppBar(
           // The title text which will be shown on the action bar
           toolbarHeight: 47,
@@ -41,14 +40,12 @@ class MyHomePage extends StatelessWidget {
                 Text("Wallet", textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.black,
-                      fontSize: 14,
-                      fontFamily: "Roboto",)
+                      fontSize: 14,)
                 ),
                 Text("Smart chain", textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Color(0xff998b8b),
-                      fontSize: 9,
-                      fontFamily: "Roboto",)
+                      fontSize: 9,)
                 ),
               ]
           ),
@@ -56,167 +53,158 @@ class MyHomePage extends StatelessWidget {
           backgroundColor: Colors.white,
           foregroundColor: Colors.blue,
         ),
-        body:  SingleChildScrollView(
-              child:Padding(
-                  padding: const EdgeInsets.only(top: 50.0),
-                  child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          CircleAvatar(
-                            backgroundColor: Colors.greenAccent[400],
-                            radius: 27,
-                            child: const Text(
-                              'U',
-                              style: TextStyle(fontSize: 15, color: Colors.white,fontFamily: "Roboto",),
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 76,
-                            height: 23,
-                            child: Text(
-                              "Account 1",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: Color(0x89000000),
-                                fontSize: 13,
-                                fontFamily: "Roboto",
-                              ),
-                            ),
-                          ),
-                          const Padding(
-                            padding: EdgeInsets.only(top: 4.0),
-                            child: SizedBox(
-                              width: 42,
-                              height: 10,
-                              child: Text(
-                                "\$ 0.36",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Color(0xff998c8c),
-                                  fontSize: 9,
-                                  fontFamily: "Roboto",
-                                ),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 10.0),
-                            child: SizedBox(
-                              width: 98,
-                              height: 16,
-                              child: (
-                                  SizedBox(
-                                    width: 98,
-                                    height: 16,
-                                    child: Material(
-                                      color: const Color(0xffc9def2),
-                                      borderRadius: BorderRadius.circular(16),
-                                      child: const Padding(
-                                        padding: EdgeInsets.only(left: 15, right: 14, top: 3, bottom: 3, ),
-                                        child: (
-                                            SizedBox(
-                                              width: 68.48,
-                                              height: 14,
-                                              child: Text(
-                                                "0x5368...4037",
-                                                textAlign: TextAlign.center,
-                                                style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 9,
-                                                  fontFamily: "Roboto",
-                                                ),
-                                              ),
-                                            )
-                                        ),
-                                      ),
-                                    ),
-                                  )
-                              ),
-                            ),
-                          ),
-
-                          Padding(
-                            padding: const EdgeInsets.only(top: 19.0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                buttonInMenu(buttonText: 'receive', onTap: () {  }, icon: const Icon(Icons.arrow_downward, color:Colors.white),),
-                                buttonInMenu(buttonText: 'buy', onTap: () {
-                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>const PurchasePage())); },
-                                  icon: const Icon(Icons.credit_card, color:Colors.white),),
-                                buttonInMenu(buttonText: 'send', onTap: () {  }, icon: const Icon(Icons.arrow_upward, color:Colors.white),),
-                                buttonInMenu(buttonText: 'swap', onTap: () {  }, icon: const Icon(Icons.arrow_forward, color:Colors.white),),
-                              ],
-                            ),
-                          ),
-
-                          Padding(
-                            padding: const EdgeInsets.only(top: 16.0),
-                            child: SizedBox(
-                              width: 414,
-                              height: 20,
-                              child: Column(
-                                  children:const [
-                                    SizedBox(
-                                      child: Text(
-                                        "Tokens",
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          color: Color(0xff1890ff),
-                                          fontSize: 13,
-                                          fontFamily: "Roboto",
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(height: 3),
-                                    Divider(
-                                      thickness: 1,
-                                      height: 2,
-                                      color: Color(0xff1890ff),
-                                    )
-                                  ]
-                              ),
-                            ),
-                          ),
-
-                          Padding(
-                            padding: const EdgeInsets.only(top:10),
-                            child:SizedBox(
-                              width: 110,
-                              height: 70,
-                              child: Column(
-                                children:  [
-                                  const Text(
-                                    "Don’t see your token ?",
+        body:  Padding(
+          padding: const EdgeInsets.only(top: 50.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              CircleAvatar(
+                backgroundColor: Colors.greenAccent[400],
+                radius: 27,
+                child: const Text(
+                  'U',
+                  style: TextStyle(fontSize: 15, color: Colors.white),
+                ),
+              ),
+              const SizedBox(
+                width: 76,
+                height: 23,
+                child: Text(
+                  "Account 1",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Color(0x89000000),
+                    fontSize: 13,
+                  ),
+                ),
+              ),
+              const Padding(
+                padding: EdgeInsets.only(top: 4.0),
+                child: SizedBox(
+                  width: 42,
+                  height: 10,
+                  child: Text(
+                    "\$ 0.36",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Color(0xff998c8c),
+                      fontSize: 9,
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 10.0),
+                child: SizedBox(
+                  width: 98,
+                  height: 16,
+                  child: (
+                      SizedBox(
+                        width: 98,
+                        height: 16,
+                        child: Material(
+                          color: const Color(0xffc9def2),
+                          borderRadius: BorderRadius.circular(16),
+                          child: const Padding(
+                            padding: EdgeInsets.only(left: 15, right: 14, top: 3, bottom: 3, ),
+                            child: (
+                                SizedBox(
+                                  width: 68.48,
+                                  height: 14,
+                                  child: Text(
+                                    "0x5368...4037",
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
-                                      color: Color(0xff979797),
-                                      fontSize: 11,
-                                      fontFamily: "Roboto",
+                                      color: Colors.white,
+                                      fontSize: 9,
+
                                     ),
                                   ),
-                                  TextButton(
-                                      onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context)=> const ImportTokenPage()));},
-                                      child: const Text(
-                                        "Import Tokens",
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          color: Color(0xff1890ff),
-                                          fontSize: 11,
-                                          fontFamily: "Roboto",
-                                        ),
-                                      )
-                                  )
-                                ],
-                              ),
+                                )
                             ),
-                          )
-                        ],
+                          ),
+                        ),
+                      )
+                  ),
+                ),
+              ),
+
+              Padding(
+                padding: const EdgeInsets.only(top: 19.0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    buttonInMenu(buttonText: 'receive', onTap: () {  }, icon: const Icon(Icons.arrow_downward, color:Colors.white),),
+                    buttonInMenu(buttonText: 'buy', onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>const PurchasePage())); },
+                      icon: const Icon(Icons.credit_card, color:Colors.white),),
+                    buttonInMenu(buttonText: 'send', onTap: () {  }, icon: const Icon(Icons.arrow_upward, color:Colors.white),),
+                    buttonInMenu(buttonText: 'swap', onTap: () {  }, icon: const Icon(Icons.arrow_forward, color:Colors.white),),
+                  ],
+                ),
+              ),
+
+              Padding(
+                padding: const EdgeInsets.only(top: 16.0),
+                child: SizedBox(
+                  width: 414,
+                  height: 20,
+                  child: Column(
+                      children:const [
+                        SizedBox(
+                          child: Text(
+                            "Tokens",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Color(0xff1890ff),
+                              fontSize: 13,
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 3),
+                        Divider(
+                          thickness: 1,
+                          height: 2,
+                          color: Color(0xff1890ff),
+                        )
+                      ]
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 19.0),
+                child: SizedBox(
+                  width: 110,
+                  height: 39,
+                  child: Column(
+                    children: const [
+                      Text(
+                        "Don’t see your token ?",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Color(0xff979797),
+                          fontSize: 11,
+                        ),
                       ),
-                    )
-    )
+                      Text(
+                        "Import Tokens",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Color(0xff1890ff),
+                          fontSize: 11,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              )
+            ],
+          ),
+        )
     );
   }
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:metamask_project/ReLogin.dart';
+import 'package:metamask_project/TransactionHistory.dart';
 
 class SideMenu extends StatelessWidget {
   const SideMenu({Key? key }) : super(key : key);
@@ -105,7 +106,7 @@ class SideMenu extends StatelessWidget {
             ListTile(
               leading: const Icon(Icons.list_outlined),
               title: const Text('Activity'),
-              onTap: (){},
+              onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>TransactionHistory()));},
             ),
             ListTile(
               leading: const Icon(Icons.settings),
