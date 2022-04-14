@@ -12,21 +12,28 @@ class _SendState extends State<SendPage> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Send to', style: TextStyle(fontSize: 16,fontFamily: "Roboto",color: Colors.black),),
-          backgroundColor: Colors.white,
-          centerTitle: true,
-          actions:[
-            TextButton(child: const Text('Cancel',style: TextStyle(fontSize: 12,fontFamily: "Roboto",color: Colors.blueAccent),),
-              onPressed: (){Navigator.pop(context);},)
-          ],
-        ) ,
-        body: SingleChildScrollView(
-              child: Column(
-
-              )
+      appBar: AppBar(
+        title: const Text(
+          'Send to',
+          style: TextStyle(
+              fontSize: 16, fontFamily: "Roboto", color: Colors.black),
         ),
+        backgroundColor: Colors.white,
+        centerTitle: true,
+        actions: [
+          TextButton(
+            child: const Text(
+              'Cancel',
+              style: TextStyle(
+                  fontSize: 12, fontFamily: "Roboto", color: Colors.blueAccent),
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          )
+        ],
+      ),
+      body: SingleChildScrollView(child: Column()),
     );
   }
-  
 }

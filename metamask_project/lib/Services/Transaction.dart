@@ -1,5 +1,4 @@
 class Transaction {
-
   String type;
   String name;
   String status;
@@ -11,7 +10,8 @@ class Transaction {
   double amount = 0;
   double fee = 0;
 
-  Transaction(this.type, this.name, this.status, this.time, this.date, this.from, this.to, this.Tamount) {
+  Transaction(this.type, this.name, this.status, this.time, this.date,
+      this.from, this.to, this.Tamount) {
     fee = Tamount * 0.1;
     amount = Tamount - fee;
   }
