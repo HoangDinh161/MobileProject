@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:bip39/bip39.dart' as bip39;
 class PhraseCard extends StatelessWidget {
-  PhraseCard({Key? key, required this.phrase}) : super(key: key);
+  const PhraseCard({Key? key, required this.phrase}) : super(key: key);
   final String phrase;
 
   @override
@@ -14,12 +14,13 @@ class PhraseCard extends StatelessWidget {
           border: Border.all(
             color: Colors.blue,
             style: BorderStyle.solid,
+            width: 1.5
           )),
       child: Center(
           child: Text(
         phrase,
         textAlign: TextAlign.center,
-        style: const TextStyle(fontSize: 14, fontFamily: "Roboto"),
+        style: const TextStyle(fontSize: 13, fontFamily: "Roboto"),
       )),
     );
   }
@@ -27,15 +28,15 @@ class PhraseCard extends StatelessWidget {
 class Phrase {
   static String getrandomphrase()  {
     String randomMnemonic =  bip39.generateMnemonic();
-    print(randomMnemonic);
+    //print(randomMnemonic);
     return randomMnemonic;
   }
   static List<PhraseCard> getsecretphrases () {
     List<PhraseCard> listPhrase = <PhraseCard>[];
     List<String> randomPhrase = getrandomphrase().split(" ");
-    randomPhrase.forEach((element) {
+    for (var element in randomPhrase) {
       listPhrase.add(PhraseCard(phrase: element));
-    });
+    }
     return listPhrase;
   }
 }
@@ -47,12 +48,12 @@ class ListPhraseView extends StatelessWidget {
     return Container(
       height: 250,
       width: 300,
-      padding: const EdgeInsets.fromLTRB(0,10,10,10),
+      padding: const EdgeInsets.fromLTRB(10,0,10,10),
       decoration: BoxDecoration(
         border: Border.all(
           color: Colors.blue,
           style: BorderStyle.solid,
-          width: 1.0
+          width: 2.0
         ),
         borderRadius: BorderRadius.circular(10),
       ),
