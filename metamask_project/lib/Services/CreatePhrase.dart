@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:bip39/bip39.dart' as bip39;
 class PhraseCard extends StatelessWidget {
   PhraseCard({Key? key, required this.phrase}) : super(key: key);
   final String phrase;
@@ -24,31 +24,30 @@ class PhraseCard extends StatelessWidget {
     );
   }
 }
-
+class Phrase {
+  static String getrandomphrase()  {
+    String randomMnemonic =  bip39.generateMnemonic();
+    print(randomMnemonic);
+    return randomMnemonic;
+  }
+  static List<PhraseCard> getsecretphrases () {
+    List<PhraseCard> listPhrase = <PhraseCard>[];
+    List<String> randomPhrase = getrandomphrase().split(" ");
+    randomPhrase.forEach((element) {
+      listPhrase.add(PhraseCard(phrase: element));
+    });
+    return listPhrase;
+  }
+}
 class ListPhraseView extends StatelessWidget {
-  final List<PhraseCard> secretphrases = [
-    PhraseCard(phrase: "race"),
-    PhraseCard(phrase: "hard"),
-    PhraseCard(phrase: "card"),
-    PhraseCard(phrase: "forgot"),
-    PhraseCard(phrase: "kiss"),
-    PhraseCard(phrase: "height"),
-    PhraseCard(phrase: "understand"),
-    PhraseCard(phrase: "wood"),
-    PhraseCard(phrase: "engineering"),
-    PhraseCard(phrase: "technology"),
-    PhraseCard(phrase: "game"),
-    PhraseCard(phrase: "fall"),
-  ];
-
-  ListPhraseView({Key? key}) : super(key: key);
-
+  ListPhraseView({Key? key }) : super(key: key);
+  final List<PhraseCard> secretphrases = Phrase.getsecretphrases();
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 250,
       width: 300,
-      padding: const EdgeInsets.all(10),
+      padding: const EdgeInsets.fromLTRB(0,10,10,10),
       decoration: BoxDecoration(
         border: Border.all(
           color: Colors.blue,
