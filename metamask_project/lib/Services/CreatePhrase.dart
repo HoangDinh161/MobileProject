@@ -26,32 +26,37 @@ class PhraseCard extends StatelessWidget {
   }
 }
 class Phrase {
-  static String getrandomphrase()  {
-    String randomMnemonic =  bip39.generateMnemonic();
-    //print(randomMnemonic);
-    return randomMnemonic;
+  String phrases = "";
+  Phrase () {
+    phrases = bip39.generateMnemonic();
   }
-  static List<PhraseCard> getsecretphrases () {
+
+  List<PhraseCard> getsecretphrases () {
     List<PhraseCard> listPhrase = <PhraseCard>[];
-    List<String> randomPhrase = getrandomphrase().split(" ");
+    List<String> randomPhrase = phrases.split(" ");
     for (var element in randomPhrase) {
       listPhrase.add(PhraseCard(phrase: element));
     }
     return listPhrase;
   }
+  List<String> stringList () {
+    return phrases.split(" ");
+  }
+
 }
 class ListPhraseView extends StatelessWidget {
-  ListPhraseView({Key? key }) : super(key: key);
-  final List<PhraseCard> secretphrases = Phrase.getsecretphrases();
+  ListPhraseView({required this.p,Key? key }) : super(key: key);
+  Phrase p;
   @override
   Widget build(BuildContext context) {
+    List<PhraseCard> secretphrases = p.getsecretphrases();
     return Container(
       height: 250,
       width: 300,
       padding: const EdgeInsets.fromLTRB(10,0,10,10),
       decoration: BoxDecoration(
         border: Border.all(
-          color: Colors.blue,
+          color: Colors.grey,
           style: BorderStyle.solid,
           width: 2.0
         ),

@@ -1,7 +1,11 @@
+
 import 'package:flutter/material.dart';
 import 'package:passwordfield/passwordfield.dart';
 
 import 'Services/CreatePhrase.dart';
+
+Phrase p = Phrase();
+List<String> slist = p.stringList();
 
 class CreateWalletPage extends StatefulWidget {
   const CreateWalletPage({Key? key}) : super(key: key);
@@ -11,6 +15,7 @@ class CreateWalletPage extends StatefulWidget {
 }
 
 class _CreateWalletState extends State<CreateWalletPage> {
+
   int _currentstep = 0;
   int step_2 = 0;
   void onContinue() {
@@ -260,7 +265,7 @@ class _CreateWalletState extends State<CreateWalletPage> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 20),
-                    child: ListPhraseView(),
+                    child: ListPhraseView(p: p),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 30),
@@ -299,7 +304,7 @@ class _CreateWalletState extends State<CreateWalletPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  const Text('Write down your Secret Recovery Phrase',
+                  const Text('Confirm Secret Recovery Phrase',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontSize: 15,
@@ -309,34 +314,35 @@ class _CreateWalletState extends State<CreateWalletPage> {
                     height: 5,
                   ),
                   const Text(
-                    "This is your Secret Recovery Phrase. Write it down on a paper or keep in a safe place. You'll be asked to re-enter this phrase (in order) on the next step.",
+                    "Select  each word in the order it was presented to you.",
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 9, fontFamily: "Roboto"),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 20),
-                    child: ListPhraseView(),
+                    child: TextListView(),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 30),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          primary: Colors.blue,
-                          onPrimary: Colors.white,
-                          minimumSize: const Size(350, 35),
-                          side: const BorderSide(width: 2, color: Colors.blue),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30))),
-                      child: const Text(
-                        'Continue',
-                        style: TextStyle(
-                            fontSize: 12,
-                            fontFamily: "Roboto",
-                            color: Colors.white),
-                      ),
-                      onPressed: onContinue,
-                    ),
-                  )
+
+                  // Padding(
+                  //   padding: const EdgeInsets.only(top: 30),
+                  //   child: ElevatedButton(
+                  //     style: ElevatedButton.styleFrom(
+                  //         primary: Colors.blue,
+                  //         onPrimary: Colors.white,
+                  //         minimumSize: const Size(350, 35),
+                  //         side: const BorderSide(width: 2, color: Colors.blue),
+                  //         shape: RoundedRectangleBorder(
+                  //             borderRadius: BorderRadius.circular(30))),
+                  //     child: const Text(
+                  //       'Continue',
+                  //       style: TextStyle(
+                  //           fontSize: 12,
+                  //           fontFamily: "Roboto",
+                  //           color: Colors.white),
+                  //     ),
+                  //     onPressed: onContinue,
+                  //   ),
+                  // )
                 ],
               ),
             )),
@@ -344,6 +350,7 @@ class _CreateWalletState extends State<CreateWalletPage> {
 
   @override
   Widget build(BuildContext context) {
+
     // TODO: implement build
     return Scaffold(
         body: Column(
@@ -393,5 +400,82 @@ class _CreateWalletState extends State<CreateWalletPage> {
             },
           ))
         ]));
+  }
+}
+
+class TextListView extends StatelessWidget {
+  const TextListView({Key? key }) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 250,
+      width: 300,
+      padding: const EdgeInsets.fromLTRB(10,0,10,10),
+      decoration: BoxDecoration(
+        border: Border.all(
+            color: Colors.grey,
+            style: BorderStyle.solid,
+            width: 2.0
+        ),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: GridView.builder(
+        itemCount: 12,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            crossAxisSpacing: 10,
+            mainAxisSpacing: 5,
+            childAspectRatio: 4),
+        itemBuilder: (BuildContext context, int index) {
+          return TxtView(index: index+1);
+        },
+      ),
+    );
+  }
+}
+
+class TxtView extends StatefulWidget {
+  const TxtView({required this.index,Key? key }) : super(key: key);
+  final int index;
+
+  @override
+  State<TxtView> createState() => _TxtViewState();
+}
+
+class _TxtViewState extends State<TxtView> {
+  bool right = false;
+  TextEditingController controller = TextEditingController();
+  @override
+  void initState() {
+    super.initState();
+
+    controller.addListener(() {
+      if(controller.text.toLowerCase() == slist[widget.index-1]) {
+        setState(() {
+          right = true;
+        });
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+      decoration: InputDecoration(
+        label: Text(widget.index.toString()+'.'),
+          border: const OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(4.0)),
+            borderSide: BorderSide(width: 1.0),
+          ),
+
+      ),
+      controller: controller,
+    );
   }
 }
