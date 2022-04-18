@@ -12,9 +12,15 @@ class CreateWalletPage extends StatefulWidget {
 
 class _CreateWalletState extends State<CreateWalletPage> {
   int _currentstep = 0;
-
+  int step_2 = 0;
   void onContinue() {
-    if (_currentstep < stepLiLt().length - 1) {
+    if (_currentstep == 1&&step_2 == 0) {
+      setState(() {
+        step_2 = 1;
+        _currentstep = 1;
+      });
+    }
+    else if (_currentstep < stepLiLt().length - 1) {
       setState(() {
         _currentstep += 1;
       });
@@ -25,11 +31,18 @@ class _CreateWalletState extends State<CreateWalletPage> {
     if (_currentstep == 0) {
       return;
     }
-    setState(() {
+    if (_currentstep == 1&&step_2 == 1) {
+      setState(() {
+        step_2 = 0;
+        _currentstep =1;
+      });
+    }
+    else {
+      setState(() {
       _currentstep -= 1;
     });
+    }
   }
-
 
   List<Step> stepLiLt() => [
         Step(
@@ -43,104 +56,128 @@ class _CreateWalletState extends State<CreateWalletPage> {
           ),
           content: SingleChildScrollView(
               child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              const Text(
-                'Create Password',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    fontSize: 16,
-                    fontFamily: "Roboto",
-                    fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              const Text(
-                'This password will unlock your MetaMask wallet only on this device.',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 11, fontFamily: "Roboto"),
-              ),
-              const SizedBox(
-                height: 3,
-              ),
-              Container(
-                  padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-                  child: Column(children: [
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    const Text(
+                      'Create Password',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontFamily: "Roboto",
+                          fontWeight: FontWeight.bold),
+                    ),
                     const SizedBox(
-                      height: 15,
+                      height: 10,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const <Widget>[
-                        Text(
-                          'New Password',
-                          style: TextStyle(fontFamily: "Roboto", fontSize: 12),
-                        ),
-                        Text('')
-                      ],
+                    const Text(
+                      'This password will unlock your MetaMask wallet only on this device.',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 11, fontFamily: "Roboto"),
                     ),
-                    SizedBox(
-                        height: 70,
-                        child: PasswordField(
-                          color: Colors.blue,
-                          inputDecoration: PasswordDecoration(),
-                          border: PasswordBorder(
-                              border: OutlineInputBorder(
-                            borderSide: const BorderSide(
-                              color: Colors.blueAccent,
+                    const SizedBox(
+                      height: 3,
+                    ),
+                    Container(
+                        padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+                        child: Column(children: [
+                          const SizedBox(
+                            height: 15,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: const <Widget>[
+                              Text(
+                                'New Password',
+                                style: TextStyle(fontFamily: "Roboto", fontSize: 12),
+                              ),
+                              Text('')
+                            ],
+                          ),
+                          SizedBox(
+                              height: 70,
+                              child: PasswordField(
+                                color: Colors.blue,
+                                errorMessage: '''
+                                  - A minimum length of 8 characters
+                                ''',
+                                inputDecoration: PasswordDecoration(),
+                                border: PasswordBorder(
+                                    border: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    color: Colors.blueAccent,
+                                  ),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                    borderSide:
+                                    BorderSide(width: 2, color: Colors.red.shade200),
+                                  ),
+                                ),
+
+                              )
+                          ),
+                          const SizedBox(
+                            height: 15,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: const <Widget>[
+                              Text(
+                                'Confirm Password',
+                                style: TextStyle(fontFamily: "Roboto", fontSize: 12),
+                              ),
+                              Text('')
+                            ],
+                          ),
+                          SizedBox(
+                              height: 70,
+                              child: PasswordField(
+                                color: Colors.blue,
+                                inputDecoration: PasswordDecoration(),
+                                border: PasswordBorder(
+                                    border: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    color: Colors.blueAccent,
+                                  ),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                    borderSide:
+                                    BorderSide(width: 2, color: Colors.red.shade200),
+                                  ),
+                                ),
+                              )),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                primary: Colors.blue,
+                                onPrimary: Colors.white,
+                                minimumSize: const Size(350, 35),
+                                side: const BorderSide(width: 2, color: Colors.blue),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(30))),
+                            child: const Text(
+                              'Create Password',
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  fontFamily: "Roboto",
+                                  color: Colors.white),
                             ),
-                            borderRadius: BorderRadius.circular(10),
-                          )),
-                        )),
-                    const SizedBox(
-                      height: 15,
+                            onPressed: onContinue,
+                          )
+                        ])
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const <Widget>[
-                        Text(
-                          'Confirm Password',
-                          style: TextStyle(fontFamily: "Roboto", fontSize: 12),
-                        ),
-                        Text('')
-                      ],
-                    ),
-                    SizedBox(
-                        height: 70,
-                        child: PasswordField(
-                          color: Colors.blue,
-                          inputDecoration: PasswordDecoration(),
-                          border: PasswordBorder(
-                              border: OutlineInputBorder(
-                            borderSide: const BorderSide(
-                              color: Colors.blueAccent,
-                            ),
-                            borderRadius: BorderRadius.circular(10),
-                          )),
-                        )),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          primary: Colors.blue,
-                          onPrimary: Colors.white,
-                          minimumSize: const Size(350, 35),
-                          side: const BorderSide(width: 2, color: Colors.blue),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30))),
-                      child: const Text(
-                        'Create Password',
-                        style: TextStyle(
-                            fontSize: 12,
-                            fontFamily: "Roboto",
-                            color: Colors.white),
-                      ),
-                      onPressed: onContinue,
-                    )
-                  ])),
             ],
           )),
         ),
@@ -154,57 +191,100 @@ class _CreateWalletState extends State<CreateWalletPage> {
                 fontSize: 6, fontFamily: "Roboto", color: Colors.blueAccent),
           ),
           content: SingleChildScrollView(
-              child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              const Text(
-                'Confirm your password',
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                    fontSize: 20, fontFamily: "Roboto", color: Colors.black),
-              ),
-              const SizedBox(
-                height: 3,
-              ),
-              const Text(
-                'Before continuing we need to confirm your password',
-                textAlign: TextAlign.left,
-                style: TextStyle(fontFamily: "Roboto", fontSize: 12),
-              ),
-              const SizedBox(
-                height: 3,
-              ),
-              PasswordField(
-                color: Colors.blue,
-                inputDecoration: PasswordDecoration(),
-                border: PasswordBorder(
-                    border: OutlineInputBorder(
-                  borderSide: const BorderSide(
-                    color: Colors.blueAccent,
-                  ),
-                  borderRadius: BorderRadius.circular(10),
-                )),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-                ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                    primary: Colors.blue,
-                    onPrimary: Colors.white,
-                    minimumSize: const Size(350, 35),
-                    side: const BorderSide(width: 2, color: Colors.blue),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30))),
-                    child: const Text(
-                      'Confirm',
+              child: step_2 == 0 ? Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Confirm your password',
+                      textAlign: TextAlign.left,
                       style: TextStyle(
-                      fontSize: 12, fontFamily: "Roboto", color: Colors.white),
-                ),
-                onPressed: onContinue,
+                          fontSize: 20, fontFamily: "Roboto", color: Colors.black),
+                    ),
+                    const SizedBox(
+                      height: 3,
+                    ),
+                    const Text(
+                      'Before continuing we need to confirm your password',
+                      textAlign: TextAlign.left,
+                      style: TextStyle(fontFamily: "Roboto", fontSize: 12),
+                    ),
+                    const SizedBox(
+                      height: 3,
+                    ),
+                    PasswordField(
+                      color: Colors.blue,
+                      inputDecoration: PasswordDecoration(),
+                      border: PasswordBorder(
+                          border: OutlineInputBorder(
+                        borderSide: const BorderSide(
+                          color: Colors.blueAccent,
+                        ),
+                        borderRadius: BorderRadius.circular(10),
+                      )),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          primary: Colors.blue,
+                          onPrimary: Colors.white,
+                          minimumSize: const Size(350, 35),
+                          side: const BorderSide(width: 2, color: Colors.blue),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30))),
+                      child: const Text(
+                        'Confirm',
+                        style: TextStyle(
+                            fontSize: 12, fontFamily: "Roboto", color: Colors.white),
+                      ),
+                      onPressed: onContinue,
+                    )
+                  ],
+                ) : Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  const Text('Write down your Secret Recovery Phrase',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: 15,
+                          fontFamily: "Roboto",
+                          fontWeight: FontWeight.bold)),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  const Text(
+                    "This is your Secret Recovery Phrase. Write it down on a paper or keep in a safe place. You'll be asked to re-enter this phrase (in order) on the next step.",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 9, fontFamily: "Roboto"),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20),
+                    child: ListPhraseView(),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 30),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          primary: Colors.blue,
+                          onPrimary: Colors.white,
+                          minimumSize: const Size(350, 35),
+                          side: const BorderSide(width: 2, color: Colors.blue),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30))),
+                      child: const Text(
+                        'Continue',
+                        style: TextStyle(
+                            fontSize: 12,
+                            fontFamily: "Roboto",
+                            color: Colors.white),
+                      ),
+                      onPressed: onContinue,
+                    ),
+                  )
+                ],
               )
-            ],
-          )),
+          ),
         ),
         Step(
             state: _currentstep <= 2 ? StepState.editing : StepState.complete,
@@ -233,7 +313,8 @@ class _CreateWalletState extends State<CreateWalletPage> {
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 9, fontFamily: "Roboto"),
                   ),
-                  Padding(padding: const EdgeInsets.only(top: 20),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20),
                     child: ListPhraseView(),
                   ),
                   Padding(
@@ -249,10 +330,12 @@ class _CreateWalletState extends State<CreateWalletPage> {
                       child: const Text(
                         'Continue',
                         style: TextStyle(
-                            fontSize: 12, fontFamily: "Roboto", color: Colors.white),
+                            fontSize: 12,
+                            fontFamily: "Roboto",
+                            color: Colors.white),
                       ),
                       onPressed: onContinue,
-                    ) ,
+                    ),
                   )
                 ],
               ),
@@ -307,7 +390,7 @@ class _CreateWalletState extends State<CreateWalletPage> {
                   currentStep: _currentstep,
                   controlsBuilder: (BuildContext context, ControlsDetails details) {
                     return const SizedBox();
-                  },
+            },
           ))
         ]));
   }

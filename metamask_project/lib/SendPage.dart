@@ -16,7 +16,7 @@ class _SendState extends State<SendPage> {
         title: const Text(
           'Send to',
           style: TextStyle(
-              fontSize: 16, fontFamily: "Roboto", color: Colors.black),
+              fontSize: 16, fontFamily: 'Roboto', color: Colors.black),
         ),
         backgroundColor: Colors.white,
         centerTitle: true,
@@ -25,7 +25,7 @@ class _SendState extends State<SendPage> {
             child: const Text(
               'Cancel',
               style: TextStyle(
-                  fontSize: 12, fontFamily: "Roboto", color: Colors.blueAccent),
+                  fontSize: 12, fontFamily: 'Roboto', color: Colors.blueAccent),
             ),
             onPressed: () {
               Navigator.pop(context);
