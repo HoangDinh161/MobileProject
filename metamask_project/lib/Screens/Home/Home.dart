@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:metamask_project/Purchase.dart';
-import 'package:metamask_project/SideMenu.dart';
+import 'package:metamask_project/Screens/Home/SideMenu.dart';
 
-import 'ImportTokenPage.dart';
+import '../../ImportTokenPage.dart';
 
 /*void main() {
   runApp(const MyApp());
@@ -26,14 +26,13 @@ class MyApp extends StatelessWidget {
  */
 
 class MyHomePage extends StatelessWidget {
-  final String title;
 
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+  const MyHomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        drawer: SideMenu(),
+        drawer: const SideMenu(),
         appBar: AppBar(
           // The title text which will be shown on the action bar
           toolbarHeight: 47,
@@ -141,12 +140,12 @@ class MyHomePage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    buttonInMenu(buttonText: 'receive', onTap: () {  }, icon: const Icon(Icons.arrow_downward, color:Colors.white),),
-                    buttonInMenu(buttonText: 'buy', onTap: () {
+                    ButtonInMenu(buttonText: 'receive', onTap: () {  }, icon: const Icon(Icons.arrow_downward, color:Colors.white),),
+                    ButtonInMenu(buttonText: 'buy', onTap: () {
                       Navigator.push(context, MaterialPageRoute(builder: (context)=>const PurchasePage())); },
                       icon: const Icon(Icons.credit_card, color:Colors.white),),
-                    buttonInMenu(buttonText: 'send', onTap: () {  }, icon: const Icon(Icons.arrow_upward, color:Colors.white),),
-                    buttonInMenu(buttonText: 'swap', onTap: () {  }, icon: const Icon(Icons.arrow_forward, color:Colors.white),),
+                    ButtonInMenu(buttonText: 'send', onTap: () {  }, icon: const Icon(Icons.arrow_upward, color:Colors.white),),
+                    ButtonInMenu(buttonText: 'swap', onTap: () {  }, icon: const Icon(Icons.arrow_forward, color:Colors.white),),
                   ],
                 ),
               ),
@@ -217,12 +216,12 @@ class MyHomePage extends StatelessWidget {
   }
 
 }
-class buttonInMenu extends StatelessWidget {
-  buttonInMenu({ required this.buttonText, required this.icon, required this.onTap, Key? key}) : super(key: key);
+class ButtonInMenu extends StatelessWidget {
+  const ButtonInMenu({ required this.buttonText, required this.icon, required this.onTap, Key? key}) : super(key: key);
 
-  VoidCallback onTap;
-  Icon icon;
-  String buttonText;
+  final VoidCallback onTap;
+  final Icon icon;
+  final String buttonText;
 
   @override
   Widget build(BuildContext context) {

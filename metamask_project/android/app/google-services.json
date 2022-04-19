@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "13211367215",
+    "project_id": "metamaskclonedidongnam3",
+    "storage_bucket": "metamaskclonedidongnam3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:13211367215:android:a3ba9eef634615e1aa93da",
+        "android_client_info": {
+          "package_name": "com.example.metamask_project"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "13211367215-qbrs5hnrjuo5l5i508k2fk7epf03s7nf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJdB4Wy54COS8_cIzS8hKvn2HS4p6Uimw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "13211367215-qbrs5hnrjuo5l5i508k2fk7epf03s7nf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:metamask_project/ReLogin.dart';
+import 'package:metamask_project/Screens/Auth/ReLogin.dart';
 import 'package:metamask_project/TransactionHistory.dart';
 
 class SideMenu extends StatelessWidget {

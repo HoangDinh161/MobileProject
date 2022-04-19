@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:passwordfield/passwordfield.dart';
 
-import 'Services/CreatePhrase.dart';
+import '../../Services/CreatePhrase.dart';
 
 Phrase p = Phrase();
 List<String> slist = p.stringList();

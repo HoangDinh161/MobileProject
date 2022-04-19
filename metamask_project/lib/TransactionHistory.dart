@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:metamask_project/Services/Transaction.dart';
+import 'package:metamask_project/Models/Transaction.dart';
 
 class TransactionHistory extends StatelessWidget {
   List<Transaction> trans = [
