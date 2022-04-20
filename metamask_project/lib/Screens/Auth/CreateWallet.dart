@@ -15,6 +15,9 @@ class CreateWalletPage extends StatefulWidget {
 }
 
 class _CreateWalletState extends State<CreateWalletPage> {
+  final TextEditingController _password1 = TextEditingController();
+  final TextEditingController _password2 = TextEditingController();
+  final TextEditingController _password3 = TextEditingController();
 
   int _currentstep = 0;
   int step_2 = 0;
@@ -102,6 +105,7 @@ class _CreateWalletState extends State<CreateWalletPage> {
                           SizedBox(
                               height: 70,
                               child: PasswordField(
+                                controller: _password1,
                                 color: Colors.blue,
                                 errorMessage: '''
                                   - A minimum length of 8 characters
@@ -142,6 +146,7 @@ class _CreateWalletState extends State<CreateWalletPage> {
                           SizedBox(
                               height: 70,
                               child: PasswordField(
+                                controller: _password2,
                                 color: Colors.blue,
                                 inputDecoration: PasswordDecoration(),
                                 border: PasswordBorder(
