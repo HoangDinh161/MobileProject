@@ -1,8 +1,10 @@
 
 import 'package:flutter/material.dart';
+import 'package:metamask_project/Services/Auth.dart';
 import 'package:passwordfield/passwordfield.dart';
 
 import '../../Services/CreatePhrase.dart';
+import '../Home/Home.dart';
 
 Phrase p = Phrase();
 List<String> slist = p.stringList();
@@ -328,26 +330,31 @@ class _CreateWalletState extends State<CreateWalletPage> {
                     child: TextListView(),
                   ),
 
-                  // Padding(
-                  //   padding: const EdgeInsets.only(top: 30),
-                  //   child: ElevatedButton(
-                  //     style: ElevatedButton.styleFrom(
-                  //         primary: Colors.blue,
-                  //         onPrimary: Colors.white,
-                  //         minimumSize: const Size(350, 35),
-                  //         side: const BorderSide(width: 2, color: Colors.blue),
-                  //         shape: RoundedRectangleBorder(
-                  //             borderRadius: BorderRadius.circular(30))),
-                  //     child: const Text(
-                  //       'Continue',
-                  //       style: TextStyle(
-                  //           fontSize: 12,
-                  //           fontFamily: "Roboto",
-                  //           color: Colors.white),
-                  //     ),
-                  //     onPressed: onContinue,
-                  //   ),
-                  // )
+                  Padding(
+                    padding: const EdgeInsets.only(top: 30),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          primary: Colors.blue,
+                          onPrimary: Colors.white,
+                          minimumSize: const Size(350, 35),
+                          side: const BorderSide(width: 2, color: Colors.blue),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30))),
+                      child: const Text(
+                        'Continue',
+                        style: TextStyle(
+                            fontSize: 12,
+                            fontFamily: "Roboto",
+                            color: Colors.white),
+                      ),
+                      onPressed: () async {
+                        bool register = await newWallet(p.phrases, _password1.text);
+                        if (register) {
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=> const MyHomePage()));
+                        }
+                      },
+                    ),
+                  )
                 ],
               ),
             )),

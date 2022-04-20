@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:passwordfield/passwordfield.dart';
+import '../../Services/Auth.dart';
+import '../Home/Home.dart';
 import 'CreateWallet.dart';
 
 class ImportPage extends StatefulWidget {
@@ -10,6 +12,9 @@ class ImportPage extends StatefulWidget {
 }
 
 class _ImportState extends State<ImportPage> {
+  TextEditingController _phrases = TextEditingController();
+  TextEditingController _newPassword = TextEditingController();
+  TextEditingController _reNewPassword = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -151,7 +156,12 @@ class _ImportState extends State<ImportPage> {
                                 fontFamily: "Roboto",
                                 color: Colors.white),
                           ),
-                          onPressed: () {},
+                          onPressed: () async {
+                            bool imported = await import(_phrases.text, _newPassword.text);
+                            if (imported) {
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=> const MyHomePage()));
+                            }
+                          },
                         )
                       ])),
                   const SizedBox(
