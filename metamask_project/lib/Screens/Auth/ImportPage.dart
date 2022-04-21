@@ -15,6 +15,8 @@ class _ImportState extends State<ImportPage> {
   TextEditingController _phrases = TextEditingController();
   TextEditingController _newPassword = TextEditingController();
   TextEditingController _reNewPassword = TextEditingController();
+
+  final AuthService _auth = AuthService();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -157,7 +159,7 @@ class _ImportState extends State<ImportPage> {
                                 color: Colors.white),
                           ),
                           onPressed: () async {
-                            bool imported = await import(_phrases.text, _newPassword.text);
+                            bool imported = await _auth.import(_phrases.text, _newPassword.text);
                             if (imported) {
                               Navigator.push(context, MaterialPageRoute(builder: (context)=> const MyHomePage()));
                             }

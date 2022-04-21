@@ -3,6 +3,11 @@ import 'package:passwordfield/passwordfield.dart';
 import 'Screens/Auth/CreateWallet.dart';
 import 'Screens/Auth/StartPage.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
+
+import 'Screens/Home/Home.dart';
+import 'Services/Auth.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -12,21 +17,35 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return MultiProvider(
+      providers: [
+        Provider<AuthService>(
+          create: (_) => AuthService(),
+        ),
+        StreamProvider(
+          create: (context) => context.read<AuthService>().authStateChanges,
+        ),
+      ],
+      child: MaterialApp(
+        title: "APP",
+        home: AuthWrapper(),
       ),
-      home: const StartPage(),
     );
   }
 }
 
+class AuthWrapper extends StatelessWidget{
+  @override
+  Widget build(BuildContext context) {
+    final user = context.watch<User>();
 
+    if(user != null){
+      return StartPage();
+    }
+    return MyHomePage();
+  }
 
-
+}

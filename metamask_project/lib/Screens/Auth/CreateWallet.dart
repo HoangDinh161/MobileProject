@@ -1,13 +1,14 @@
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:metamask_project/Services/Auth.dart';
 import 'package:passwordfield/passwordfield.dart';
-
+import 'package:provider/provider.dart';
 import '../../Services/CreatePhrase.dart';
 import '../Home/Home.dart';
 
-Phrase p = Phrase();
-List<String> slist = p.stringList();
+
 
 class CreateWalletPage extends StatefulWidget {
   const CreateWalletPage({Key? key}) : super(key: key);
@@ -17,9 +18,12 @@ class CreateWalletPage extends StatefulWidget {
 }
 
 class _CreateWalletState extends State<CreateWalletPage> {
+  Phrase p = Phrase();
   final TextEditingController _password1 = TextEditingController();
   final TextEditingController _password2 = TextEditingController();
   final TextEditingController _password3 = TextEditingController();
+
+  final AuthService _auth = AuthService();
 
   int _currentstep = 0;
   int step_2 = 0;
@@ -327,7 +331,7 @@ class _CreateWalletState extends State<CreateWalletPage> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 20),
-                    child: TextListView(),
+                    child: TextListView(p: p),
                   ),
 
                   Padding(
@@ -348,10 +352,21 @@ class _CreateWalletState extends State<CreateWalletPage> {
                             color: Colors.white),
                       ),
                       onPressed: () async {
-                        bool register = await newWallet(p.phrases, _password1.text);
-                        if (register) {
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=> const MyHomePage()));
-                        }
+                        dynamic result = context.read<AuthService>().newWallet(
+                            p.phrases,
+                          _password1.text,
+                          'Account',
+                        ).then((value) async{
+                          User user = FirebaseAuth.instance.currentUser;
+
+                          await FirebaseFirestore.instance.collection("users").doc(user.uid).set({
+                            'uid': user.uid,
+                            'phrase': p.phrases,
+                            'username': 'Account',
+                          });
+                        });
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=> const MyHomePage()));
+
                       },
                     ),
                   )
@@ -416,7 +431,8 @@ class _CreateWalletState extends State<CreateWalletPage> {
 }
 
 class TextListView extends StatelessWidget {
-  const TextListView({Key? key }) : super(key: key);
+  const TextListView({required this.p, Key? key }) : super(key: key);
+  final Phrase p;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -439,7 +455,7 @@ class TextListView extends StatelessWidget {
             mainAxisSpacing: 5,
             childAspectRatio: 4),
         itemBuilder: (BuildContext context, int index) {
-          return TxtView(index: index+1);
+          return TxtView(index: index+1, slist: p.stringList(),);
         },
       ),
     );
@@ -447,9 +463,9 @@ class TextListView extends StatelessWidget {
 }
 
 class TxtView extends StatefulWidget {
-  const TxtView({required this.index,Key? key }) : super(key: key);
+  const TxtView({required this.index, required this.slist ,Key? key }) : super(key: key);
   final int index;
-
+  final List<String> slist;
   @override
   State<TxtView> createState() => _TxtViewState();
 }
@@ -462,7 +478,7 @@ class _TxtViewState extends State<TxtView> {
     super.initState();
 
     controller.addListener(() {
-      if(controller.text.toLowerCase() == slist[widget.index-1]) {
+      if(controller.text.toLowerCase() == widget.slist[widget.index-1]) {
         setState(() {
           right = true;
         });
