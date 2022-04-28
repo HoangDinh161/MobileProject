@@ -43,9 +43,9 @@ class AuthWrapper extends StatelessWidget{
     final user = context.watch<User>();
 
     if(user != null){
-      return StartPage();
+      return MyHomePage();
     }
-    return MyHomePage();
+    return StartPage();
   }
 
 }

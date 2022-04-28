@@ -21,14 +21,7 @@ class AuthService{
   Future<bool> newWallet(String phrases, String password, String username,) async {
     try{
       String mail = phrases.replaceAll(' ', '') + "@mail.com";
-      await _auth.createUserWithEmailAndPassword(email: mail, password: password).then((value) async{
-        User user = FirebaseAuth.instance.currentUser;
-        await FirebaseFirestore.instance.collection("users").doc(user.uid).set({
-          'uid': user.uid,
-          'phrase': phrases,
-          'username': 'Account',
-        });
-      });
+      await _auth.createUserWithEmailAndPassword(email: mail, password: password);
       return true;
     }
     catch(e) {

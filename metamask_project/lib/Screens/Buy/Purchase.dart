@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+
+import 'Buy.dart';
 /*
 void main() {
   runApp(const MyApp());
@@ -109,7 +111,9 @@ class PurchasePage extends StatelessWidget {
                 style: TextStyle(
                     fontSize: 12, fontFamily: "Roboto", color: Colors.white),
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>const BuyPage()));
+              },
             ),
           ],
         ),
@@ -118,17 +122,4 @@ class PurchasePage extends StatelessWidget {
   }
 }
 
-class BuyPage extends StatefulWidget {
-  const BuyPage({Key? key}) : super(key: key);
 
-  @override
-  _BuyState createState() => _BuyState();
-}
-
-class _BuyState extends State<BuyPage> {
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    return Scaffold();
-  }
-}
