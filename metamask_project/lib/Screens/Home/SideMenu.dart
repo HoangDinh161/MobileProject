@@ -132,9 +132,8 @@ class SideMenu extends StatelessWidget {
             leading: const Icon(Icons.logout_outlined),
             title: const Text('Log out'),
             onTap: () {
-              FirebaseAuth.instance.signOut();
-              // Navigator.push(context,
-              //     MaterialPageRoute(builder: (context) => const LoginPage()));
+              FirebaseAuth.instance.signOut().then((value) => Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const LoginPage())));
             },
           )
         ],

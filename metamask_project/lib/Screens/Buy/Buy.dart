@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:metamask_project/Screens/Home/Home.dart';
 import 'package:metamask_project/Services/CoinFromCoingecko.dart';
 import '../../Models/Coin.dart';
+import '../../Services/Database.dart';
 class BuyPage extends StatefulWidget {
   const BuyPage({Key? key}) : super(key: key);
 
@@ -53,13 +55,6 @@ class _BuyState extends State<BuyPage> {
           children: [
           DropdownButton<Coin>(
           value: dropdownValue,
-          // icon: const Icon(Icons.arrow_downward),
-          // elevation: 16,
-          // style: const TextStyle(color: Colors.deepPurple),
-          // underline: Container(
-          //   height: 2,
-          //   color: Colors.deepPurpleAccent,
-          // ),
           onChanged: (Coin? newValue) {
             setState(() {
               dropdownValue = newValue!;
@@ -74,7 +69,7 @@ class _BuyState extends State<BuyPage> {
                     value.image,
                     width: 20,
                   ),
-                  Text(value.symbol, textAlign: TextAlign.left, style: const TextStyle(
+                  Text(value.symbol.toUpperCase(), textAlign: TextAlign.left, style: const TextStyle(
                       color: Colors.black,
                       fontFamily: 'Miriam Libre',
                       fontSize: 14,
@@ -101,8 +96,25 @@ class _BuyState extends State<BuyPage> {
                   borderSide: BorderSide(width: 1.0),
                 ),
               ),
-
-            )
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  primary: Colors.blue,
+                  onPrimary: Colors.white,
+                  minimumSize: const Size(350, 30),
+                  side: const BorderSide(width: 2, color: Colors.blue),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30))),
+              child: const Text(
+                'Buy',
+                style: TextStyle(
+                    fontSize: 12, fontFamily: "Roboto", color: Colors.white),
+              ),
+              onPressed: () async {
+                await DatabaseService().buyCoin(dropdownValue, _amountController.text);
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>const MyHomePage()));
+              },
+            ),
           ],
         )
     );

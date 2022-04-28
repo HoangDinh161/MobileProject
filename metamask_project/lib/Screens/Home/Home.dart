@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import '../../ImportTokenPage.dart';
 import '../../Models/user.dart';
 import '../../Services/Database.dart';
+import 'WalletList.dart';
 
 /*void main() {
   runApp(const MyApp());
@@ -91,7 +92,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       child: Text(
                         userData!.username,
                         textAlign: TextAlign.center,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Color(0x89000000),
                           fontSize: 13,
                         ),
@@ -133,7 +134,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                         child: Text(
                                           userData.short(),
                                           textAlign: TextAlign.center,
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             color: Colors.white,
                                             fontSize: 9,
 
@@ -192,48 +193,16 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                       ),
                     ),
-                    Padding(
-                        padding: const EdgeInsets.only(top:10),
-                        child:SizedBox(
-                          width: 110,
-                          height: 70,
-                          child: Column(
-                            children:  [
-                              const Text(
-                                "Don’t see your token ?",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Color(0xff979797),
-                                  fontSize: 11,
-                                  fontFamily: "Roboto",
-                                ),
-                              ),
-                              TextButton(
-                                  onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context)=> const ImportTokenPage()));},
-                                  child: const Text(
-                                    "Import Tokens",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: Color(0xff1890ff),
-                                      fontSize: 11,
-                                      fontFamily: "Roboto",
-                                    ),
-                                  )
-                              )
-                            ],
-                          ),
-                        )
-                    ),
+                    WalletList(),
+
                   ],
                 ),
               )
           );
         } else {
-          return Container(
-            child: const Center(
-              child: CircularProgressIndicator(
-                color: Colors.blue,
-              ),
+          return const Center(
+            child: CircularProgressIndicator(
+              color: Colors.blue,
             ),
           );
       }
@@ -284,6 +253,8 @@ class ButtonInMenu extends StatelessWidget {
 }
 
 class coinStream extends StatefulWidget {
+  const coinStream({Key? key}) : super(key: key);
+
   @override
   State<coinStream> createState() => _coinStreamState();
 }
@@ -301,7 +272,7 @@ class _coinStreamState extends State<coinStream> {
             AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) return Text('Error = ${snapshot.error}');
           if (!snapshot.hasData) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           }
