@@ -84,6 +84,7 @@ class _BuyState extends State<BuyPage> {
             ),
             TextFormField(
               controller: _amountController,
+              keyboardType: TextInputType.number,
               decoration: const InputDecoration(
                 label: Text('Amount', textAlign: TextAlign.left, style: TextStyle(
                     color: Color.fromRGBO(153, 140, 140, 1),
