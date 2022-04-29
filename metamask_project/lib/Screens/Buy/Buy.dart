@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:metamask_project/Screens/Home/Home.dart';
 import 'package:metamask_project/Services/CoinFromCoingecko.dart';
 import '../../Models/Coin.dart';
@@ -85,6 +86,9 @@ class _BuyState extends State<BuyPage> {
             TextFormField(
               controller: _amountController,
               keyboardType: TextInputType.number,
+              inputFormatters: <TextInputFormatter>[
+                FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+              ],
               decoration: const InputDecoration(
                 label: Text('Amount', textAlign: TextAlign.left, style: TextStyle(
                     color: Color.fromRGBO(153, 140, 140, 1),
