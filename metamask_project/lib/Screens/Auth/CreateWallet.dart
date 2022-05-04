@@ -28,8 +28,13 @@ class _CreateWalletState extends State<CreateWalletPage> {
   final GlobalKey<FormState> _formKey_2 = GlobalKey<FormState>();
   final AuthService _auth = AuthService();
 
+  bool _passwordVisible = true;
+  String _showHide = "Show";
   int _currentstep = 0;
   int step_2 = 0;
+
+
+
 
   void onContinue() {
     if (_currentstep == 0 &&!_formKey_1.currentState!.validate()) {
@@ -115,24 +120,32 @@ class _CreateWalletState extends State<CreateWalletPage> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment
                                     .spaceBetween,
-                                children: const <Widget>[
-                                  Text(
+                                children: <Widget>[
+                                  const Text(
                                     'New Password',
                                     style: TextStyle(
                                         fontFamily: "Roboto", fontSize: 12),
                                   ),
-                                  Text('')
+                                  TextButton(
+                                    child: Text(_showHide,style: const TextStyle(fontFamily: "Roboto", fontSize: 12, color: Colors.black),),
+                                    onPressed: () {
+                                      setState(() {
+                                          _passwordVisible = !_passwordVisible;
+                                          _showHide = _passwordVisible == true? "Show" : "Hide";
+                                      });
+                                    },
+                                  )
                                 ],
                               ),
                               SizedBox(
                                   height: 70,
                                   child: TextFormField(
                                     controller: password,
-                                    obscureText: true,
-                                    textAlign: TextAlign.center,
+                                    obscureText: _passwordVisible,
+                                    textAlign: TextAlign.justify,
                                     keyboardType: TextInputType.text,
                                     decoration: buildInputDecoration(
-                                        12, "Password"),
+                                        10, "Password"),
                                     validator: (value) {
                                       RegExp regex = RegExp(
                                           r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$');
@@ -157,18 +170,18 @@ class _CreateWalletState extends State<CreateWalletPage> {
                                     style: TextStyle(
                                         fontFamily: "Roboto", fontSize: 12),
                                   ),
-                                  Text('')
+                                  Text(''),
                                 ],
                               ),
                               SizedBox(
                                 height: 70,
                                 child: TextFormField(
                                   controller: confirmPassword_1,
-                                  textAlign: TextAlign.center,
+                                  textAlign: TextAlign.justify,
                                   obscureText: true,
                                   keyboardType: TextInputType.text,
                                   decoration: buildInputDecoration(
-                                      12, "Confirm Password"),
+                                      10, "Confirm Password"),
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
                                       return 'Please re-enter password';
@@ -237,16 +250,17 @@ class _CreateWalletState extends State<CreateWalletPage> {
                               ),
                               const Text(
                                 'Before continuing we need to confirm your password',
-                                textAlign: TextAlign.left,
+                                textAlign: TextAlign.justify,
                                 style: TextStyle(fontFamily: "Roboto", fontSize: 12),
                               ),
+                              const SizedBox(height: 5,),
                               TextFormField(
                                 controller: confirmPassword_2,
-                                textAlign: TextAlign.center,
+                                textAlign: TextAlign.left,
                                 obscureText: true,
                                 keyboardType: TextInputType.text,
                                 decoration: buildInputDecoration(
-                                    12, "Confirm Password"),
+                                    8, "Confirm Password"),
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
                                     return 'Please re-enter password';
@@ -256,9 +270,6 @@ class _CreateWalletState extends State<CreateWalletPage> {
                                   }
                                   return null;
                                 },
-                              ),
-                              const SizedBox(
-                                height: 3,
                               ),
                               const SizedBox(
                                 height: 20,
