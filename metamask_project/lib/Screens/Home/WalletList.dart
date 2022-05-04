@@ -17,59 +17,58 @@ class WalletList extends StatelessWidget{
             List<wallet>? wallets = snapshot.data;
               return Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: SingleChildScrollView(
-                  child:Column(
-                        children: [
-                          ListView.builder(
-                            scrollDirection: Axis.vertical,
-                            shrinkWrap: true,
-                            itemCount: wallets?.length,
-                            itemBuilder: (context, index) {
-                              return Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Material(
-                                    child: walletTile(
-                                      w: wallets![index],
-                                    )),
-                              );
-                            },
-                          ),
-                          Padding(
-                              padding: const EdgeInsets.only(top:10),
-                              child:SizedBox(
-                                width: 110,
-                                height: 70,
-                                child: Column(
-                                  children:  [
-                                    const Text(
-                                      "Don’t see your token ?",
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        color: Color(0xff979797),
-                                        fontSize: 11,
-                                        fontFamily: "Roboto",
-                                      ),
-                                    ),
-                                    TextButton(
-                                        onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context)=> const ImportTokenPage()));},
-                                        child: const Text(
-                                          "Import Tokens",
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                            color: Color(0xff1890ff),
-                                            fontSize: 11,
-                                            fontFamily: "Roboto",
-                                          ),
-                                        )
-                                    )
-                                  ],
+                child: Column(
+                  children: [
+                    ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      shrinkWrap: true,
+                      itemCount: wallets?.length,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Material(
+                              child: walletTile(
+                                w: wallets![index],
+                              )),
+                        );
+                      },
+                    ),
+                    Padding(
+                        padding: const EdgeInsets.only(top:10),
+                        child:SizedBox(
+                          width: 110,
+                          height: 70,
+                          child: Column(
+                            children:  [
+                              const Text(
+                                "Don’t see your token ?",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: Color(0xff979797),
+                                  fontSize: 11,
+                                  fontFamily: "Roboto",
                                 ),
+                              ),
+                              TextButton(
+                                  onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context)=> const ImportTokenPage()));},
+                                  child: const Text(
+                                    "Import Tokens",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Color(0xff1890ff),
+                                      fontSize: 11,
+                                      fontFamily: "Roboto",
+                                    ),
+                                  )
                               )
+                            ],
                           ),
-                        ],
+                        )
+                    ),
+                  ],
                 ),
-              )
               );
+
           } else {
             return const SizedBox(
 

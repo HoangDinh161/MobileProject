@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:metamask_project/Screens/Auth/ReLogin.dart';
 import 'package:metamask_project/TransactionHistory.dart';
 
+import '../Auth/StartPage.dart';
+
 class SideMenu extends StatelessWidget {
   const SideMenu({Key? key}) : super(key: key);
 
@@ -132,8 +134,9 @@ class SideMenu extends StatelessWidget {
             leading: const Icon(Icons.logout_outlined),
             title: const Text('Log out'),
             onTap: () {
-              FirebaseAuth.instance.signOut().then((value) => Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const LoginPage())));
+              FirebaseAuth.instance.signOut().then((value) => Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const StartPage())));
             },
           )
         ],

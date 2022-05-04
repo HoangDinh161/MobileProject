@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import '../../ImportTokenPage.dart';
 import '../../Models/user.dart';
 import '../../Services/Database.dart';
+import '../Send/SendPage.dart';
 import 'WalletList.dart';
 
 /*void main() {
@@ -160,7 +161,8 @@ class _MyHomePageState extends State<MyHomePage> {
                           ButtonInMenu(buttonText: 'buy', onTap: () {
                             Navigator.push(context, MaterialPageRoute(builder: (context)=>const PurchasePage())); },
                             icon: const Icon(Icons.credit_card, color:Colors.white),),
-                          ButtonInMenu(buttonText: 'send', onTap: () {  }, icon: const Icon(Icons.arrow_upward, color:Colors.white),),
+                          ButtonInMenu(buttonText: 'send', onTap: () { Navigator.push(context, MaterialPageRoute(builder: (context)=>const SendPage())); },
+                            icon: const Icon(Icons.arrow_upward, color:Colors.white),),
                           ButtonInMenu(buttonText: 'swap', onTap: () {  }, icon: const Icon(Icons.arrow_forward, color:Colors.white),),
                         ],
                       ),
@@ -193,7 +195,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                       ),
                     ),
-                    const WalletList(),
+                    WalletList(),
 
                   ],
                 ),

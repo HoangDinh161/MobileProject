@@ -112,7 +112,8 @@ class PurchasePage extends StatelessWidget {
                     fontSize: 12, fontFamily: "Roboto", color: Colors.white),
               ),
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>const BuyPage()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const BuyPage()));
               },
             ),
           ],
@@ -121,5 +122,3 @@ class PurchasePage extends StatelessWidget {
     );
   }
 }
-
-
