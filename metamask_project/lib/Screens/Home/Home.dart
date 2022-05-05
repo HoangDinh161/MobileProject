@@ -160,7 +160,7 @@ class MyHomePage extends StatelessWidget {
                                 ButtonInMenu(buttonText: 'buy', onTap: () {
                                   Navigator.push(context, MaterialPageRoute(builder: (context)=> const PurchasePage())); },
                                   icon: const Icon(Icons.credit_card, color:Colors.white),),
-                                ButtonInMenu(buttonText: 'send', onTap: () { Navigator.push(context, MaterialPageRoute(builder: (context)=>const SendPage())); },
+                                ButtonInMenu(buttonText: 'send', onTap: () { Navigator.push(context, MaterialPageRoute(builder: (context)=>SendPage(wallets: wallets,))); },
                                   icon: const Icon(Icons.arrow_upward, color:Colors.white),),
                                 ButtonInMenu(buttonText: 'swap', onTap: () {  }, icon: const Icon(Icons.arrow_forward, color:Colors.white),),
                               ],

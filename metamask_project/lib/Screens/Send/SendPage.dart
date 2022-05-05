@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:metamask_project/Models/wallet.dart';
 
-import '../../Services/Database.dart';
+import '../../Models/Coin.dart';
 import 'SendConfirm.dart';
 
 class SendPage extends StatefulWidget {
-  const SendPage({Key? key}) : super(key: key);
+  SendPage({required this.wallets,Key? key}) : super(key: key);
+  List<wallet>? wallets;
 
   @override
   _SendState createState() => _SendState();
@@ -17,63 +18,65 @@ class _SendState extends State<SendPage> {
   final TextEditingController _receiverController = TextEditingController();
   final TextEditingController _amountController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  wallet dropdownValue = wallet(coin: Coin('','','',''), amount: 0);
+
+  @override
+  initState() {
+    dropdownValue = widget.wallets![0];
+  }
+
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return StreamBuilder<List<wallet>>(
-        stream: DatabaseService().walletList,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            List<wallet>? wallets = snapshot.data;
-            wallet dropdownValue = wallets![0];
-            return Scaffold(
-              appBar: AppBar(
-                title: const Text(
-                  'Send to',
-                  style: TextStyle(
-                      fontSize: 16, fontFamily: 'Roboto', color: Colors.black),
-                ),
-                backgroundColor: Colors.white,
-                centerTitle: true,
-                actions: [
-                  TextButton(
-                    child: const Text(
-                      'Cancel',
-                      style: TextStyle(
-                          fontSize: 12,
-                          fontFamily: 'Roboto',
-                          color: Colors.blueAccent),
-                    ),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  )
-                ],
-              ),
-              body: SingleChildScrollView(
-                child: Padding( 
-                  padding: const EdgeInsets.fromLTRB(10, 15, 10, 5),
-                  child:Column(
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          'Send to',
+          style: TextStyle(
+              fontSize: 16, fontFamily: 'Roboto', color: Colors.black),
+        ),
+        backgroundColor: Colors.white,
+        centerTitle: true,
+        actions: [
+          TextButton(
+            child: const Text(
+              'Cancel',
+              style: TextStyle(
+                  fontSize: 12,
+                  fontFamily: 'Roboto',
+                  color: Colors.blueAccent),
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          )
+        ],
+      ),
+      body: SingleChildScrollView(
+          child: Padding(
+              padding: const EdgeInsets.fromLTRB(10, 15, 10, 5),
+              child:Column(
+                children: [
+                  Row(
                     children: [
-                      Row(
-                        children: [
-                          const Expanded(
-                              flex: 1,
-                              child: Text(
-                                'From:',
-                                textAlign: TextAlign.left,
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontFamily: 'Roboto',
-                                  fontSize: 11,
-                                  fontWeight: FontWeight.normal,
-                                ),
-                              )),
-                          Expanded(
-                              flex: 5,
-                            child: Padding(
-                                padding: const EdgeInsets.only(top: 10, left: 5),
-                                child: TextFormField(
+                      const Expanded(
+                          flex: 1,
+                          child: Text(
+                            'From:',
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontFamily: 'Roboto',
+                              fontSize: 11,
+                              fontWeight: FontWeight.normal,
+                            ),
+                          )),
+                      Expanded(
+                          flex: 5,
+                          child: Padding(
+                              padding: const EdgeInsets.only(top: 10, left: 5),
+                              child: TextFormField(
                                   enabled: false,
                                   decoration: InputDecoration(
                                     label: Text(
@@ -92,25 +95,25 @@ class _SendState extends State<SendPage> {
                                       borderSide: BorderSide(width: 1.0),
                                     ),
                                   ))))
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          const Expanded(
-                              flex: 1,
-                              child: Text(
-                                'To:',
-                                textAlign: TextAlign.left,
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontFamily: 'Roboto',
-                                  fontSize: 11,
-                                  fontWeight: FontWeight.normal,
-                                ),
-                              )),
-                          Expanded(
-                              flex: 5,
-                            child: Padding(
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      const Expanded(
+                          flex: 1,
+                          child: Text(
+                            'To:',
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontFamily: 'Roboto',
+                              fontSize: 11,
+                              fontWeight: FontWeight.normal,
+                            ),
+                          )),
+                      Expanded(
+                          flex: 5,
+                          child: Padding(
                               padding: const EdgeInsets.only(top: 10, left: 5),
                               child: TextFormField(
                                   controller: _receiverController,
@@ -133,41 +136,41 @@ class _SendState extends State<SendPage> {
                                       borderSide: BorderSide(width: 1.0),
                                     ),
                                   ))))
-                        ],
-                      ),
-                      const Divider(thickness: 1,),
-                      Row(
-                        children: [
-                          const Expanded(flex: 1, child: SizedBox()),
-                          Expanded(
-                            flex: 5,
-                            child: Container(
-                              margin: const EdgeInsets.only(left: 5),
-                              decoration: BoxDecoration(
-                                border: Border.all(
+                    ],
+                  ),
+                  const Divider(thickness: 1,),
+                  Row(
+                    children: [
+                      const Expanded(flex: 1, child: SizedBox()),
+                      Expanded(
+                        flex: 5,
+                        child: Container(
+                          margin: const EdgeInsets.only(left: 5),
+                          decoration: BoxDecoration(
+                              border: Border.all(
                                   color: Colors.grey
-                                )
-                              ),
-                              child: DropdownButtonHideUnderline(
-                                child: DropdownButton<wallet>(
-                                  value: dropdownValue,
-                                  onChanged: (wallet? newValue) {
-                                    setState(() {
-                                      dropdownValue = newValue!;
-                                    });
-                                  },
-                                  items: wallets.map<DropdownMenuItem<wallet>>((wallet value) {
-                                    return DropdownMenuItem<wallet>(
-                                      value: value,
-                                      child: Row(
-                                        children: [
-                                          Image.network(
-                                            value.coin.image,
-                                            width: 20,
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(top:5, left: 5),
-                                              child:Column(
+                              )
+                          ),
+                          child: DropdownButtonHideUnderline(
+                            child: DropdownButton<wallet>(
+                              value: dropdownValue,
+                              onChanged: (wallet? newValue) {
+                                setState(() {
+                                  dropdownValue = newValue!;
+                                });
+                              },
+                              items: widget.wallets?.map<DropdownMenuItem<wallet>>((wallet value) {
+                                return DropdownMenuItem<wallet>(
+                                  value: value,
+                                  child: Row(
+                                    children: [
+                                      Image.network(
+                                        value.coin.image,
+                                        width: 20,
+                                      ),
+                                      Padding(
+                                          padding: const EdgeInsets.only(top:5, left: 5),
+                                          child:Column(
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               Text(
@@ -197,115 +200,105 @@ class _SendState extends State<SendPage> {
                                             ],
                                           ))
 
-                                        ],
-                                      ),
-                                    );
-                                  }).toList(),
-                                ),
-                              ),
+                                    ],
+                                  ),
+                                );
+                              }).toList(),
                             ),
-                          )
-                        ],
-                      ),
-                      Form(
-                          key:_formKey,
-                          child:Row(
-                            children: [
-                            Expanded(
-                            flex: 1,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                  Form(
+                      key:_formKey,
+                      child:Row(
+                        children: [
+                          Expanded(
+                              flex: 1,
                               child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                    primary: Colors.white,
-                                    onPrimary: Colors.blue,
-                                    side: const BorderSide(width: 2, color: Colors.blue),
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(30))),
-                                child: const Text(
-                                  'Max', textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      fontSize: 10, fontFamily: "Roboto", color: Colors.blue),
-                                ),
-                                onPressed: () {
+                                  style: ElevatedButton.styleFrom(
+                                      primary: Colors.white,
+                                      onPrimary: Colors.blue,
+                                      side: const BorderSide(width: 2, color: Colors.blue),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(30))),
+                                  child: const Text(
+                                    'Max', textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        fontSize: 10, fontFamily: "Roboto", color: Colors.blue),
+                                  ),
+                                  onPressed: () {
                                     _amountController.text = dropdownValue.amount.toString();
                                   }
                               )
                           ),
-                           Expanded(
+                          Expanded(
                               flex: 5,
                               child: Padding(
                                   padding: const EdgeInsets.only(top: 10, left: 5),
                                   child:TextFormField(
-                                  controller: _amountController,
-                                  keyboardType: TextInputType.number,
-                                  inputFormatters: <TextInputFormatter>[
+                                    controller: _amountController,
+                                    keyboardType: TextInputType.number,
+                                    inputFormatters: <TextInputFormatter>[
                                       FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
-                                  ],
-                                  enabled: true,
-                                  decoration: const InputDecoration(
-                                    label: Text(
-                                      "Amount",
-                                      textAlign: TextAlign.left,
-                                      style: TextStyle(
-                                        color: Color.fromRGBO(153, 140, 140, 1),
-                                        fontFamily: 'Roboto',
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.normal,
+                                    ],
+                                    enabled: true,
+                                    decoration: const InputDecoration(
+                                      label: Text(
+                                        "Amount",
+                                        textAlign: TextAlign.left,
+                                        style: TextStyle(
+                                          color: Color.fromRGBO(153, 140, 140, 1),
+                                          fontFamily: 'Roboto',
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.normal,
+                                        ),
+                                      ),
+                                      border: OutlineInputBorder(
+                                        borderRadius:
+                                        BorderRadius.all(Radius.circular(4.0)),
+                                        borderSide: BorderSide(width: 1.0),
                                       ),
                                     ),
-                                    border: OutlineInputBorder(
-                                      borderRadius:
-                                      BorderRadius.all(Radius.circular(4.0)),
-                                      borderSide: BorderSide(width: 1.0),
-                                    ),
-                                  ),
-                                  validator: (value) {
+                                    validator: (value) {
                                       if (value == null|| value.isEmpty) {
                                         return "Please enter amount of token";
                                       }
                                       if (int.parse(_amountController.text) > dropdownValue.amount ) {
                                         return "Amount you enter is larger than amount of your wallet";
                                       }
-                                        return null;
-                                  },
-                              )
-                          ))
+                                      return null;
+                                    },
+                                  )
+                              ))
                         ],
                       )),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            primary: Colors.blue,
-                            onPrimary: Colors.white,
-                            minimumSize: const Size(350, 30),
-                            side: const BorderSide(width: 2, color: Colors.blue),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30))),
-                        child: const Text(
-                          'Next',
-                          style: TextStyle(
-                              fontSize: 12, fontFamily: "Roboto", color: Colors.white),
-                        ),
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
+                  ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          primary: Colors.blue,
+                          onPrimary: Colors.white,
+                          minimumSize: const Size(350, 30),
+                          side: const BorderSide(width: 2, color: Colors.blue),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30))),
+                      child: const Text(
+                        'Next',
+                        style: TextStyle(
+                            fontSize: 12, fontFamily: "Roboto", color: Colors.white),
+                      ),
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
                           Navigator.push(
                               context,
                               MaterialPageRoute(builder: (context) => SendConfirm(amount: double.parse(_amountController.text), receiver: _receiverController.text, coin: dropdownValue.coin,)));
-                          }
                         }
-                      ),
-                    ],
-                  )
-                )
-              ),
-            );
-          } else {
-            return const Center(
-              child: CircularProgressIndicator(
-                color: Colors.blue,
-              ),
-            );
-          }
-
-        }
-        );
+                      }
+                  ),
+                ],
+              )
+          )
+      ),
+    );
   }
 }
