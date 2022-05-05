@@ -7,6 +7,8 @@ import 'package:metamask_project/Models/wallet.dart';
 import '../Models/user.dart';
 import 'package:intl/intl.dart';
 
+import 'CoinFromCoingecko.dart';
+
 class DatabaseService {
 
   final String uid = FirebaseAuth.instance.currentUser.uid;
@@ -38,15 +40,6 @@ class DatabaseService {
     return FirebaseFirestore.instance.collection('user').doc(uid).collection('wallet').snapshots().map(_walletListFromSnapshot);
   }
 
-  Future<double> total() async {
-    double result = 0;
-    FirebaseFirestore.instance.collection('user').doc(uid).collection('wallet').get().then((value) => {
-      value.docs.forEach((element) {
-        print(element);
-      })
-    });
-    return result;
-  }
 
   Future<bool> buyCoin(Coin coin, String value) async {
     try {
@@ -64,6 +57,7 @@ class DatabaseService {
         }
         double newAmount = snapshot.data()['amount'] + amount;
         transaction.update(documentReference, {'amount': newAmount});
+
         return true;
       });
       return true;
