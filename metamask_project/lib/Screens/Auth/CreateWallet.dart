@@ -139,7 +139,7 @@ class _CreateWalletState extends State<CreateWalletPage> {
                                   child: TextFormField(
                                     controller: password,
                                     obscureText: _passwordVisible,
-                                    textAlign: TextAlign.justify,
+                                    textAlign: TextAlign.left,
                                     keyboardType: TextInputType.text,
                                     decoration: buildInputDecoration(
                                         10, "Password"),
@@ -174,7 +174,7 @@ class _CreateWalletState extends State<CreateWalletPage> {
                                 height: 70,
                                 child: TextFormField(
                                   controller: confirmPassword_1,
-                                  textAlign: TextAlign.justify,
+                                  textAlign: TextAlign.left,
                                   obscureText: true,
                                   keyboardType: TextInputType.text,
                                   decoration: buildInputDecoration(
@@ -247,7 +247,7 @@ class _CreateWalletState extends State<CreateWalletPage> {
                               ),
                               const Text(
                                 'Before continuing we need to confirm your password',
-                                textAlign: TextAlign.justify,
+                                textAlign: TextAlign.left,
                                 style: TextStyle(fontFamily: "Roboto", fontSize: 12),
                               ),
                               const SizedBox(height: 5,),
@@ -411,7 +411,7 @@ class _CreateWalletState extends State<CreateWalletPage> {
                             } else {
                               const snackBar =  SnackBar(
                                   content: Text('Your phrases are Wrong or not in right Order. Please re-enter or re-order your phrases',
-                                        style: TextStyle(fontSize: 10, fontFamily: "Roboto", color: Colors.red)));
+                                        style: TextStyle(fontSize: 12, fontFamily: "Roboto", color: Colors.red)));
                                   ScaffoldMessenger.of(context).showSnackBar(snackBar);
                           }
                           },
