@@ -16,22 +16,31 @@ class WalletList extends StatelessWidget{
           if(snapshot.hasData) {
             List<wallet>? wallets = snapshot.data;
               return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ListView(
+                padding: const EdgeInsets.all(2.0),
+                child: Column(
                   children: [
-                    ListView.builder(
-                      scrollDirection: Axis.vertical,
-                      shrinkWrap: true,
-                      itemCount: wallets?.length,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Material(
-                              child: walletTile(
-                                w: wallets![index],
-                              )),
-                        );
-                      },
+                    Container(
+                        height: 200,
+                        padding: const EdgeInsets.fromLTRB(0, 2, 0, 2),
+                        child: ListView.builder(
+                          scrollDirection: Axis.vertical,
+                          shrinkWrap: true,
+                          itemCount: wallets?.length,
+                          itemBuilder: (context, index) {
+                            return Container(
+                                padding: const EdgeInsets.all(1.0),
+                                decoration: const BoxDecoration(
+                                  border: Border(
+                                    top: BorderSide(width: 0.2),
+                                    bottom: BorderSide(width: 0.3)
+                                  )
+                                ),
+                                child: walletTile(
+                                      w: wallets![index],
+                                    ),
+                              );
+                            },
+                        )
                     ),
                     Padding(
                         padding: const EdgeInsets.only(top:10),
@@ -98,7 +107,7 @@ class walletTile extends StatelessWidget{
 
       title: Text(w.amount.toString() + " ${w.coin.symbol.toUpperCase()}"),
       subtitle: Text('usd'),
-      trailing: const Icon(Icons.arrow_left),
+      trailing: const Icon(Icons.arrow_right),
     );
   }
 

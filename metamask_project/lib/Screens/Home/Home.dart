@@ -26,11 +26,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: '123',),
+      home: const MyHomePage(),
     );
   }
 }
- */
+*/
 
 class MyHomePage extends StatefulWidget {
 
@@ -73,7 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 foregroundColor: Colors.blue,
               ),
               body:  Padding(
-                padding: const EdgeInsets.only(top: 50.0),
+                padding: const EdgeInsets.only(top: 25.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -151,7 +151,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
 
                     Padding(
-                      padding: const EdgeInsets.only(top: 19.0),
+                      padding: const EdgeInsets.only(top: 15.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -159,7 +159,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         children: [
                           ButtonInMenu(buttonText: 'receive', onTap: () {  }, icon: const Icon(Icons.arrow_downward, color:Colors.white),),
                           ButtonInMenu(buttonText: 'buy', onTap: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=>const PurchasePage())); },
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=> const PurchasePage())); },
                             icon: const Icon(Icons.credit_card, color:Colors.white),),
                           ButtonInMenu(buttonText: 'send', onTap: () { Navigator.push(context, MaterialPageRoute(builder: (context)=>const SendPage())); },
                             icon: const Icon(Icons.arrow_upward, color:Colors.white),),
@@ -169,7 +169,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
 
                     Padding(
-                      padding: const EdgeInsets.only(top: 16.0),
+                      padding: const EdgeInsets.only(top: 10.0),
                       child: SizedBox(
                         width: 414,
                         height: 20,
