@@ -92,7 +92,10 @@ class _BuyState extends State<BuyPage> {
                 );
               }).toList(),
             ),
-            TextFormField(
+            Container(
+              height: 80,
+              padding: EdgeInsets.fromLTRB(15,10,15,10),
+              child:TextFormField(
               controller: _amountController,
               keyboardType: TextInputType.number,
               inputFormatters: <TextInputFormatter>[
@@ -114,7 +117,7 @@ class _BuyState extends State<BuyPage> {
                   borderSide: BorderSide(width: 1.0),
                 ),
               ),
-            ),
+            ),),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                   primary: Colors.blue,

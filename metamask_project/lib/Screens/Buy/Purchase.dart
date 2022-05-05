@@ -86,7 +86,7 @@ class PurchasePage extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30))),
               child: const Text(
-                'Buy BNB',
+                'Buy',
                 style: TextStyle(
                     fontSize: 12, fontFamily: "Roboto", color: Colors.white),
               ),

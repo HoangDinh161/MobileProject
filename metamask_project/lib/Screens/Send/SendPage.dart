@@ -51,7 +51,9 @@ class _SendState extends State<SendPage> {
                 ],
               ),
               body: SingleChildScrollView(
-                  child: Column(
+                child: Padding( 
+                  padding: const EdgeInsets.fromLTRB(10, 15, 10, 5),
+                  child:Column(
                     children: [
                       Row(
                         children: [
@@ -69,7 +71,9 @@ class _SendState extends State<SendPage> {
                               )),
                           Expanded(
                               flex: 5,
-                              child: TextFormField(
+                            child: Padding(
+                                padding: const EdgeInsets.only(top: 10, left: 5),
+                                child: TextFormField(
                                   enabled: false,
                                   decoration: InputDecoration(
                                     label: Text(
@@ -87,7 +91,7 @@ class _SendState extends State<SendPage> {
                                       BorderRadius.all(Radius.circular(4.0)),
                                       borderSide: BorderSide(width: 1.0),
                                     ),
-                                  )))
+                                  ))))
                         ],
                       ),
                       Row(
@@ -106,6 +110,8 @@ class _SendState extends State<SendPage> {
                               )),
                           Expanded(
                               flex: 5,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 10, left: 5),
                               child: TextFormField(
                                   controller: _receiverController,
                                   keyboardType: TextInputType.text,
@@ -126,7 +132,7 @@ class _SendState extends State<SendPage> {
                                       BorderRadius.all(Radius.circular(4.0)),
                                       borderSide: BorderSide(width: 1.0),
                                     ),
-                                  )))
+                                  ))))
                         ],
                       ),
                       const Divider(thickness: 1,),
@@ -136,6 +142,7 @@ class _SendState extends State<SendPage> {
                           Expanded(
                             flex: 5,
                             child: Container(
+                              margin: const EdgeInsets.only(left: 5),
                               decoration: BoxDecoration(
                                 border: Border.all(
                                   color: Colors.grey
@@ -158,7 +165,9 @@ class _SendState extends State<SendPage> {
                                             value.coin.image,
                                             width: 20,
                                           ),
-                                          Column(
+                                          Padding(
+                                            padding: const EdgeInsets.only(top:5, left: 5),
+                                              child:Column(
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               Text(
@@ -186,7 +195,7 @@ class _SendState extends State<SendPage> {
                                                 ),
                                               ),
                                             ],
-                                          )
+                                          ))
 
                                         ],
                                       ),
@@ -221,9 +230,11 @@ class _SendState extends State<SendPage> {
                                   }
                               )
                           ),
-                          Expanded(
+                           Expanded(
                               flex: 5,
-                              child: TextFormField(
+                              child: Padding(
+                                  padding: const EdgeInsets.only(top: 10, left: 5),
+                                  child:TextFormField(
                                   controller: _amountController,
                                   keyboardType: TextInputType.number,
                                   inputFormatters: <TextInputFormatter>[
@@ -257,7 +268,7 @@ class _SendState extends State<SendPage> {
                                         return null;
                                   },
                               )
-                          )
+                          ))
                         ],
                       )),
                       ElevatedButton(
@@ -283,6 +294,7 @@ class _SendState extends State<SendPage> {
                       ),
                     ],
                   )
+                )
               ),
             );
           } else {
