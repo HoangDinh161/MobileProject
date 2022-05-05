@@ -10,7 +10,8 @@ class AuthService{
 
   Future<bool> import(String phrases, String password) async {
     try{
-      await _auth.signInWithEmailAndPassword(email: phrases, password: password);
+      String mail = phrases.replaceAll(' ', '') + "@mail.com";
+      await _auth.signInWithEmailAndPassword(email: mail, password: password);
       return true;
     } catch(e) {
       print(e.toString());

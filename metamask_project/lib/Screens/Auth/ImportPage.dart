@@ -13,7 +13,7 @@ class ImportPage extends StatefulWidget {
 
 class _ImportState extends State<ImportPage> {
   TextEditingController _phrases = TextEditingController();
-  TextEditingController _newPassword = TextEditingController();
+  TextEditingController _password = TextEditingController();
   TextEditingController _reNewPassword = TextEditingController();
 
   final AuthService _auth = AuthService();
@@ -160,13 +160,13 @@ class _ImportState extends State<ImportPage> {
                         color: Colors.white),
                   ),
                   onPressed: () async {
-                    bool imported =
-                        await _auth.import(_phrases.text, _newPassword.text);
-                    if (imported) {
+                    if (await _auth.import(_phrases.text, _password.text)) {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => const MyHomePage()));
+                    } else {
+
                     }
                   },
                 )
