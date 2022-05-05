@@ -44,6 +44,15 @@ class DatabaseService {
   Future<bool> buyCoin(Coin coin, String value) async {
     try {
       var amount = double.parse(value);
+      var now = DateTime.now();
+      var formatterDate = DateFormat.MMMMd('en_US') ;
+      var formatterTime = DateFormat.jm();
+      var formatterDoc1 = DateFormat.yMMMMd('en_US') ;
+      var formatterDoc2 = DateFormat.Hms();
+      String actualDate = formatterDate.format(now);
+      String actualTime = formatterTime.format(now);
+      String docName = formatterDoc1.format(now) + formatterDoc2.format(now);
+      docName = docName.replaceAll(' ', '');
       DocumentReference documentReference = FirebaseFirestore.instance
           .collection('user')
           .doc(uid)
@@ -57,7 +66,16 @@ class DatabaseService {
         }
         double newAmount = snapshot.data()['amount'] + amount;
         transaction.update(documentReference, {'amount': newAmount});
-
+        await FirebaseFirestore.instance.collection("user").doc(uid).collection("trans").doc(docName).set({
+          'type': 'Buy',
+          'name': coin.symbol.toUpperCase(),
+          'status': 'Confirmed',
+          'time': actualTime,
+          'date': actualDate,
+          'from': uid,
+          'to': receiver,
+          'Tamount': amount,
+        });
         return true;
       });
       return true;
