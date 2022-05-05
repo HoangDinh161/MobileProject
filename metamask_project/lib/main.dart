@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:metamask_project/Services/Database.dart';
 import 'package:passwordfield/passwordfield.dart';
 import 'Screens/Auth/CreateWallet.dart';
 import 'Screens/Auth/StartPage.dart';
@@ -41,9 +42,11 @@ class AuthWrapper extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     final user = context.watch<User>();
-
     if(user != null){
-      return MyHomePage();
+      return Provider<DatabaseService>(
+          create: (_) => DatabaseService(),
+          child: MyHomePage()
+      );
     }
     return StartPage();
   }

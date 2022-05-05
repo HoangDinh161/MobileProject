@@ -20,6 +20,7 @@ class DatabaseService {
         uid: snapshot.data()['uid'],
     );
   }
+
   List<wallet> _walletListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.docs.map((doc){
       //print(doc.data);
@@ -35,6 +36,16 @@ class DatabaseService {
   }
   Stream<List<wallet>> get walletList  {
     return FirebaseFirestore.instance.collection('user').doc(uid).collection('wallet').snapshots().map(_walletListFromSnapshot);
+  }
+
+  Future<double> total() async {
+    double result = 0;
+    FirebaseFirestore.instance.collection('user').doc(uid).collection('wallet').get().then((value) => {
+      value.docs.forEach((element) {
+        print(element);
+      })
+    });
+    return result;
   }
 
   Future<bool> buyCoin(Coin coin, String value) async {

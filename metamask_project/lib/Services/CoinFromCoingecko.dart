@@ -13,7 +13,19 @@ Future<List<Coin>> getCoinList() async {
     }
     return coinList;
   }catch(e){
-    print(e);
     return coinList;
+  }
+}
+
+Future<double> getUSD(String id) async {
+  try{
+    var url = "https://api.coingecko.com/api/v3/coins/" + id;
+    var respond = await http.get(url);
+    var json = jsonDecode(respond.body);
+    var value = json['market_data']['current_price']['usd'].toString();
+    return double.parse(value);
+  }catch(e){
+    print(e);
+    return 0.0;
   }
 }

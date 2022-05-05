@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:metamask_project/Models/wallet.dart';
 
 import '../../ImportTokenPage.dart';
+import '../../Services/CoinFromCoingecko.dart';
 import '../../Services/Database.dart';
 
 class WalletList extends StatelessWidget{
@@ -35,7 +36,7 @@ class WalletList extends StatelessWidget{
                                     bottom: BorderSide(width: 0.3)
                                   )
                                 ),
-                                child: walletTile(
+                                child: WalletTile(
                                       w: wallets![index],
                                     ),
                               );
@@ -88,11 +89,32 @@ class WalletList extends StatelessWidget{
   }
 }
 
-class walletTile extends StatelessWidget{
-  const walletTile({required this.w, Key? key}) : super(key: key);
+class WalletTile extends StatefulWidget{
+  const WalletTile({required this.w, Key? key}) : super(key: key);
   final wallet w;
+
+  @override
+  State<WalletTile> createState() => _WalletTileState();
+}
+
+class _WalletTileState extends State<WalletTile> {
+  double usd = 0.0;
+
+  @override
+  initState() {
+    updateValues();
+  }
+
+  updateValues() async {
+    usd = await getUSD(widget.w.coin.id);
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
+    getValue(String id, double amount)  {
+      return (usd * amount).toStringAsFixed(2);
+    }
     // TODO: implement build
     return ListTile(
       dense:true,
@@ -101,12 +123,12 @@ class walletTile extends StatelessWidget{
         height: 20,
         width: 20,
         child: Image.network(
-          w.coin.image,
+          widget.w.coin.image,
         ),
       ),
 
-      title: Text(w.amount.toString() + " ${w.coin.symbol.toUpperCase()}"),
-      subtitle: Text('usd'),
+      title: Text(widget.w.amount.toString() + " ${widget.w.coin.symbol.toUpperCase()}"),
+      subtitle: Text("${getValue(widget.w.coin.id, widget.w.amount)} USD"),
       trailing: const Icon(Icons.arrow_right),
     );
   }
