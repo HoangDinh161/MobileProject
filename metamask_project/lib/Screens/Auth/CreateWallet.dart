@@ -33,9 +33,6 @@ class _CreateWalletState extends State<CreateWalletPage> {
   int _currentstep = 0;
   int step_2 = 0;
 
-
-
-
   void onContinue() {
     if (_currentstep == 0 &&!_formKey_1.currentState!.validate()) {
       return ;

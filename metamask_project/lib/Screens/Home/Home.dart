@@ -195,7 +195,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                       ),
                     ),
-                    WalletList(),
+                     WalletList(),
 
                   ],
                 ),

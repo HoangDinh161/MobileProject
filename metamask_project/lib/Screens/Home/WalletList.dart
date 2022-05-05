@@ -17,7 +17,7 @@ class WalletList extends StatelessWidget{
             List<wallet>? wallets = snapshot.data;
               return Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Column(
+                child: ListView(
                   children: [
                     ListView.builder(
                       scrollDirection: Axis.vertical,
