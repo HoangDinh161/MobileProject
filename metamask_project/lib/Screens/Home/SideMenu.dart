@@ -3,11 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:metamask_project/Screens/Auth/ReLogin.dart';
 import 'package:metamask_project/TransactionHistory.dart';
 
+import '../../Models/user.dart';
+import '../../Models/wallet.dart';
 import '../Auth/StartPage.dart';
+import 'Home.dart';
 
 class SideMenu extends StatelessWidget {
-  const SideMenu({Key? key}) : super(key: key);
-
+  SideMenu({required this.wallets, required this.userData,Key? key}) : super(key: key);
+  user? userData;
+  List<wallet>? wallets;
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -54,19 +58,11 @@ class SideMenu extends StatelessWidget {
                     ),
                   ),
                 ),
-                const Padding(
+                 Padding(
                   padding: EdgeInsets.only(top: 4.0),
                   child: SizedBox(
-                    width: 42,
                     height: 10,
-                    child: Text(
-                      "\$ 0.36",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Color(0xff998c8c),
-                        fontSize: 9,
-                      ),
-                    ),
+                    child: getTotal(wallets: wallets),
                   ),
                 ),
                 Padding(

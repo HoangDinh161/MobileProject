@@ -56,7 +56,7 @@ class MyHomePage extends StatelessWidget {
               if(snapshot.hasData) {
                 List<wallet>? wallets = snapshot.data;
                 return Scaffold(
-                    drawer: const SideMenu(),
+                    drawer: SideMenu(userData: userData,wallets: wallets,),
                     appBar: AppBar(
                       // The title text which will be shown on the action bar
                       toolbarHeight: 47,
@@ -301,3 +301,39 @@ class _coinStreamState extends State<coinStream> {
   }
 }
 
+class getTotal extends StatefulWidget {
+
+  getTotal({required this.wallets,Key? key}) : super(key: key);
+  List<wallet>? wallets;
+  @override
+  State<getTotal> createState() => _getTotalState();
+}
+
+class _getTotalState extends State<getTotal> {
+  double total = 0.0;
+  @override
+  initState() {
+    getTotal();
+  }
+
+  getTotal()  async {
+    for(var w in widget.wallets ?? [])  {
+      double a = await getUSD(w.coin.id);
+      total += a*w.amount;
+    }
+    setState(() {});
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Text(
+      "\$ ${total.toStringAsFixed(2)}",
+      textAlign: TextAlign.center,
+      style: const TextStyle(
+        color: Color(0xff998c8c),
+        fontSize: 9,
+      ),
+    );
+  }
+}
