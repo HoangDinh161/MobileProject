@@ -3,7 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:metamask_project/Services/Auth.dart';
-import 'package:passwordfield/passwordfield.dart';
 import 'package:provider/provider.dart';
 import '../../Design/InputDeco_design.dart';
 import '../../Services/CreatePhrase.dart';
@@ -26,6 +25,7 @@ class _CreateWalletState extends State<CreateWalletPage> {
 
   final GlobalKey<FormState> _formKey_1 = GlobalKey<FormState>();
   final GlobalKey<FormState> _formKey_2 = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKeyPhrase = GlobalKey<FormState>();
   final AuthService _auth = AuthService();
 
   bool _passwordVisible = true;
@@ -345,7 +345,9 @@ class _CreateWalletState extends State<CreateWalletPage> {
                       fontFamily: "Roboto",
                       color: Colors.blueAccent)),
               content: SingleChildScrollView(
-                child: Column(
+                child: Form(
+                    key: _formKeyPhrase,
+                    child:Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     const Text('Confirm Secret Recovery Phrase',
@@ -386,29 +388,37 @@ class _CreateWalletState extends State<CreateWalletPage> {
                               color: Colors.white),
                         ),
                         onPressed: () async {
-                          dynamic result = context.read<AuthService>()
-                              .newWallet(
-                            p.phrases,
-                            password.text,
-                            'Account',
-                          )
-                              .then((value) async {
-                            User user = FirebaseAuth.instance.currentUser;
-                            await FirebaseFirestore.instance.collection("user")
-                                .doc(user.uid)
-                                .set({
-                              'uid': user.uid,
-                              'phrase': p.phrases,
-                              'username': 'Account',
+                          if (_formKeyPhrase.currentState!.validate()) {
+                            dynamic result = context.read<AuthService>()
+                                .newWallet(
+                              p.phrases,
+                              password.text,
+                              'Account',
+                            )
+                                .then((value) async {
+                              User user = FirebaseAuth.instance.currentUser;
+                              await FirebaseFirestore.instance.collection(
+                                  "user")
+                                  .doc(user.uid)
+                                  .set({
+                                'uid': user.uid,
+                                'phrase': p.phrases,
+                                'username': 'Account',
+                              });
+                              Navigator.push(context, MaterialPageRoute(
+                                  builder: (context) => const MyHomePage()));
                             });
-                            Navigator.push(context, MaterialPageRoute(
-                                builder: (context) => const MyHomePage()));
-                          });
-                        },
+                            } else {
+                              const snackBar =  SnackBar(
+                                  content: Text('Your phrases are Wrong or not in right Order. Please re-enter or re-order your phrases',
+                                        style: TextStyle(fontSize: 10, fontFamily: "Roboto", color: Colors.red)));
+                                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                          }
+                          },
                       ),
                     )
                   ],
-                ),
+                )),
               )),
         ];
 
@@ -472,8 +482,9 @@ class _CreateWalletState extends State<CreateWalletPage> {
 
 }
 class TextListView extends StatelessWidget {
-  const TextListView({required this.p, Key? key }) : super(key: key);
+  TextListView({required this.p, Key? key }) : super(key: key);
   final Phrase p;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -488,16 +499,16 @@ class TextListView extends StatelessWidget {
         ),
         borderRadius: BorderRadius.circular(10),
       ),
-      child: GridView.builder(
-        itemCount: 12,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+      child:GridView.builder(
+            itemCount: 12,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             crossAxisSpacing: 10,
             mainAxisSpacing: 5,
             childAspectRatio: 4),
-        itemBuilder: (BuildContext context, int index) {
-          return TxtView(index: index+1, slist: p.stringList(),);
-        },
+            itemBuilder: (BuildContext context, int index) {
+              return TxtView(index: index+1, slist: p.stringList(),);
+          },
       ),
     );
   }
@@ -535,16 +546,25 @@ class _TxtViewState extends State<TxtView> {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
+      keyboardType: TextInputType.text,
       decoration: InputDecoration(
         label: Text(widget.index.toString()+'.'),
         border: const OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(4.0)),
           borderSide: BorderSide(width: 1.0),
         ),
-
       ),
       controller: controller,
+      validator: (value) {
+        if (value == null||value.isEmpty) {
+          return "";
+        }
+        if (controller.text != widget.slist[widget.index-1] ) {
+            return "";
+        }
+        return null;
+      },
     );
   }
 }
