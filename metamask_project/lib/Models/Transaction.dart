@@ -1,4 +1,4 @@
-class Transaction {
+class Trans {
   String type;
   String name;
   String status;
@@ -7,13 +7,20 @@ class Transaction {
   String from;
   String to;
   double Tamount;
-  double amount = 0;
-  double fee = 0;
+  double amount;
+  double fee;
 
-  Transaction(this.type, this.name, this.status, this.time, this.date,
-      this.from, this.to, this.Tamount) {
-    fee = Tamount * 0.1;
-    amount = Tamount - fee;
+  Trans( this.type, this.name, this.status, this.time, this.date,
+      this.from, this.to, this.Tamount, this.amount, this.fee);
+
+  String shortFrom() {
+    if (type == 'Buy') {
+      return 'Admin';
+    }
+    return from.substring(0, 7) + "..." + from.substring(from.length -5, from.length);
+  }
+  String shortTo() {
+    return to.substring(0, 7) + "..." + to.substring(to.length -5, to.length);
   }
 
 // Future<void> getTime() async {

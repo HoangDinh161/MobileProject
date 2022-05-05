@@ -130,7 +130,7 @@ class _BuyState extends State<BuyPage> {
               ),
               onPressed: () async {
                 if (await DatabaseService().buyCoin(dropdownValue, _amountController.text)) {
-                  Future.delayed(Duration(milliseconds: 100), () {
+                  Future.delayed(Duration(milliseconds: 500), () {
                     Navigator.push(context, MaterialPageRoute(builder: (context) => const MyHomePage()));
                   });
                 }

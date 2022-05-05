@@ -5,9 +5,9 @@ import 'package:metamask_project/Models/Coin.dart';
 import 'package:metamask_project/Models/wallet.dart';
 
 import '../Models/user.dart';
+import '../Models/Transaction.dart';
 import 'package:intl/intl.dart';
 
-import 'CoinFromCoingecko.dart';
 
 class DatabaseService {
 
@@ -31,6 +31,28 @@ class DatabaseService {
           amount: doc.data()['amount'],
       );
     }).toList();
+  }
+
+  List<Trans> _transListFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.docs.map((doc){
+      //print(doc.data);
+      return Trans(
+        doc.data()['type'],
+        doc.data()['name'],
+        doc.data()['status'],
+        doc.data()['time'],
+        doc.data()['date'],
+        doc.data()['from'],
+        doc.data()['to'],
+        doc.data()['Tamount'],
+        doc.data()['amount'],
+        doc.data()['fee'],
+      );
+    }).toList();
+  }
+
+  Stream<List<Trans>> get transList  {
+    return FirebaseFirestore.instance.collection('user').doc(uid).collection('trans').snapshots().map(_transListFromSnapshot);
   }
 
   Stream<user> get userData {
@@ -73,8 +95,10 @@ class DatabaseService {
           'time': actualTime,
           'date': actualDate,
           'from': uid,
-          'to': receiver,
+          'to': uid,
           'Tamount': amount,
+          'amount': amount,
+          'fee': 0.0,
         });
         return true;
       });
@@ -126,6 +150,8 @@ class DatabaseService {
           'from': uid,
           'to': receiver,
           'Tamount': amount,
+          'amount': amount*0.9,
+          'fee': amount*0.1,
         });
         await FirebaseFirestore.instance.collection("user").doc(receiver).collection("trans").doc(docName).set({
           'type': 'Receive',
@@ -136,6 +162,8 @@ class DatabaseService {
           'from': uid,
           'to': receiver,
           'Tamount': amount,
+          'amount': amount*0.9,
+          'fee': amount*0.1,
         });
         return true;
       });

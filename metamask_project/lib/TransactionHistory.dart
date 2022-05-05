@@ -1,84 +1,101 @@
 import 'package:flutter/material.dart';
 import 'package:metamask_project/Models/Transaction.dart';
+import 'package:metamask_project/Services/Database.dart';
 
 class TransactionHistory extends StatelessWidget {
-  List<Transaction> trans = [
-    Transaction("Buy", "BNB", "Confirm", "11:15PM", "Mar 10", "0x5388...4037",
-        "0xf357...Edl2", 0.001),
-    Transaction("Send", "Bcoin", "Confirm", "11:15PM", "Mar 10",
-        "0x5388...4037", "0xf357...Edl2", 20),
-    Transaction("Send", "BNB", "Confirm", "11:15PM", "Mar 10", "0x5388...4037",
-        "0xf357...Edl2", 0.5),
-    Transaction("Buy", "Bcoin", "Confirm", "11:15PM", "Mar 10", "0x5388...4037",
-        "0xf357...Edl2", 100),
-    Transaction("Send", "BNB", "Confirm", "11:15PM", "Mar 10", "0x5388...4037",
-        "0xf357...Edl2", 0.8),
-    Transaction("Send", "Bcoin", "Confirm", "11:15PM", "Mar 10",
-        "0x5388...4037", "0xf357...Edl2", 5.7),
-    Transaction("Send", "BNB", "Confirm", "11:15PM", "Mar 10", "0x5388...4037",
-        "0xf357...Edl2", 0.67),
-    Transaction("Send", "Bcoin", "Confirm", "11:15PM", "Mar 10",
-        "0x5388...4037", "0xf357...Edl2", 0.0034),
-    Transaction("Send", "BNB", "Confirm", "11:15PM", "Mar 10", "0x5388...4037",
-        "0xf357...Edl2", 0.647),
-  ];
+  // List<Transaction> trans = [
+  //   Transaction("Buy", "BNB", "Confirm", "11:15PM", "Mar 10", "0x5388...4037",
+  //       "0xf357...Edl2", 0.001),
+  //   Transaction("Send", "Bcoin", "Confirm", "11:15PM", "Mar 10",
+  //       "0x5388...4037", "0xf357...Edl2", 20),
+  //   Transaction("Send", "BNB", "Confirm", "11:15PM", "Mar 10", "0x5388...4037",
+  //       "0xf357...Edl2", 0.5),
+  //   Transaction("Buy", "Bcoin", "Confirm", "11:15PM", "Mar 10", "0x5388...4037",
+  //       "0xf357...Edl2", 100),
+  //   Transaction("Send", "BNB", "Confirm", "11:15PM", "Mar 10", "0x5388...4037",
+  //       "0xf357...Edl2", 0.8),
+  //   Transaction("Send", "Bcoin", "Confirm", "11:15PM", "Mar 10",
+  //       "0x5388...4037", "0xf357...Edl2", 5.7),
+  //   Transaction("Send", "BNB", "Confirm", "11:15PM", "Mar 10", "0x5388...4037",
+  //       "0xf357...Edl2", 0.67),
+  //   Transaction("Send", "Bcoin", "Confirm", "11:15PM", "Mar 10",
+  //       "0x5388...4037", "0xf357...Edl2", 0.0034),
+  //   Transaction("Send", "BNB", "Confirm", "11:15PM", "Mar 10", "0x5388...4037",
+  //       "0xf357...Edl2", 0.647),
+  // ];
 
   TransactionHistory({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          // The title text which will be shown on the action bar
-          toolbarHeight: 47,
-          leading: IconButton(
-              icon: const Icon(Icons.arrow_back),
-              color: Colors.black,
-              onPressed: () {
-                Navigator.pop(context);
-              }),
+    return StreamBuilder<List<Trans>>(
+      stream: DatabaseService().transList,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          List<Trans>? trans = snapshot.data;
+          return Scaffold(
+              appBar: AppBar(
+                // The title text which will be shown on the action bar
+                toolbarHeight: 47,
+                leading: IconButton(
+                    icon: const Icon(Icons.arrow_back),
+                    color: Colors.black,
+                    onPressed: () {
+                      Navigator.pop(context);
+                    }),
 
-          title: Column(children: const [
-            Text(
-              'Transaction',
-              style: TextStyle(
-                  fontSize: 16, fontFamily: "Roboto", color: Colors.black),
-            ),
-            Text(
-              'Smart chain',
-              style: TextStyle(
-                  fontSize: 9, fontFamily: "Roboto", color: Colors.grey),
-            )
-          ]),
-          actions: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: CircleAvatar(
-                backgroundColor: Colors.greenAccent[400],
-                radius: 17,
-                child: const Text(
-                  'U',
-                  style: TextStyle(fontSize: 15, color: Colors.white),
-                ),
+                title: Column(children: const [
+                  Text(
+                    'Transaction',
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontFamily: "Roboto",
+                        color: Colors.black),
+                  ),
+                  Text(
+                    'Smart chain',
+                    style: TextStyle(
+                        fontSize: 9, fontFamily: "Roboto", color: Colors.grey),
+                  )
+                ]),
+                actions: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: CircleAvatar(
+                      backgroundColor: Colors.greenAccent[400],
+                      radius: 17,
+                      child: const Text(
+                        'U',
+                        style: TextStyle(fontSize: 15, color: Colors.white),
+                      ),
+                    ),
+                  ),
+                ],
+                centerTitle: true,
+                backgroundColor: Colors.white,
               ),
+              body: ListView.builder(
+                itemCount: trans?.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Material(
+                        child: TransTile(
+                          trans: trans![index],
+                          index: index,
+                        )),
+                  );
+                },
+              ));
+        } else {
+          return const Center(
+            child: CircularProgressIndicator(
+              color: Colors.blue,
             ),
-          ],
-          centerTitle: true,
-          backgroundColor: Colors.white,
-        ),
-        body: ListView.builder(
-          itemCount: trans.length,
-          itemBuilder: (context, index) {
-            return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Material(
-                  child: TransTile(
-                trans: trans[index],
-                index: index,
-              )),
-            );
-          },
-        ));
+          );
+        }
+      }
+    );
   }
 }
 
@@ -86,7 +103,7 @@ class TransTile extends StatelessWidget {
   TransTile({required this.trans, required this.index, Key? key})
       : super(key: key);
 
-  Transaction trans;
+  Trans trans;
   num index;
 
   @override
@@ -300,7 +317,7 @@ class TransTile extends StatelessWidget {
                                   Padding(
                                     padding:
                                         const EdgeInsets.only(bottom: 13.0),
-                                    child: Text(trans.from,
+                                    child: Text(trans.shortFrom(),
                                         textAlign: TextAlign.left,
                                         style: const TextStyle(
                                           color: Colors.black,
@@ -327,7 +344,7 @@ class TransTile extends StatelessWidget {
                                   Padding(
                                     padding:
                                         const EdgeInsets.only(bottom: 13.0),
-                                    child: Text(trans.to,
+                                    child: Text(trans.shortTo(),
                                         textAlign: TextAlign.right,
                                         style: const TextStyle(
                                           color: Colors.black,

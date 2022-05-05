@@ -213,10 +213,9 @@ class SendConfirm extends StatelessWidget {
             ),
             onPressed:  () async{
               if (await DatabaseService().sendCoin(coin, receiver, amount.toString(),)) {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const MyHomePage()));
+                Future.delayed(Duration(milliseconds: 500), () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const MyHomePage()));
+                });
               }
             }
         ),
