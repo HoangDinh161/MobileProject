@@ -549,6 +549,7 @@ class _TxtViewState extends State<TxtView> {
     return TextFormField(
       keyboardType: TextInputType.text,
       decoration: InputDecoration(
+        errorStyle: const TextStyle(fontSize: 0.01),
         label: Text(widget.index.toString()+'.'),
         border: const OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(4.0)),
@@ -558,10 +559,10 @@ class _TxtViewState extends State<TxtView> {
       controller: controller,
       validator: (value) {
         if (value == null||value.isEmpty) {
-          return "";
+          return '';
         }
         if (controller.text != widget.slist[widget.index-1] ) {
-            return "";
+            return '';
         }
         return null;
       },
