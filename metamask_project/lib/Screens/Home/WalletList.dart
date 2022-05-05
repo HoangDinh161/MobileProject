@@ -32,7 +32,6 @@ class WalletList extends StatelessWidget{
                                 padding: const EdgeInsets.all(1.0),
                                 decoration: const BoxDecoration(
                                   border: Border(
-                                    top: BorderSide(width: 0.2),
                                     bottom: BorderSide(width: 0.3)
                                   )
                                 ),
