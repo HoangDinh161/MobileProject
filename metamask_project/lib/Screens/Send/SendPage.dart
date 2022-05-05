@@ -16,6 +16,7 @@ class SendPage extends StatefulWidget {
 class _SendState extends State<SendPage> {
   final TextEditingController _receiverController = TextEditingController();
   final TextEditingController _amountController = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -197,9 +198,11 @@ class _SendState extends State<SendPage> {
                           )
                         ],
                       ),
-                      Row(
-                        children: [
-                          Expanded(
+                      Form(
+                          key:_formKey,
+                          child:Row(
+                            children: [
+                            Expanded(
                             flex: 1,
                               child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
@@ -214,7 +217,7 @@ class _SendState extends State<SendPage> {
                                       fontSize: 10, fontFamily: "Roboto", color: Colors.blue),
                                 ),
                                 onPressed: () {
-
+                                    _amountController.text = dropdownValue.amount.toString();
                                   }
                               )
                           ),
@@ -252,12 +255,11 @@ class _SendState extends State<SendPage> {
                                         return "Amount you enter is larger than amount of your wallet";
                                       }
                                         return null;
-                                      
                                   },
                               )
                           )
                         ],
-                      ),
+                      )),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
                             primary: Colors.blue,
@@ -272,10 +274,12 @@ class _SendState extends State<SendPage> {
                               fontSize: 12, fontFamily: "Roboto", color: Colors.white),
                         ),
                         onPressed: () {
+                          if (_formKey.currentState!.validate()) {
                           Navigator.push(
                               context,
                               MaterialPageRoute(builder: (context) => SendConfirm(amount: double.parse(_amountController.text), receiver: _receiverController.text, coin: dropdownValue.coin,)));
                           }
+                        }
                       ),
                     ],
                   )
