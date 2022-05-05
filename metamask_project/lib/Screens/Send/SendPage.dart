@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:metamask_project/Models/wallet.dart';
 
 import '../../Services/Database.dart';
@@ -106,6 +107,7 @@ class _SendState extends State<SendPage> {
                               flex: 5,
                               child: TextFormField(
                                   controller: _receiverController,
+                                  keyboardType: TextInputType.text,
                                   enabled: true,
                                   decoration: const InputDecoration(
                                     label: Text(
@@ -220,6 +222,10 @@ class _SendState extends State<SendPage> {
                               flex: 5,
                               child: TextFormField(
                                   controller: _amountController,
+                                  keyboardType: TextInputType.number,
+                                  inputFormatters: <TextInputFormatter>[
+                                      FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                                  ],
                                   enabled: true,
                                   decoration: const InputDecoration(
                                     label: Text(
@@ -237,7 +243,17 @@ class _SendState extends State<SendPage> {
                                       BorderRadius.all(Radius.circular(4.0)),
                                       borderSide: BorderSide(width: 1.0),
                                     ),
-                                  )
+                                  ),
+                                  validator: (value) {
+                                      if (value == null|| value.isEmpty) {
+                                        return "Please enter amount of token";
+                                      }
+                                      if (int.parse(_amountController.text) > dropdownValue.amount ) {
+                                        return "Amount you enter is larger than amount of your wallet";
+                                      }
+                                        return null;
+                                      
+                                  },
                               )
                           )
                         ],

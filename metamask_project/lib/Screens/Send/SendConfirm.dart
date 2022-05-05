@@ -44,58 +44,58 @@ class SendConfirm extends StatelessWidget {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-        Row(
-        children: [
-        const Expanded(
-        flex: 1,
-            child: Text(
-              'From:',
-              textAlign: TextAlign.left,
-              style: TextStyle(
-                color: Colors.black,
-                fontFamily: 'Roboto',
-                fontSize: 11,
-                fontWeight: FontWeight.normal,
-              ),
+            Row(
+              children: [
+                const Expanded(
+                    flex: 1,
+                    child: Text(
+                        'From:',
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontFamily: 'Roboto',
+                          fontSize: 11,
+                          fontWeight: FontWeight.normal,
+                        ),
             )),
-        Expanded(
-            flex: 5,
-            child: TextFormField(
-                enabled: false,
-                decoration: InputDecoration(
-                  label: Text(
-                    FirebaseAuth.instance.currentUser.uid,
+              Expanded(
+                  flex: 5,
+                  child: TextFormField(
+                      enabled: false,
+                      decoration: InputDecoration(
+                        label: Text(
+                          FirebaseAuth.instance.currentUser.uid,
+                          textAlign: TextAlign.left,
+                          style: const TextStyle(
+                            color: Color.fromRGBO(153, 140, 140, 1),
+                            fontFamily: 'Roboto',
+                            fontSize: 12,
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
+                        border: const OutlineInputBorder(
+                          borderRadius:
+                          BorderRadius.all(Radius.circular(4.0)),
+                          borderSide: BorderSide(width: 1.0),
+                        ),
+                      )))
+              ],
+            ),
+          Row(
+            children: [
+              const Expanded(
+                  flex: 1,
+                  child: Text(
+                    'To:',
                     textAlign: TextAlign.left,
-                    style: const TextStyle(
-                      color: Color.fromRGBO(153, 140, 140, 1),
+                    style: TextStyle(
+                      color: Colors.black,
                       fontFamily: 'Roboto',
-                      fontSize: 12,
+                      fontSize: 11,
                       fontWeight: FontWeight.normal,
                     ),
-                  ),
-                  border: const OutlineInputBorder(
-                    borderRadius:
-                    BorderRadius.all(Radius.circular(4.0)),
-                    borderSide: BorderSide(width: 1.0),
-                  ),
-                )))
-        ],
-      ),
-      Row(
-        children: [
-          const Expanded(
-              flex: 1,
-              child: Text(
-                'To:',
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                  color: Colors.black,
-                  fontFamily: 'Roboto',
-                  fontSize: 11,
-                  fontWeight: FontWeight.normal,
-                ),
-              )),
-          Expanded(
+                  )),
+            Expanded(
               flex: 5,
               child: TextFormField(
                   enabled: false,
@@ -119,10 +119,10 @@ class SendConfirm extends StatelessWidget {
           ),
         ],
       ),
-        const Divider(
+          const Divider(
           thickness: 1,
         ),
-        const Text(
+          const Text(
           'AMOUNT', textAlign: TextAlign.center, style: TextStyle(
             color: Color.fromRGBO(0, 0, 0, 1),
             fontFamily: 'Roboto',
@@ -132,7 +132,7 @@ class SendConfirm extends StatelessWidget {
             height: 1.5384615384615385
           ),
         ),
-        Text(
+          Text(
           amount.toString(), textAlign: TextAlign.center, style: const TextStyle(
             color: Color.fromRGBO(0, 0, 0, 1),
             fontFamily: 'Roboto',
@@ -142,12 +142,12 @@ class SendConfirm extends StatelessWidget {
             height: 0.5555555555555556
           ),
         ),
-        Container(
-          decoration: BoxDecoration(
+          Container(
+              decoration: BoxDecoration(
               border: Border.all(color: Colors.black),
               borderRadius: const BorderRadius.all(Radius.circular(18)),
           ),
-          child: Column(
+            child: Column(
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -198,7 +198,7 @@ class SendConfirm extends StatelessWidget {
             ],
           ),
         ),
-        ElevatedButton(
+          ElevatedButton(
             style: ElevatedButton.styleFrom(
                 primary: Colors.blue,
                 onPrimary: Colors.white,
