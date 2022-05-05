@@ -60,10 +60,10 @@ class _ImportState extends State<ImportPage> {
                   child: Text(''),
                 )
               ]),
-          const Text(
-            "Import from seed",
-            textAlign: TextAlign.center,
-            style: TextStyle(
+                const Text(
+              "Import from seed",
+              textAlign: TextAlign.center,
+              style: TextStyle(
                 fontSize: 16,
                 fontFamily: "Roboto",
                 fontWeight: FontWeight.bold),
@@ -97,7 +97,6 @@ class _ImportState extends State<ImportPage> {
                             obscureText: _passwordVisible,
                             textAlign: TextAlign.left,
                             keyboardType: TextInputType.text,
-                            maxLines: null,
                             decoration: buildInputDecoration(
                                 10, "Secret Phrases"),
                         ),
