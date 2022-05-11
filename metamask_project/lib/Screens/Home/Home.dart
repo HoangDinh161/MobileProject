@@ -55,8 +55,9 @@ class MyHomePage extends StatelessWidget {
             builder: (context, snapshot) {
               if(snapshot.hasData) {
                 List<wallet>? wallets = snapshot.data;
+                getTotal total = getTotal(wallets: wallets);
                 return Scaffold(
-                    drawer: SideMenu(userData: userData,wallets: wallets,),
+                    drawer: SideMenu(userData: userData,total: getTotal(wallets: wallets)),
                     appBar: AppBar(
                       // The title text which will be shown on the action bar
                       toolbarHeight: 47,
@@ -110,7 +111,7 @@ class MyHomePage extends StatelessWidget {
                             padding: const EdgeInsets.only(top: 4.0),
                             child: SizedBox(
                                 width: 350,
-                              child: getTotal(wallets: wallets,)
+                              child: total,
                             ),
                           ),
                           Padding(
@@ -305,21 +306,23 @@ class getTotal extends StatefulWidget {
 
   getTotal({required this.wallets,Key? key}) : super(key: key);
   List<wallet>? wallets;
+  double total = 0.0;
   @override
   State<getTotal> createState() => _getTotalState();
 }
 
 class _getTotalState extends State<getTotal> {
-  double total = 0.0;
+
   @override
   initState() {
     getTotal();
   }
 
   getTotal()  async {
+    widget.total = 0.0;
     for(var w in widget.wallets ?? [])  {
       double a = await getUSD(w.coin.id);
-      total += a*w.amount;
+      widget.total += a*w.amount;
     }
     setState(() {});
   }
@@ -328,7 +331,7 @@ class _getTotalState extends State<getTotal> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Text(
-      "\$ ${total.toStringAsFixed(2)}",
+      "\$ ${widget.total.toStringAsFixed(2)}",
       textAlign: TextAlign.center,
       style: const TextStyle(
         color: Color(0xff998c8c),

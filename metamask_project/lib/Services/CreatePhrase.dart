@@ -28,6 +28,7 @@ class PhraseCard extends StatelessWidget {
 class Phrase {
   String phrases = "";
   Phrase () {
+
     phrases = bip39.generateMnemonic();
   }
 

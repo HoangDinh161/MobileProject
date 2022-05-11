@@ -9,9 +9,9 @@ import '../Auth/StartPage.dart';
 import 'Home.dart';
 
 class SideMenu extends StatelessWidget {
-  SideMenu({required this.wallets, required this.userData,Key? key}) : super(key: key);
+  SideMenu({required this.total, required this.userData,Key? key}) : super(key: key);
   user? userData;
-  List<wallet>? wallets;
+  getTotal total;
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -46,13 +46,13 @@ class SideMenu extends StatelessWidget {
                     style: TextStyle(fontSize: 10, color: Colors.white),
                   ),
                 ),
-                const SizedBox(
+                 SizedBox(
                   width: 76,
                   height: 23,
                   child: Text(
-                    "Account 1",
+                    userData!.username,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Color(0x89000000),
                       fontSize: 10,
                     ),
@@ -62,7 +62,7 @@ class SideMenu extends StatelessWidget {
                   padding: EdgeInsets.only(top: 4.0),
                   child: SizedBox(
                     height: 10,
-                    child: getTotal(wallets: wallets),
+                    child: total,
                   ),
                 ),
                 Padding(
