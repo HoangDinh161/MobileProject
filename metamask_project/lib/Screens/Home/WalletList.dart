@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:metamask_project/Models/wallet.dart';
 
@@ -17,7 +18,13 @@ class WalletList extends StatelessWidget{
           Container(
               height: 200,
               padding: const EdgeInsets.fromLTRB(0, 2, 0, 2),
+              decoration: const BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(color: Colors.black26,width: 0.2),
+                ),
+              ),
               child: ListView.builder(
+
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
                 itemCount: wallets?.length,

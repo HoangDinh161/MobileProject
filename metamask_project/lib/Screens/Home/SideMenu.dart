@@ -59,7 +59,7 @@ class SideMenu extends StatelessWidget {
                   ),
                 ),
                  Padding(
-                  padding: EdgeInsets.only(top: 4.0),
+                  padding: const EdgeInsets.only(top: 4.0),
                   child: SizedBox(
                     height: 10,
                     child: total,
@@ -109,7 +109,12 @@ class SideMenu extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.account_balance_wallet_outlined),
             title: const Text('Wallet'),
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const MyHomePage()));
+            },
           ),
           ListTile(
             leading: const Icon(Icons.list_outlined),
@@ -121,11 +126,11 @@ class SideMenu extends StatelessWidget {
                       builder: (context) => TransactionHistory()));
             },
           ),
-          ListTile(
+          /**ListTile(
             leading: const Icon(Icons.settings),
             title: const Text('Settings'),
             onTap: () {},
-          ),
+          ),**/
           ListTile(
             leading: const Icon(Icons.logout_outlined),
             title: const Text('Log out'),

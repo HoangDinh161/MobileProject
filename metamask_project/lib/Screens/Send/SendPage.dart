@@ -99,25 +99,25 @@ class _SendState extends State<SendPage> {
                                   ))))
                     ],
                   ),
-                  Row(
-                    children: [
-                      const Expanded(
-                          flex: 1,
-                          child: Text(
-                            'To:',
-                            textAlign: TextAlign.left,
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontFamily: 'Roboto',
-                              fontSize: 11,
-                              fontWeight: FontWeight.normal,
-                            ),
-                          )),
-                      Form(
-                        key:_formKey1,
-                        child: Expanded(
-                            flex: 5,
-                            child: Padding(
+                  Form (
+                      key: _formKey1,
+                      child:Row(
+                          children: [
+                              const Expanded(
+                                  flex: 1,
+                                  child: Text(
+                                    'To:',
+                                    textAlign: TextAlign.left,
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontFamily: 'Roboto',
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.normal,
+                                    ),
+                                  )),
+                            Expanded(
+                              flex: 5,
+                              child: Padding(
                                 padding: const EdgeInsets.only(top: 10, left: 5),
                                 child: TextFormField(
                                     controller: _receiverController,
@@ -154,9 +154,8 @@ class _SendState extends State<SendPage> {
                                   },
                                 )
                             )),
-                      )
                     ],
-                  ),
+                  )),
                   const Divider(thickness: 1,),
                   Row(
                     children: [
@@ -307,12 +306,17 @@ class _SendState extends State<SendPage> {
                             fontSize: 12, fontFamily: "Roboto", color: Colors.white),
                       ),
                       onPressed: () async {
-                        if (_formKey.currentState!.validate() && _formKey1.currentState!.validate()) {
+                        if (_formKey1.currentState!.validate() & _formKey.currentState!.validate()) {
                           if (await lookingForUser(_receiverController.text)) {
                               Navigator.push(
                               context,
                               MaterialPageRoute(builder: (context) => SendConfirm(amount: double.parse(_amountController.text), receiver: _receiverController.text, coin: dropdownValue.coin,)));
-                              }
+                              } else {
+                              const snackBar =  SnackBar(
+                                  content: Text('This receiver account is not exist. Please check that address again and re-enter it!',
+                                    style: TextStyle(fontSize: 12, fontFamily: "Roboto", color: Colors.red)));
+                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                          }
                           }
                         }
                   ),
