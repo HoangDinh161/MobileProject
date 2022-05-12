@@ -174,4 +174,16 @@ class DatabaseService {
   }
 }
 
+Future<bool> lookingForUser(String? receiver) async {
+  if (receiver == null) {
+    return false;
+  }
+  DocumentSnapshot document = await FirebaseFirestore.instance.collection('user').doc(receiver).get();
+  if(document.exists) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 

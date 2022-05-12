@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:metamask_project/Models/wallet.dart';
 
 import '../../Models/Coin.dart';
+import '../../Services/Database.dart';
 import 'SendConfirm.dart';
 
 class SendPage extends StatefulWidget {
@@ -18,6 +19,7 @@ class _SendState extends State<SendPage> {
   final TextEditingController _receiverController = TextEditingController();
   final TextEditingController _amountController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey1 = GlobalKey<FormState>();
   wallet dropdownValue = wallet(coin: Coin('','','',''), amount: 0);
 
   @override
@@ -111,31 +113,48 @@ class _SendState extends State<SendPage> {
                               fontWeight: FontWeight.normal,
                             ),
                           )),
-                      Expanded(
-                          flex: 5,
-                          child: Padding(
-                              padding: const EdgeInsets.only(top: 10, left: 5),
-                              child: TextFormField(
-                                  controller: _receiverController,
-                                  keyboardType: TextInputType.text,
-                                  enabled: true,
-                                  decoration: const InputDecoration(
-                                    label: Text(
-                                      "Receiver ID",
-                                      textAlign: TextAlign.left,
-                                      style: TextStyle(
-                                        color: Color.fromRGBO(153, 140, 140, 1),
-                                        fontFamily: 'Roboto',
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.normal,
+                      Form(
+                        key:_formKey1,
+                        child: Expanded(
+                            flex: 5,
+                            child: Padding(
+                                padding: const EdgeInsets.only(top: 10, left: 5),
+                                child: TextFormField(
+                                    controller: _receiverController,
+                                    keyboardType: TextInputType.text,
+                                    enabled: true,
+                                    decoration: const InputDecoration(
+                                      label: Text(
+                                        "Receiver ID",
+                                        textAlign: TextAlign.left,
+                                        style: TextStyle(
+                                          color: Color.fromRGBO(153, 140, 140, 1),
+                                          fontFamily: 'Roboto',
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.normal,
+                                        ),
+                                      ),
+                                      border: OutlineInputBorder(
+                                        borderRadius:
+                                        BorderRadius.all(Radius.circular(4.0)),
+                                        borderSide: BorderSide(width: 1.0),
                                       ),
                                     ),
-                                    border: OutlineInputBorder(
-                                      borderRadius:
-                                      BorderRadius.all(Radius.circular(4.0)),
-                                      borderSide: BorderSide(width: 1.0),
-                                    ),
-                                  ))))
+                                  validator: (value) {
+                                    if (value == null|| value.isEmpty) {
+                                      return "Please enter receiver id";
+                                    }
+                                    if (value.length < 28) {
+                                      return "Id must be 28 characters long";
+                                    }
+                                    if (value == FirebaseAuth.instance.currentUser.uid) {
+                                      return "You cannot send to yourself";
+                                    }
+                                    return null;
+                                  },
+                                )
+                            )),
+                      )
                     ],
                   ),
                   const Divider(thickness: 1,),
@@ -265,7 +284,7 @@ class _SendState extends State<SendPage> {
                                       if (value == null|| value.isEmpty) {
                                         return "Please enter amount of token";
                                       }
-                                      if (int.parse(_amountController.text) > dropdownValue.amount ) {
+                                      if (double.parse(_amountController.text) > dropdownValue.amount ) {
                                         return "Amount you enter is larger than amount of your wallet";
                                       }
                                       return null;
@@ -287,13 +306,15 @@ class _SendState extends State<SendPage> {
                         style: TextStyle(
                             fontSize: 12, fontFamily: "Roboto", color: Colors.white),
                       ),
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          Navigator.push(
+                      onPressed: () async {
+                        if (_formKey.currentState!.validate() && _formKey1.currentState!.validate()) {
+                          if (await lookingForUser(_receiverController.text)) {
+                              Navigator.push(
                               context,
                               MaterialPageRoute(builder: (context) => SendConfirm(amount: double.parse(_amountController.text), receiver: _receiverController.text, coin: dropdownValue.coin,)));
+                              }
+                          }
                         }
-                      }
                   ),
                 ],
               )
