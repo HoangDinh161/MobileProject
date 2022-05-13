@@ -132,11 +132,10 @@ class _BuyState extends State<BuyPage> {
                     fontSize: 12, fontFamily: "Roboto", color: Colors.white),
               ),
               onPressed: () async {
-                if (await DatabaseService().buyCoin(dropdownValue, _amountController.text)) {
-                  Future.delayed(Duration(milliseconds: 500), () {
+                  await DatabaseService().buyCoin(dropdownValue, _amountController.text);
+                  Future.delayed(Duration(milliseconds: 300), () {
                     Navigator.push(context, MaterialPageRoute(builder: (context) => const MyHomePage()));
                   });
-                }
               },
             ),
           ],

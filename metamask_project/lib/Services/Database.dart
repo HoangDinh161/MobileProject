@@ -61,10 +61,9 @@ class DatabaseService {
   Stream<List<wallet>> get walletList  {
     return FirebaseFirestore.instance.collection('user').doc(uid).collection('wallet').snapshots().map(_walletListFromSnapshot);
   }
-
-
   Future<bool> buyCoin(Coin coin, String value) async {
     try {
+      bool added = false;
       var amount = double.parse(value);
       var now = DateTime.now();
       var formatterDate = DateFormat.MMMMd('en_US') ;
@@ -82,12 +81,6 @@ class DatabaseService {
           .doc(coin.id);
       FirebaseFirestore.instance.runTransaction((transaction) async {
         DocumentSnapshot snapshot = await transaction.get(documentReference);
-        if (!snapshot.exists) {
-          documentReference.set({'id': coin.id, 'name': coin.name,'symbol': coin.symbol, 'image': coin.image, 'amount': amount});
-          return true;
-        }
-        double newAmount = snapshot.data()['amount'] + amount;
-        transaction.update(documentReference, {'amount': newAmount});
         await FirebaseFirestore.instance.collection("user").doc(uid).collection("trans").doc(docName).set({
           'type': 'Buy',
           'name': coin.symbol.toUpperCase(),
@@ -100,7 +93,18 @@ class DatabaseService {
           'amount': amount,
           'fee': 0.0,
         });
-        return true;
+        if (snapshot.exists) {
+          if (!added) {
+            double newAmount = snapshot.data()['amount'] + amount;
+            transaction.update(documentReference, {'amount': newAmount});
+            return true;
+          }
+          return true;
+        } else {
+          documentReference.set({'id': coin.id, 'name': coin.name,'symbol': coin.symbol, 'image': coin.image, 'amount': amount});
+          added = true;
+          return true;
+        }
       });
       return true;
     } catch (e) {
