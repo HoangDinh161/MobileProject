@@ -1,9 +1,7 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:metamask_project/Models/wallet.dart';
-
-import '../../ImportTokenPage.dart';
-import '../../Services/CoinFromCoingecko.dart';
+ import 'package:flutter/material.dart';
+ import 'package:metamask_project/Models/wallet.dart';
+ import '../../ImportTokenPage.dart';
+ import '../../Services/CoinFromCoingecko.dart';
 
 class WalletList extends StatelessWidget{
   WalletList({required this.wallets,Key? key}) : super(key: key);
@@ -24,7 +22,6 @@ class WalletList extends StatelessWidget{
                 ),
               ),
               child: ListView.builder(
-
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
                 itemCount: wallets?.length,

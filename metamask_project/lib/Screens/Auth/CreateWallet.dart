@@ -307,7 +307,7 @@ class _CreateWalletState extends State<CreateWalletPage> {
                       style: TextStyle(fontSize: 9, fontFamily: "Roboto"),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 20),
+                      padding: const EdgeInsets.only(top: 10),
                       child: ListPhraseView(p: p),
                     ),
                     Padding(
@@ -348,73 +348,73 @@ class _CreateWalletState extends State<CreateWalletPage> {
                 child: Form(
                     key: _formKeyPhrase,
                     child:Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    const Text('Confirm Secret Recovery Phrase',
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                      const Text('Confirm Secret Recovery Phrase',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: 15,
                             fontFamily: "Roboto",
                             fontWeight: FontWeight.bold)),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    const Text(
-                      "Select  each word in the order it was presented to you.",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 9, fontFamily: "Roboto"),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 20),
-                      child: TextListView(p: p),
-                    ),
-
-                    Padding(
-                      padding: const EdgeInsets.only(top: 30),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            primary: Colors.blue,
-                            onPrimary: Colors.white,
-                            minimumSize: const Size(350, 35),
-                            side: const BorderSide(
-                                width: 2, color: Colors.blue),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30))),
-                        child: const Text(
-                          'Continue',
-                          style: TextStyle(
-                              fontSize: 12,
-                              fontFamily: "Roboto",
-                              color: Colors.white),
+                        const SizedBox(
+                          height: 5,
                         ),
-                        onPressed: () async {
-                          if (_formKeyPhrase.currentState!.validate()) {
-                            dynamic result = context.read<AuthService>()
-                                .newWallet(
-                              p.phrases,
-                              password.text,
-                              'Account',
-                            )
-                                .then((value) async {
-                              User user = FirebaseAuth.instance.currentUser;
-                              await FirebaseFirestore.instance.collection(
-                                  "user")
-                                  .doc(user.uid)
-                                  .set({
-                                'uid': user.uid,
-                                'phrase': p.phrases,
-                                'username': 'Account',
-                              });
-                              Navigator.push(context, MaterialPageRoute(
-                                  builder: (context) => const MyHomePage()));
-                            });
-                            } else {
-                              const snackBar =  SnackBar(
-                                  content: Text('Your phrases are Wrong or not in right Order. Please re-enter or re-order your phrases',
-                                        style: TextStyle(fontSize: 12, fontFamily: "Roboto", color: Colors.red)));
-                                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                          }
-                          },
+                        const Text(
+                          "Select  each word in the order it was presented to you.",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 9, fontFamily: "Roboto"),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 20),
+                          child: TextListView(p: p),
+                        ),
+
+                        Padding(
+                          padding: const EdgeInsets.only(top: 30),
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                primary: Colors.blue,
+                                onPrimary: Colors.white,
+                                minimumSize: const Size(350, 35),
+                                side: const BorderSide(
+                                    width: 2, color: Colors.blue),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(30))),
+                            child: const Text(
+                              'Continue',
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  fontFamily: "Roboto",
+                                  color: Colors.white),
+                            ),
+                            onPressed: () async {
+                              if (_formKeyPhrase.currentState!.validate()) {
+                                dynamic result = context.read<AuthService>()
+                                    .newWallet(
+                                  p.phrases,
+                                  password.text,
+                                  'Account',
+                                )
+                                    .then((value) async {
+                                  User user = FirebaseAuth.instance.currentUser;
+                                  await FirebaseFirestore.instance.collection(
+                                      "user")
+                                      .doc(user.uid)
+                                      .set({
+                                    'uid': user.uid,
+                                    'phrase': p.phrases,
+                                    'username': 'Account',
+                                  });
+                                  Navigator.push(context, MaterialPageRoute(
+                                      builder: (context) => const MyHomePage()));
+                                });
+                                } else {
+                                  const snackBar =  SnackBar(
+                                      content: Text('Your phrases are Wrong or not in right Order. Please re-enter or re-order your phrases',
+                                            style: TextStyle(fontSize: 12, fontFamily: "Roboto", color: Colors.red)));
+                                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                              }
+                              },
                       ),
                     )
                   ],
