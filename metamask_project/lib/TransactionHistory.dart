@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:metamask_project/Models/Transaction.dart';
+import 'package:metamask_project/Screens/Home/Home.dart';
 import 'package:metamask_project/Services/Database.dart';
 
 class TransactionHistory extends StatelessWidget {
@@ -41,7 +42,7 @@ class TransactionHistory extends StatelessWidget {
                     icon: const Icon(Icons.arrow_back),
                     color: Colors.black,
                     onPressed: () {
-                      Navigator.pop(context);
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const MyHomePage()));
                     }),
 
                 title: Column(children: const [

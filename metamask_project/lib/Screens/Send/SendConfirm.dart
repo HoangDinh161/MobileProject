@@ -4,6 +4,7 @@ import 'package:metamask_project/Screens/Home/Home.dart';
 
 import '../../Models/Coin.dart';
 import '../../Services/Database.dart';
+import '../../TransactionHistory.dart';
 
 class SendConfirm extends StatelessWidget {
   SendConfirm({required this.amount, required this.receiver, required this.coin,Key? key}) : super(key: key);
@@ -224,7 +225,7 @@ class SendConfirm extends StatelessWidget {
                       onPressed:  () async{
                         if (await DatabaseService().sendCoin(coin, receiver, amount.toString(),)) {
                           Future.delayed(const Duration(milliseconds: 500), () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => const MyHomePage()));
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => TransactionHistory()));
                           });
                         }
                       }
