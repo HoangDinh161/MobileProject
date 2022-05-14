@@ -52,7 +52,7 @@ class _ImportTokenState extends State<ImportTokenPage> {
                 const SizedBox(
                   height: 30,
                   child: Text(
-                    'CUSTOM TOKEN',
+                    'SEARCH',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         fontSize: 16,
@@ -68,109 +68,7 @@ class _ImportTokenState extends State<ImportTokenPage> {
                 const SizedBox(
                   height: 10,
                 ),
-                Container(
-                  //color: const Color.fromARGB(253, 253, 218, 1),
-                  height: 40,
-                  width: 200,
-                  padding: const EdgeInsets.only(top: 5),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: const Color.fromARGB(243, 240, 199, 1),
-                    ),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: const <Widget>[
-                      Icon(
-                        Icons.warning_amber_rounded,
-                        color: Color.fromARGB(243, 240, 199, 1),
-                      ),
-                      Expanded(
-                          flex: 4,
-                          child: Text(
-                            "Anyone can create a token, including creating fake versions of existing tokens.Learn more about scams and security risks.",
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 3,
-                            textAlign: TextAlign.left,
-                            style: TextStyle(
-                                fontSize: 10,
-                                fontFamily: "Roboto",
-                                color: Colors.black),
-                          ))
-                    ],
-                  ),
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const <Widget>[
-                    Text(
-                      'Token Address',
-                      style: TextStyle(fontFamily: "Roboto", fontSize: 12),
-                    ),
-                    Text('')
-                  ],
-                ),
-                const SizedBox(
-                    height: 50,
-                    child: TextField(
-                      decoration: InputDecoration(
-                        hintText: 'Enter Token Address',
-                        border: OutlineInputBorder(),
-                      ),
-                      style: TextStyle(fontFamily: "Roboto", fontSize: 11),
-                    )),
-                const SizedBox(
-                  height: 30,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const <Widget>[
-                    Text(
-                      'Token Symbol',
-                      style: TextStyle(fontFamily: "Roboto", fontSize: 12),
-                    ),
-                    Text('')
-                  ],
-                ),
-                const SizedBox(
-                    height: 50,
-                    child: TextField(
-                      decoration: InputDecoration(
-                        hintText: 'Enter Token Symbol',
-                        border: OutlineInputBorder(),
-                      ),
-                      style: TextStyle(fontFamily: "Roboto", fontSize: 11),
-                    )),
-                const SizedBox(
-                  height: 30,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const <Widget>[
-                    Text(
-                      'Token of Precision',
-                      style: TextStyle(fontFamily: "Roboto", fontSize: 12),
-                    ),
-                    Text('')
-                  ],
-                ),
-                const SizedBox(
-                    height: 50,
-                    child: TextField(
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        hintText: 'Enter Token of Precision',
-                      ),
-                      style: TextStyle(fontFamily: "Roboto", fontSize: 11),
-                    )),
-                const SizedBox(
-                  height: 50,
-                ),
+
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       primary: Colors.blue,
