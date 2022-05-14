@@ -11,3 +11,9 @@
 ![](https://github.com/HoangDinh161/MobileProject/blob/73c15d9376206c998acb9bdeb57b16916100a5af/metamask_project/test/Test_SendCoin/sendcoin.png)
 
 ![](https://github.com/HoangDinh161/MobileProject/blob/20176feecaee60867c5cdc0bf125edcdd840f0e3/metamask_project/test/Test_SendtowrongAddress/sendtonotexistaddress.png)
+
+#### Các hình ảnh kết quả của unit test:
+
+![](https://github.com/HoangDinh161/MobileProject/blob/20176feecaee60867c5cdc0bf125edcdd840f0e3/metamask_project/test/unitTest_pic/password_and_phrases.png)
+
+![](https://github.com/HoangDinh161/MobileProject/blob/20176feecaee60867c5cdc0bf125edcdd840f0e3/metamask_project/test/unitTest_pic/receiver_and_amount.png)
