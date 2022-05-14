@@ -7,6 +7,34 @@ import '../../Models/Coin.dart';
 import '../../Services/Database.dart';
 import 'SendConfirm.dart';
 
+class ReceiverFieldValidator {
+  static String? validate(String? value, String uid) {
+    if (value == null|| value.isEmpty) {
+      return "Please enter receiver id";
+    }
+    if (value.length < 28) {
+      return "Id must be 28 characters long";
+    }
+    if (value == uid) {
+      return "You cannot send to yourself";
+    }
+    return null;
+  }
+}
+
+class AmountFieldValidator {
+  static String? validate(String? value, double amount) {
+    if (value == null|| value.isEmpty) {
+      return "Please enter amount of token";
+    }
+    if (double.parse(value) > amount ) {
+      return "Amount you enter is larger than amount of your wallet";
+    }
+    return null;
+  }
+}
+
+
 class SendPage extends StatefulWidget {
   SendPage({required this.wallets,Key? key}) : super(key: key);
   List<wallet>? wallets;
@@ -140,18 +168,7 @@ class _SendState extends State<SendPage> {
                                         borderSide: BorderSide(width: 1.0),
                                       ),
                                     ),
-                                  validator: (value) {
-                                    if (value == null|| value.isEmpty) {
-                                      return "Please enter receiver id";
-                                    }
-                                    if (value.length < 28) {
-                                      return "Id must be 28 characters long";
-                                    }
-                                    if (value == FirebaseAuth.instance.currentUser.uid) {
-                                      return "You cannot send to yourself";
-                                    }
-                                    return null;
-                                  },
+                                  validator: (value) => ReceiverFieldValidator.validate(value, FirebaseAuth.instance.currentUser.uid),
                                 )
                             )),
                     ],
@@ -279,15 +296,7 @@ class _SendState extends State<SendPage> {
                                         borderSide: BorderSide(width: 1.0),
                                       ),
                                     ),
-                                    validator: (value) {
-                                      if (value == null|| value.isEmpty) {
-                                        return "Please enter amount of token";
-                                      }
-                                      if (double.parse(_amountController.text) > dropdownValue.amount ) {
-                                        return "Amount you enter is larger than amount of your wallet";
-                                      }
-                                      return null;
-                                    },
+                                    validator:(value) => AmountFieldValidator.validate(value, dropdownValue.amount),
                                   )
                               ))
                         ],
