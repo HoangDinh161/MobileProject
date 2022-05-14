@@ -16,6 +16,6 @@ Dự án dùng [Flutter test](https://docs.flutter.dev/testing) cho unit test v�
 
 #### Các hình ảnh kết quả của unit test:
 
-![](https://github.com/HoangDinh161/MobileProject/blob/d455edbea069e82c92e980db981393111a89b596/metamask_project/test/unitTest_pic/password_and_phrases.png)
+![](https://github.com/HoangDinh161/MobileProject/blob/7d7ae81968b3348ca9d7dc6b063f4a8ba25c8b5f/metamask_project/test/unitTest_pic/password_n_phrase.png)
 
-![](https://github.com/HoangDinh161/MobileProject/blob/d455edbea069e82c92e980db981393111a89b596/metamask_project/test/unitTest_pic/receiver_and_amount.png)
+![](https://github.com/HoangDinh161/MobileProject/blob/7d7ae81968b3348ca9d7dc6b063f4a8ba25c8b5f/metamask_project/test/unitTest_pic/receiver_n_amount.png)
