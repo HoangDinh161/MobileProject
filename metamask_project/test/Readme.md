@@ -1,4 +1,6 @@
 # TEST
+Dự án dùng [Flutter test](https://docs.flutter.dev/testing) cho unit test và [TestProject](https://testproject.io/) cho e2e để thực hiện kiểm thử.
+
 #### Các hình ảnh kết quả của test e2e:
 ![](https://github.com/HoangDinh161/MobileProject/blob/73c15d9376206c998acb9bdeb57b16916100a5af/metamask_project/test/Test_CreateWallet/createwalletresult.png)
 
