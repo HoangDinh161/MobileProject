@@ -8,7 +8,43 @@ import '../../Design/InputDeco_design.dart';
 import '../../Services/CreatePhrase.dart';
 import '../Home/Home.dart';
 
+class PasswordFieldValidator {
+  static String? validate(String? value) {
+    RegExp regex = RegExp(
+        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$');
+    if (value == null || value.isEmpty) {
+      return 'Please a Enter Password';
+    } else if (!regex.hasMatch(value)) {
+      return 'Password must have at least 8 characters,one uppercase, one lowercase, one digit';
+    }
+    return null;
+  }
+}
 
+class PasswordConfirmationFieldValidator {
+  static String? validate(String? value, String password) {
+    if (value == null || value.isEmpty) {
+      return 'Please re-enter password';
+    }
+    if (password !=
+        value) {
+      return "Password does not match";
+    }
+    return null;
+  }
+}
+
+class PhrasesValidator {
+  static String? validate(String? value, String phrase) {
+    if (value == null||value.isEmpty) {
+      return '';
+    }
+    if (value != phrase) {
+      return '';
+    }
+    return null;
+  }
+}
 
 class CreateWalletPage extends StatefulWidget {
   const CreateWalletPage({Key? key}) : super(key: key);
@@ -32,6 +68,8 @@ class _CreateWalletState extends State<CreateWalletPage> {
   String _showHide = "Show";
   int _currentstep = 0;
   int step_2 = 0;
+
+
 
   void onContinue() {
     if (_currentstep == 0 &&!_formKey_1.currentState!.validate()) {
@@ -143,16 +181,7 @@ class _CreateWalletState extends State<CreateWalletPage> {
                                     keyboardType: TextInputType.text,
                                     decoration: buildInputDecoration(
                                         10, "Password"),
-                                    validator: (value) {
-                                      RegExp regex = RegExp(
-                                          r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$');
-                                      if (value == null || value.isEmpty) {
-                                        return 'Please a Enter Password';
-                                      } else if (!regex.hasMatch(value)) {
-                                        return 'Password must have at least 8 characters,one uppercase, one lowercase, one digit';
-                                      }
-                                      return null;
-                                    },
+                                    validator: PasswordFieldValidator.validate,
                                   )
                               ),
                               const SizedBox(
@@ -179,16 +208,7 @@ class _CreateWalletState extends State<CreateWalletPage> {
                                   keyboardType: TextInputType.text,
                                   decoration: buildInputDecoration(
                                       10, "Confirm Password"),
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return 'Please re-enter password';
-                                    }
-                                    if (password.text !=
-                                        confirmPassword_1.text) {
-                                      return "Password does not match";
-                                    }
-                                    return null;
-                                  },
+                                  validator:(value) => PasswordConfirmationFieldValidator.validate(value, password.text),
                                 ),
                               ),
                               const SizedBox(
@@ -258,15 +278,7 @@ class _CreateWalletState extends State<CreateWalletPage> {
                                 keyboardType: TextInputType.text,
                                 decoration: buildInputDecoration(
                                     8, "Confirm Password"),
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please re-enter password';
-                                  }
-                                  if (password.text != confirmPassword_2.text) {
-                                    return "Password is wrong";
-                                  }
-                                  return null;
-                                },
+                                validator: (value) => PasswordConfirmationFieldValidator.validate(value, password.text),
                               ),
                               const SizedBox(
                                 height: 20,
@@ -557,15 +569,7 @@ class _TxtViewState extends State<TxtView> {
         ),
       ),
       controller: controller,
-      validator: (value) {
-        if (value == null||value.isEmpty) {
-          return '';
-        }
-        if (controller.text != widget.slist[widget.index-1] ) {
-            return '';
-        }
-        return null;
-      },
+      validator: (value) => PhrasesValidator.validate(value, widget.slist[widget.index-1]),
     );
   }
 }

@@ -146,7 +146,7 @@ class _ImportState extends State<ImportPage> {
                                           builder: (context) => const MyHomePage()));
                                 } else {
                                   const snackBar =  SnackBar(
-                                      content: Text('Your secret phrases or Password is incorrect!',
+                                      content: Text('Your secret Phrases or Password is incorrect!',
                                           style: TextStyle(fontSize: 12, fontFamily: "Roboto", color: Colors.red)));
                                   ScaffoldMessenger.of(context).showSnackBar(snackBar);
                                 }
