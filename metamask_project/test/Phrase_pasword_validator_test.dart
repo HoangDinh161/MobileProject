@@ -40,13 +40,11 @@ void main() {
   });
 
   test('wrong phrase ', () {
-
     final result = PhrasesValidator.validate('people', 'peopeo');
     expect(result, '');
   });
 
   test('right phrase ', () {
-
     final result = PhrasesValidator.validate('people', 'people');
     expect(result, null);
   });
