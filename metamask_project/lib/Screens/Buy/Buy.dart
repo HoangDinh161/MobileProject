@@ -1,3 +1,5 @@
+// ignore_for_file: always_specify_types
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:metamask_project/Screens/Home/Home.dart';
@@ -38,7 +40,7 @@ class _BuyState extends State<BuyPage> {
           title: const Text(
             'Purchase Method',
             style: TextStyle(
-                fontSize: 16, fontFamily: "Roboto", color: Colors.black),
+                fontSize: 16, fontFamily: 'Roboto', color: Colors.black),
           ),
           backgroundColor: Colors.white,
           centerTitle: true,
@@ -49,7 +51,7 @@ class _BuyState extends State<BuyPage> {
                 'Cancel',
                 style: TextStyle(
                     fontSize: 12,
-                    fontFamily: "Roboto",
+                    fontFamily: 'Roboto',
                     color: Colors.blueAccent),
               ),
               onPressed: () {
@@ -84,7 +86,8 @@ class _BuyState extends State<BuyPage> {
                           fontFamily: 'Miriam Libre',
                           fontSize: 14,
                           letterSpacing:
-                              0 /*percentages not used in flutter. defaulting to zero*/,
+                              0 /*percentages not used in flutter.
+                               defaulting to zero*/,
                           fontWeight: FontWeight.normal,
                         ),
                       )
@@ -97,11 +100,11 @@ class _BuyState extends State<BuyPage> {
               height: 80,
               padding: const EdgeInsets.fromLTRB(15,10,15,10),
               child:TextFormField(
-              controller: _amountController,
-              keyboardType: TextInputType.number,
-              inputFormatters: <TextInputFormatter>[
-                FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
-              ],
+                  controller: _amountController,
+                  keyboardType: TextInputType.number,
+                  inputFormatters: <TextInputFormatter>[
+                    FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                  ],
               decoration: const InputDecoration(
                 label: Text(
                   'Amount',
@@ -130,12 +133,14 @@ class _BuyState extends State<BuyPage> {
               child: const Text(
                 'Buy',
                 style: TextStyle(
-                    fontSize: 12, fontFamily: "Roboto", color: Colors.white),
+                    fontSize: 12, fontFamily: 'Roboto', color: Colors.white),
               ),
               onPressed: () async {
-                  await DatabaseService().buyCoin(dropdownValue, _amountController.text);
+                  await DatabaseService().buyCoin(dropdownValue,
+                      _amountController.text);
                   Future.delayed(const Duration(milliseconds: 300), () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => const MyHomePage()));
+                    Navigator.push(context, MaterialPageRoute(builder:
+                        (context) => const MyHomePage()));
                   });
               },
             ),

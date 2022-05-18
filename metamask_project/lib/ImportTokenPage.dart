@@ -1,3 +1,5 @@
+// ignore_for_file: always_specify_types
+
 import 'package:flutter/material.dart';
 import 'package:metamask_project/Screens/Home/Home.dart';
 
@@ -31,11 +33,13 @@ class _ImportTokenState extends State<ImportTokenPage> {
   void _runFilter(String enteredKeyword) {
     List<Coin> results = [];
     if (enteredKeyword.isEmpty) {
-      // if the search field is empty or only contains white-space, we'll display all tokens
+      // if the search field is empty or only contains white-space,
+      // we'll display all tokens
       results = coinList;
     } else {
       results = coinList
-          .where((token) => token.name.toLowerCase().contains(enteredKeyword.toLowerCase())).toList();
+          .where((Coin token) => token.name.toLowerCase()
+          .contains(enteredKeyword.toLowerCase())).toList();
       // we use the toLowerCase() method to make it case-insensitive
     }
     // Refresh the UI
@@ -57,20 +61,20 @@ class _ImportTokenState extends State<ImportTokenPage> {
             Navigator.pop(context);
           },
         ),
-        title: Column(children: const [
-          Text("Import Token",
+        title: Column(children: const <Widget>[
+          Text('Import Token',
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 14,
-                fontFamily: "Roboto",
+                fontFamily: 'Roboto',
               )),
-          Text("Smart chain",
+          Text('Smart chain',
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Color(0xff998b8b),
                 fontSize: 9,
-                fontFamily: "Roboto",
+                fontFamily: 'Roboto',
               )),
         ]),
         centerTitle: true,
@@ -85,15 +89,15 @@ class _ImportTokenState extends State<ImportTokenPage> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 const SizedBox(
-                  height: 30,
-                  child: Text(
+                  height: 5,
+            ),
+                  const Text(
                     'SEARCH',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                        fontSize: 16,
+                        fontSize: 20,
                         fontFamily: 'Roboto',
-                        color: Colors.lightBlue),
-                  ),
+                        color: Colors.deepPurpleAccent),
                 ),
                 const Divider(
                   thickness: 1,
@@ -104,9 +108,15 @@ class _ImportTokenState extends State<ImportTokenPage> {
                   height: 10,
                 ),
                 TextField(
-                  onChanged: (value) => _runFilter(value),
+                  onChanged: (String value) => _runFilter(value),
                   decoration: const InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius:
+                        BorderRadius.all(Radius.circular(4.0)),
+                        borderSide: BorderSide(width: 1.0),
+                      ),
                       labelText: 'Search', suffixIcon: Icon(Icons.search)),
+                      style: const TextStyle( fontSize: 13),
                 ),
                 const SizedBox(
                   height: 20,
@@ -117,7 +127,8 @@ class _ImportTokenState extends State<ImportTokenPage> {
                   child: foundTokens.isNotEmpty
                       ? ListView.builder(
                           itemCount: foundTokens.length,
-                          itemBuilder: (context, index) => InkWell(
+                          itemBuilder: (BuildContext context, int index)
+                          => InkWell(
                             onTap: () => setState(() {
                               selectedIndex = index;
                               _tokenChose = foundTokens[index];
@@ -156,12 +167,14 @@ class _ImportTokenState extends State<ImportTokenPage> {
                     'Import',
                     style: TextStyle(
                         fontSize: 12,
-                        fontFamily: "Roboto",
+                        fontFamily: 'Roboto',
                         color: Colors.white),
                   ),
                   onPressed: () {
-                    // viết code xử lí import ở đây,import  _tokenChose vào walletList.
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=> const MyHomePage()));
+                    // viết code xử lí import ở đây,
+                    // import  _tokenChose vào walletList.
+                    Navigator.push(context, MaterialPageRoute(builder:
+                        (BuildContext context)=> const MyHomePage()));
                   },
                 ),
               ],

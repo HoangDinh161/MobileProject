@@ -1,3 +1,5 @@
+// ignore_for_file: always_specify_types, lines_longer_than_80_chars
+
 import 'package:flutter/material.dart';
 
 import 'Buy.dart';
@@ -13,17 +15,17 @@ class PurchasePage extends StatelessWidget {
         title: const Text(
           'Purchase Method',
           style: TextStyle(
-              fontSize: 16, fontFamily: "Roboto", color: Colors.black),
+              fontSize: 16, fontFamily: 'Roboto', color: Colors.black),
         ),
         backgroundColor: Colors.white,
         centerTitle: true,
         toolbarHeight: 47,
-        actions: [
+        actions: <Widget>[
           TextButton(
             child: const Text(
               'Cancel',
               style: TextStyle(
-                  fontSize: 12, fontFamily: "Roboto", color: Colors.blueAccent),
+                  fontSize: 12, fontFamily: 'Roboto', color: Colors.blueAccent),
             ),
             onPressed: () {
               Navigator.pop(context);
@@ -45,13 +47,13 @@ class PurchasePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
+          children: <Widget>[
             const Text(
               'Bank transfer or debit card',
               textAlign: TextAlign.left,
               style: TextStyle(
                   fontSize: 14,
-                  fontFamily: "Roboto",
+                  fontFamily: 'Roboto',
                   fontWeight: FontWeight.bold),
             ),
             const SizedBox(
@@ -88,11 +90,11 @@ class PurchasePage extends StatelessWidget {
               child: const Text(
                 'Buy',
                 style: TextStyle(
-                    fontSize: 12, fontFamily: "Roboto", color: Colors.white),
+                    fontSize: 12, fontFamily: 'Roboto', color: Colors.white),
               ),
               onPressed: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const BuyPage()));
+                    MaterialPageRoute(builder: (BuildContext context) => const BuyPage()));
               },
             ),
           ],

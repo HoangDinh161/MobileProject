@@ -1,3 +1,5 @@
+// ignore_for_file: lines_longer_than_80_chars
+
 import 'package:flutter/material.dart';
 import 'package:passwordfield/passwordfield.dart';
 
@@ -43,7 +45,7 @@ class _LoginState extends State<LoginPage> {
                   const SizedBox(
                     height: 30,
                   ),
-                  Image.asset("assets/logo.png"),
+                  Image.asset('assets/logo.png'),
                   const SizedBox(
                     height: 20,
                   ),
@@ -52,7 +54,7 @@ class _LoginState extends State<LoginPage> {
                     style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
-                        fontFamily: "Inter"),
+                        fontFamily: 'Inter'),
                   ),
                   const SizedBox(
                     height: 40,
@@ -62,7 +64,7 @@ class _LoginState extends State<LoginPage> {
                     children: const <Widget>[
                       Text(
                         'Password',
-                        style: TextStyle(fontFamily: "Roboto", fontSize: 12),
+                        style: TextStyle(fontFamily: 'Roboto', fontSize: 12),
                       ),
                       Text('')
                     ],
@@ -91,7 +93,7 @@ class _LoginState extends State<LoginPage> {
                       'Create a new wallet',
                       style: TextStyle(
                           fontSize: 12,
-                          fontFamily: "Roboto",
+                          fontFamily: 'Roboto',
                           color: Colors.white),
                     ),
                     onPressed: () {},
@@ -106,7 +108,7 @@ class _LoginState extends State<LoginPage> {
                         "Can't login?You can ERASE your current wallet and setup a new one",
                         textAlign: TextAlign.center,
                         overflow: TextOverflow.clip,
-                        style: TextStyle(fontFamily: "Roboto", fontSize: 12),
+                        style: TextStyle(fontFamily: 'Roboto', fontSize: 12),
                       )),
                   TextButton(
                       onPressed: () {},
@@ -115,7 +117,7 @@ class _LoginState extends State<LoginPage> {
                         style: TextStyle(
                             color: Colors.lightBlueAccent,
                             fontSize: 12,
-                            fontFamily: "Roboto"),
+                            fontFamily: 'Roboto'),
                       ))
                 ],
               ),

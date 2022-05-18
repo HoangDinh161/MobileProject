@@ -1,3 +1,5 @@
+// ignore_for_file: always_specify_types
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:metamask_project/TransactionHistory.dart';
@@ -7,9 +9,10 @@ import '../Auth/StartPage.dart';
 import 'Home.dart';
 
 class SideMenu extends StatelessWidget {
-  SideMenu({required this.total, required this.userData,Key? key}) : super(key: key);
+  SideMenu({required this.total,
+    required this.userData,Key? key}) : super(key: key);
   user? userData;
-  getTotal total;
+  GetTotal total;
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -22,12 +25,12 @@ class SideMenu extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
-                    Image.asset("assets/mini_logo.png"),
+                    Image.asset('assets/mini_logo.png'),
                     const Text(
                       'METAMASK',
                       style: TextStyle(
                           fontSize: 10,
-                          fontFamily: "Roboto Mono",
+                          fontFamily: 'Roboto Mono',
                           letterSpacing: 5,
                           fontWeight: FontWeight.normal),
                     )
@@ -85,7 +88,7 @@ class SideMenu extends StatelessWidget {
                             width: 68.48,
                             height: 14,
                             child: Text(
-                              "0x5368...4037",
+                              '0x5368...4037',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 color: Colors.white,
@@ -109,9 +112,8 @@ class SideMenu extends StatelessWidget {
             title: const Text('Wallet'),
             onTap: () {
               Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const MyHomePage()));
+                  context, MaterialPageRoute(
+                      builder: (BuildContext context) => const MyHomePage()));
             },
           ),
           ListTile(
@@ -121,7 +123,8 @@ class SideMenu extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => TransactionHistory()));
+                      builder: (BuildContext context)
+                      => const TransactionHistory()));
             },
           ),
           /**ListTile(
@@ -135,7 +138,8 @@ class SideMenu extends StatelessWidget {
             onTap: () {
               FirebaseAuth.instance.signOut().then((value) => Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const StartPage())));
+                  MaterialPageRoute(builder: (BuildContext context)
+                  => const StartPage())));
             },
           )
         ],

@@ -1,4 +1,8 @@
+// ignore_for_file: lines_longer_than_80_chars
+
 class Trans {
+  Trans( this.type, this.name, this.status, this.time, this.date,
+      this.from, this.to, this.Tamount, this.amount, this.fee);
   String type;
   String name;
   String status;
@@ -10,17 +14,16 @@ class Trans {
   double amount;
   double fee;
 
-  Trans( this.type, this.name, this.status, this.time, this.date,
-      this.from, this.to, this.Tamount, this.amount, this.fee);
+
 
   String shortFrom() {
     if (type == 'Buy') {
       return 'Admin';
     }
-    return from.substring(0, 7) + "..." + from.substring(from.length -5, from.length);
+    return from.substring(0, 7) + '...' + from.substring(from.length -5, from.length);
   }
   String shortTo() {
-    return to.substring(0, 7) + "..." + to.substring(to.length -5, to.length);
+    return to.substring(0, 7) + '...' + to.substring(to.length -5, to.length);
   }
 
 // Future<void> getTime() async {

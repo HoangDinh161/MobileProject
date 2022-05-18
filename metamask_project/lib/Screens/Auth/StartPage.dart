@@ -1,3 +1,5 @@
+// ignore_for_file: lines_longer_than_80_chars, always_specify_types
+
 import 'package:flutter/material.dart';
 
 import 'CreateWallet.dart';
@@ -9,7 +11,7 @@ class StartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    var screensize = MediaQuery.of(context).size;
+    Size screensize = MediaQuery.of(context).size;
     return Scaffold(
         body: Center(
             child: SingleChildScrollView(
@@ -23,7 +25,7 @@ class StartPage extends StatelessWidget {
                           'METAMASK',
                           style: TextStyle(
                               fontSize: 16,
-                              fontFamily: "Roboto Mono",
+                              fontFamily: 'Roboto Mono',
                               letterSpacing: 5,
                               fontWeight: FontWeight.normal),
                         ),
@@ -33,14 +35,14 @@ class StartPage extends StatelessWidget {
                         const Text(
                           'Wallet Setup',
                           style: TextStyle(
-                              fontSize: 18, fontFamily: "Roboto", fontWeight: FontWeight.bold),
+                              fontSize: 18, fontFamily: 'Roboto', fontWeight: FontWeight.bold),
                         ),
                         const SizedBox(height: 15),
                         const Text(
                           'Import an existing wallet or create new one',
                           style: TextStyle(
                               fontSize: 12,
-                              fontFamily: "Roboto",
+                              fontFamily: 'Roboto',
                               fontWeight: FontWeight.normal),
                         ),
                         SizedBox(height: screensize.height * 0.58),
@@ -53,11 +55,11 @@ class StartPage extends StatelessWidget {
                           child: const Text(
                             'Import using Secret Recovery Phrase',
                             style: TextStyle(
-                                fontSize: 12, fontFamily: "Roboto", color: Colors.blue),
+                                fontSize: 12, fontFamily: 'Roboto', color: Colors.blue),
                           ),
                           onPressed: () {
                             Navigator.push(context,
-                                MaterialPageRoute(builder: (context) => const ImportPage()));
+                                MaterialPageRoute(builder: (BuildContext context) => const ImportPage()));
                           },
                         ),
                         const SizedBox(
@@ -74,19 +76,19 @@ class StartPage extends StatelessWidget {
                           child: const Text(
                             'Create a new wallet',
                             style: TextStyle(
-                                fontSize: 12, fontFamily: "Roboto", color: Colors.white),
+                                fontSize: 12, fontFamily: 'Roboto', color: Colors.white),
                           ),
                           onPressed: () {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const CreateWalletPage()));
+                                    builder: (BuildContext context) => const CreateWalletPage()));
                           },
                         ),
                         const SizedBox(height: 30),
                         const Text('By proceeding, you agree to these Terms and Conditions',
                             style: TextStyle(
-                                fontSize: 11, fontFamily: "Roboto", color: Colors.black26))
+                                fontSize: 11, fontFamily: 'Roboto', color: Colors.black26))
                       ],
                 )
             )

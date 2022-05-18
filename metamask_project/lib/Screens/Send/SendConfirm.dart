@@ -1,3 +1,5 @@
+// ignore_for_file: always_specify_types, lines_longer_than_80_chars
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:metamask_project/Screens/Home/Home.dart';
@@ -7,7 +9,8 @@ import '../../Services/Database.dart';
 import '../../TransactionHistory.dart';
 
 class SendConfirm extends StatelessWidget {
-  SendConfirm({required this.amount, required this.receiver, required this.coin,Key? key}) : super(key: key);
+  SendConfirm({required this.amount, required this.receiver,
+    required this.coin,Key? key}) : super(key: key);
   double amount;
   String receiver;
   Coin coin;
@@ -25,7 +28,7 @@ class SendConfirm extends StatelessWidget {
         ),
         backgroundColor: Colors.white,
         centerTitle: true,
-        actions: [
+        actions: <Widget>[
           TextButton(
             child: const Text(
               'Cancel',
@@ -46,9 +49,9 @@ class SendConfirm extends StatelessWidget {
             child: Column(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
+                      children: <Widget>[
                       Row(
-                        children: [
+                        children: <Widget>[
                           const Expanded(
                               flex: 1,
                               child: Text(
@@ -87,7 +90,7 @@ class SendConfirm extends StatelessWidget {
                         ],
                       ),
                     Row(
-                      children: [
+                      children: <Widget>[
                         const Expanded(
                             flex: 1,
                             child: Text(
@@ -134,7 +137,8 @@ class SendConfirm extends StatelessWidget {
                       color: Color.fromRGBO(0, 0, 0, 1),
                       fontFamily: 'Roboto',
                       fontSize: 13,
-                      letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                      letterSpacing: 0 /*percentages not used in flutter.
+                      defaulting to zero*/,
                       fontWeight: FontWeight.normal,
                       height: 1.5384615384615385
                     ),
@@ -142,11 +146,13 @@ class SendConfirm extends StatelessWidget {
                     Padding(
                         padding: const EdgeInsets.only(top: 20 ),
                         child: Text(
-                    amount.toString(), textAlign: TextAlign.center, style: const TextStyle(
+                    amount.toString(), textAlign: TextAlign.center,
+                          style: const TextStyle(
                       color: Color.fromRGBO(0, 0, 0, 1),
                       fontFamily: 'Roboto',
                       fontSize: 36,
-                      letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                      letterSpacing: 0 /*percentages not used in flutter.
+                       defaulting to zero*/,
                       fontWeight: FontWeight.normal,
                       height: 0.5555555555555556
                     ),
@@ -156,27 +162,33 @@ class SendConfirm extends StatelessWidget {
                         padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
                         border: Border.all(color: Colors.black),
-                        borderRadius: const BorderRadius.all(Radius.circular(18)),
+                        borderRadius: const BorderRadius.all(
+                            Radius.circular(18)),
                     ),
                       child: Column(
-                      children: [
+                      children: <Widget>[
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const Text('Estimated gas fee', textAlign: TextAlign.center, style: TextStyle(
+                            children: <Widget>[
+                              const Text('Estimated gas fee',
+                                textAlign: TextAlign.center, style: TextStyle(
                                   color: Color.fromRGBO(0, 0, 0, 1),
                                   fontFamily: 'Roboto',
                                   fontSize: 12,
-                                  letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                                  letterSpacing: 0 /*percentages not
+                                  used in flutter.defaulting to zero*/,
                                   fontWeight: FontWeight.normal,
                                   height: 1.6666666666666667
                                 ),
                               ),
-                              Text( gasfee.toString() + ' '+ coin.symbol, textAlign: TextAlign.right, style: const TextStyle(
+                              Text( gasfee.toString() + ' '+ coin.symbol,
+                                textAlign: TextAlign.right,
+                                style: const TextStyle(
                                   color: Color.fromRGBO(24, 144, 255, 1),
                                   fontFamily: 'Roboto',
                                   fontSize: 12,
-                                  letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                                  letterSpacing: 0 /*percentages not used
+                                  in flutter. defaulting to zero*/,
                                   fontWeight: FontWeight.normal,
                                   height: 1.6666666666666667
                               ),)
@@ -185,23 +197,27 @@ class SendConfirm extends StatelessWidget {
                         const Divider(thickness: 1, color: Colors.black,),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const Text('Total', textAlign: TextAlign.center, style: TextStyle(
+                          children: <Widget>[
+                            const Text('Total', textAlign: TextAlign.center,
+                              style: TextStyle(
                                 color: Color.fromRGBO(0, 0, 0, 1),
                                 fontFamily: 'Roboto',
                                 fontSize: 12,
-                                letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                                letterSpacing: 0 /*percentages not used
+                                 in flutter. defaulting to zero*/,
                                 fontWeight: FontWeight.normal,
                                 height: 1.6666666666666667
                             ),
                             ),
-                            Text( tmount.toString() + ' '+ coin.symbol, textAlign: TextAlign.right, style: const TextStyle(
-                                color: Color.fromRGBO(24, 144, 255, 1),
-                                fontFamily: 'Roboto',
+                            Text( tmount.toString() + ' '+ coin.symbol,
+                              textAlign: TextAlign.right, style:
+                              const TextStyle(fontFamily: 'Roboto',
                                 fontSize: 12,
-                                letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                                letterSpacing: 0 /*percentages not
+                                used in flutter. defaulting to zero*/,
                                 fontWeight: FontWeight.normal,
-                                height: 1.6666666666666667
+                                height: 1.6666666666666667,
+                                color: Color.fromRGBO(24, 144, 255, 1),
                             ),)
                           ],
                         ),
@@ -220,12 +236,17 @@ class SendConfirm extends StatelessWidget {
                       child: const Text(
                         'Next',
                         style: TextStyle(
-                            fontSize: 12, fontFamily: "Roboto", color: Colors.white),
+                            fontSize: 12, fontFamily: 'Roboto',
+                            color: Colors.white),
                       ),
                       onPressed:  () async{
-                        if (await DatabaseService().sendCoin(coin, receiver, amount.toString(),)) {
+                        if (await DatabaseService().sendCoin(coin, receiver,
+                          amount.toString(),)) {
                           Future.delayed(const Duration(milliseconds: 500), () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => TransactionHistory()));
+                            Navigator.push(context, MaterialPageRoute(builder:
+                                (BuildContext context) => const TransactionHistory()
+                              )
+                            );
                           });
                         }
                       }

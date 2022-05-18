@@ -1,3 +1,5 @@
+// ignore_for_file: always_specify_types
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -45,29 +47,30 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return StreamBuilder<user>(
       stream: DatabaseService().userData,
-      builder: (context, snapshot) {
+      builder: (BuildContext context, AsyncSnapshot<user> snapshot) {
         if(snapshot.hasData) {
           user? userData = snapshot.data;
           return StreamBuilder<List<wallet>>(
             stream: DatabaseService().walletList,
-            builder: (context, snapshot) {
+            builder: (BuildContext context,
+                AsyncSnapshot<List<wallet>> snapshot) {
               if(snapshot.hasData) {
                 List<wallet>? wallets = snapshot.data;
-                getTotal total = getTotal(wallets: wallets);
+                GetTotal total = GetTotal(wallets: wallets);
                 return Scaffold(
-                    drawer: SideMenu(userData: userData,total: getTotal(wallets: wallets)),
+                    drawer: SideMenu(userData: userData
+                        ,total: GetTotal(wallets: wallets)),
                     appBar: AppBar(
                       // The title text which will be shown on the action bar
                       toolbarHeight: 47,
-                      //leading: IconButton(icon: const Icon(Icons.menu, color: Color(0xff1890ff),), onPressed: () {},),
                       title: Column(
-                          children:const [
-                            Text("Wallet", textAlign: TextAlign.center,
+                          children:const <Widget>[
+                            Text('Wallet', textAlign: TextAlign.center,
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 14,)
                             ),
-                            Text("Smart chain", textAlign: TextAlign.center,
+                            Text('Smart chain', textAlign: TextAlign.center,
                                 style: TextStyle(
                                   color: Color(0xff998b8b),
                                   fontSize: 9,)
@@ -84,13 +87,14 @@ class MyHomePage extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
+                        children: <Widget>[
                           CircleAvatar(
                             backgroundColor: Colors.greenAccent[400],
                             radius: 27,
                             child: const Text(
                               'U',
-                              style: TextStyle(fontSize: 15, color: Colors.white),
+                              style: TextStyle(fontSize: 15,
+                                  color: Colors.white),
                             ),
                           ),
                           SizedBox(
@@ -125,7 +129,8 @@ class MyHomePage extends StatelessWidget {
                                       color: const Color(0xffc9def2),
                                       borderRadius: BorderRadius.circular(16),
                                       child: Padding(
-                                        padding: EdgeInsets.only(left: 15, right: 14, top: 3, bottom: 3, ),
+                                        padding: const EdgeInsets.only(left: 15,
+                                          right: 14, top: 3, bottom: 3, ),
                                         child: (
                                             SizedBox(
                                               width: 68.48,
@@ -154,14 +159,28 @@ class MyHomePage extends StatelessWidget {
                               mainAxisSize: MainAxisSize.min,
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                ButtonInMenu(buttonText: 'receive', onTap: () {  }, icon: const Icon(Icons.arrow_downward, color:Colors.white),),
+                              children: <Widget>[
+                                ButtonInMenu(buttonText: 'receive',
+                                  icon: const Icon(Icons.arrow_downward,
+                                      color:Colors.white),
+                                  onTap: () {  },),
                                 ButtonInMenu(buttonText: 'buy', onTap: () {
-                                  Navigator.push(context, MaterialPageRoute(builder: (context)=> const PurchasePage())); },
-                                  icon: const Icon(Icons.credit_card, color:Colors.white),),
-                                ButtonInMenu(buttonText: 'send', onTap: () { Navigator.push(context, MaterialPageRoute(builder: (context)=>SendPage(wallets: wallets,))); },
-                                  icon: const Icon(Icons.arrow_upward, color:Colors.white),),
-                                ButtonInMenu(buttonText: 'swap', onTap: () {  }, icon: const Icon(Icons.arrow_forward, color:Colors.white),),
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder:
+                                          (BuildContext context)
+                                      => const PurchasePage())); },
+                                  icon: const Icon(Icons.credit_card,
+                                      color:Colors.white),),
+                                ButtonInMenu(buttonText: 'send',
+                                  onTap: () { Navigator.push(context,
+                                      MaterialPageRoute(builder: (
+                                          BuildContext context)
+                                      =>SendPage(wallets: wallets,))); },
+                                  icon: const Icon(Icons.arrow_upward,
+                                      color:Colors.white),),
+                                ButtonInMenu(buttonText: 'swap', onTap: () {  },
+                                  icon: const Icon(Icons.arrow_forward,
+                                      color:Colors.white),),
                               ],
                             ),
                           ),
@@ -172,10 +191,10 @@ class MyHomePage extends StatelessWidget {
                               width: 414,
                               height: 20,
                               child: Column(
-                                  children:const [
+                                  children:const <Widget>[
                                     SizedBox(
                                       child: Text(
-                                        "Tokens",
+                                        'Tokens',
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                           color: Color(0xff1890ff),
@@ -220,7 +239,8 @@ class MyHomePage extends StatelessWidget {
   }
 }
 class ButtonInMenu extends StatelessWidget {
-  const ButtonInMenu({ required this.buttonText, required this.icon, required this.onTap, Key? key}) : super(key: key);
+  const ButtonInMenu({ required this.buttonText, required this.icon,
+    required this.onTap, Key? key}) : super(key: key);
 
   final VoidCallback onTap;
   final Icon icon;
@@ -300,19 +320,20 @@ class _CoinStreamState extends State<CoinStream> {
   }
 }
 
-class getTotal extends StatefulWidget {
+class GetTotal extends StatefulWidget {
 
-  getTotal({required this.wallets,Key? key}) : super(key: key);
+  GetTotal({required this.wallets,Key? key}) : super(key: key);
   List<wallet>? wallets;
   double total = 0.0;
   @override
-  State<getTotal> createState() => _getTotalState();
+  State<GetTotal> createState() => _GetTotalState();
 }
 
-class _getTotalState extends State<getTotal> {
+class _GetTotalState extends State<GetTotal> {
 
   @override
-  initState() {
+  void initState() {
+    super.initState();
     getTotal();
   }
 
@@ -329,7 +350,7 @@ class _getTotalState extends State<getTotal> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Text(
-      "\$ ${widget.total.toStringAsFixed(2)}",
+      '\$ ${widget.total.toStringAsFixed(2)}',
       textAlign: TextAlign.center,
       style: const TextStyle(
         color: Color(0xff998c8c),

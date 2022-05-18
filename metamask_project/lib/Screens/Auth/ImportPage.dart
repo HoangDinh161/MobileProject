@@ -1,3 +1,5 @@
+// ignore_for_file: lines_longer_than_80_chars, always_specify_types
+
 import 'package:flutter/material.dart';
 
 import '../../Design/InputDeco_design.dart';
@@ -17,7 +19,7 @@ class _ImportState extends State<ImportPage> {
   //TextEditingController _reNewPassword = TextEditingController();
 
   bool _passwordVisible = true;
-  String _showHide = "Show";
+  String _showHide = 'Show';
   final AuthService _auth = AuthService();
 
   @override
@@ -30,9 +32,9 @@ class _ImportState extends State<ImportPage> {
           const SizedBox(
             height: 18,
           ),
-          Row(mainAxisAlignment: MainAxisAlignment.start,
+              Row(mainAxisAlignment: MainAxisAlignment.start,
               //crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
+              children: <Widget>[
                 Expanded(
                     flex: 1,
                     child: IconButton(
@@ -50,7 +52,7 @@ class _ImportState extends State<ImportPage> {
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 16,
-                          fontFamily: "Roboto Mono",
+                          fontFamily: 'Roboto Mono',
                           letterSpacing: 5,
                           fontWeight: FontWeight.normal,
                         ))),
@@ -60,11 +62,11 @@ class _ImportState extends State<ImportPage> {
                 )
               ]),
                 const Text(
-              "Import from seed",
+              'Import from seed',
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 16,
-                fontFamily: "Roboto",
+                fontFamily: 'Roboto',
                 fontWeight: FontWeight.bold),
           ),
                 const SizedBox(
@@ -72,20 +74,20 @@ class _ImportState extends State<ImportPage> {
           ),
                 Container(
                     padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-                    child: Column(children: [
+                    child: Column(children: <Widget>[
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
                                 const Text(
                                   'Secret Recovery Phrase',
-                                  style: TextStyle(fontFamily: "Roboto", fontSize: 12),
+                                  style: TextStyle(fontFamily: 'Roboto', fontSize: 12),
                                 ),
                                 TextButton(
-                                  child: Text(_showHide,style: const TextStyle(fontFamily: "Roboto", fontSize: 12, color: Colors.black),),
+                                  child: Text(_showHide,style: const TextStyle(fontFamily: 'Roboto', fontSize: 12, color: Colors.black),),
                                   onPressed: () {
                                     setState(() {
                                       _passwordVisible = !_passwordVisible;
-                                      _showHide = _passwordVisible == true? "Show" : "Hide";
+                                      _showHide = _passwordVisible == true? 'Show' : 'Hide';
                                     });
                                   },
                                 )
@@ -97,7 +99,7 @@ class _ImportState extends State<ImportPage> {
                             textAlign: TextAlign.left,
                             keyboardType: TextInputType.text,
                             decoration: buildInputDecoration(
-                                10, "Secret Phrases"),
+                                10, 'Secret Phrases'),
                         ),
                           const SizedBox(
                             height: 15,
@@ -107,7 +109,7 @@ class _ImportState extends State<ImportPage> {
                               children: const <Widget>[
                                 Text(
                                   'New Password',
-                                  style: TextStyle(fontFamily: "Roboto", fontSize: 12),
+                                  style: TextStyle(fontFamily: 'Roboto', fontSize: 12),
                                 ),
                                 Text('')
                               ],
@@ -118,7 +120,7 @@ class _ImportState extends State<ImportPage> {
                           textAlign: TextAlign.left,
                           keyboardType: TextInputType.text,
                           decoration: buildInputDecoration(
-                              10, "Password")),
+                              10, 'Password')),
                               const SizedBox(
                                 height: 15,
                               ),
@@ -134,7 +136,7 @@ class _ImportState extends State<ImportPage> {
                                 'Import',
                                 style: TextStyle(
                                     fontSize: 12,
-                                    fontFamily: "Roboto",
+                                    fontFamily: 'Roboto',
                                     color: Colors.white),
                               ),
                               onPressed: () async {
@@ -142,11 +144,11 @@ class _ImportState extends State<ImportPage> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => const MyHomePage()));
+                                          builder: (BuildContext context) => const MyHomePage()));
                                 } else {
-                                  const snackBar =  SnackBar(
+                                  const SnackBar snackBar =  SnackBar(
                                       content: Text('Your secret Phrases or Password is incorrect!',
-                                          style: TextStyle(fontSize: 12, fontFamily: "Roboto", color: Colors.red)));
+                                          style: TextStyle(fontSize: 12, fontFamily: 'Roboto', color: Colors.red)));
                                   ScaffoldMessenger.of(context).showSnackBar(snackBar);
                                 }
                               },

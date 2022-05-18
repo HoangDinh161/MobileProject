@@ -1,3 +1,5 @@
+// ignore_for_file: lines_longer_than_80_chars, always_specify_types
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -10,13 +12,13 @@ import 'SendConfirm.dart';
 class ReceiverFieldValidator {
   static String? validate(String? value, String uid) {
     if (value == null|| value.isEmpty) {
-      return "Please enter receiver id";
+      return 'Please enter receiver id';
     }
     if (value.length < 28) {
-      return "Id must be 28 characters long";
+      return 'Id must be 28 characters long';
     }
     if (value == uid) {
-      return "You cannot send to yourself";
+      return 'You cannot send to yourself';
     }
     return null;
   }
@@ -25,10 +27,10 @@ class ReceiverFieldValidator {
 class AmountFieldValidator {
   static String? validate(String? value, double amount) {
     if (value == null|| value.isEmpty) {
-      return "Please enter amount of token";
+      return 'Please enter amount of token';
     }
     if (double.parse(value) > amount ) {
-      return "Amount you enter is larger than amount of your wallet";
+      return 'Amount you enter is larger than amount of your wallet';
     }
     return null;
   }
@@ -68,7 +70,7 @@ class _SendState extends State<SendPage> {
         ),
         backgroundColor: Colors.white,
         centerTitle: true,
-        actions: [
+        actions: <Widget>[
           TextButton(
             child: const Text(
               'Cancel',
@@ -87,9 +89,9 @@ class _SendState extends State<SendPage> {
           child: Padding(
               padding: const EdgeInsets.fromLTRB(10, 15, 10, 5),
               child:Column(
-                children: [
+                children: <Widget>[
                   Row(
-                    children: [
+                    children: <Widget>[
                       const Expanded(
                           flex: 1,
                           child: Text(
@@ -130,7 +132,7 @@ class _SendState extends State<SendPage> {
                   Form (
                       key: _formKey1,
                       child:Row(
-                          children: [
+                          children: <Widget>[
                               const Expanded(
                                   flex: 1,
                                   child: Text(
@@ -153,7 +155,7 @@ class _SendState extends State<SendPage> {
                                     enabled: true,
                                     decoration: const InputDecoration(
                                       label: Text(
-                                        "Receiver ID",
+                                        'Receiver ID',
                                         textAlign: TextAlign.left,
                                         style: TextStyle(
                                           color: Color.fromRGBO(153, 140, 140, 1),
@@ -168,14 +170,14 @@ class _SendState extends State<SendPage> {
                                         borderSide: BorderSide(width: 1.0),
                                       ),
                                     ),
-                                  validator: (value) => ReceiverFieldValidator.validate(value, FirebaseAuth.instance.currentUser.uid),
+                                  validator: (String? value) => ReceiverFieldValidator.validate(value, FirebaseAuth.instance.currentUser.uid),
                                 )
                             )),
                     ],
                   )),
                   const Divider(thickness: 1,),
                   Row(
-                    children: [
+                    children: <Widget>[
                       const Expanded(flex: 1, child: SizedBox()),
                       Expanded(
                         flex: 5,
@@ -198,7 +200,7 @@ class _SendState extends State<SendPage> {
                                 return DropdownMenuItem<wallet>(
                                   value: value,
                                   child: Row(
-                                    children: [
+                                    children: <Widget>[
                                       Image.network(
                                         value.coin.image,
                                         width: 20,
@@ -207,7 +209,7 @@ class _SendState extends State<SendPage> {
                                           padding: const EdgeInsets.only(top:5, left: 5),
                                           child:Column(
                                             crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: [
+                                            children: <Widget>[
                                               Text(
                                                 value.coin.symbol.toUpperCase(),
                                                 textAlign: TextAlign.left,
@@ -248,7 +250,7 @@ class _SendState extends State<SendPage> {
                   Form(
                       key:_formKey,
                       child:Row(
-                        children: [
+                        children: <Widget>[
                           Expanded(
                               flex: 1,
                               child: ElevatedButton(
@@ -261,7 +263,7 @@ class _SendState extends State<SendPage> {
                                   child: const Text(
                                     'Max', textAlign: TextAlign.center,
                                     style: TextStyle(
-                                        fontSize: 10, fontFamily: "Roboto", color: Colors.blue),
+                                        fontSize: 10, fontFamily: 'Roboto', color: Colors.blue),
                                   ),
                                   onPressed: () {
                                     _amountController.text = dropdownValue.amount.toString();
@@ -281,7 +283,7 @@ class _SendState extends State<SendPage> {
                                     enabled: true,
                                     decoration: const InputDecoration(
                                       label: Text(
-                                        "Amount",
+                                        'Amount',
                                         textAlign: TextAlign.left,
                                         style: TextStyle(
                                           color: Color.fromRGBO(153, 140, 140, 1),
@@ -296,7 +298,7 @@ class _SendState extends State<SendPage> {
                                         borderSide: BorderSide(width: 1.0),
                                       ),
                                     ),
-                                    validator:(value) => AmountFieldValidator.validate(value, dropdownValue.amount),
+                                    validator:(String? value) => AmountFieldValidator.validate(value, dropdownValue.amount),
                                   )
                               ))
                         ],
@@ -312,18 +314,18 @@ class _SendState extends State<SendPage> {
                       child: const Text(
                         'Next',
                         style: TextStyle(
-                            fontSize: 12, fontFamily: "Roboto", color: Colors.white),
+                            fontSize: 12, fontFamily: 'Roboto', color: Colors.white),
                       ),
                       onPressed: () async {
                         if (_formKey1.currentState!.validate() & _formKey.currentState!.validate()) {
                           if (await lookingForUser(_receiverController.text)) {
                               Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => SendConfirm(amount: double.parse(_amountController.text), receiver: _receiverController.text, coin: dropdownValue.coin,)));
+                              MaterialPageRoute(builder: (BuildContext context) => SendConfirm(amount: double.parse(_amountController.text), receiver: _receiverController.text, coin: dropdownValue.coin,)));
                               } else {
-                              const snackBar =  SnackBar(
+                              const SnackBar snackBar =  SnackBar(
                                   content: Text('This receiver account is not exist. Please check that address again and re-enter it!',
-                                    style: TextStyle(fontSize: 12, fontFamily: "Roboto", color: Colors.red)));
+                                    style: TextStyle(fontSize: 12, fontFamily: 'Roboto', color: Colors.red)));
                             ScaffoldMessenger.of(context).showSnackBar(snackBar);
                           }
                           }

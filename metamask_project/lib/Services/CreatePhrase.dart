@@ -1,3 +1,5 @@
+// ignore_for_file: lines_longer_than_80_chars
+
 import 'package:flutter/material.dart';
 import 'package:bip39/bip39.dart' as bip39;
 class PhraseCard extends StatelessWidget {
@@ -20,28 +22,28 @@ class PhraseCard extends StatelessWidget {
           child: Text(
         phrase,
         textAlign: TextAlign.center,
-        style: const TextStyle(fontSize: 13, fontFamily: "Roboto"),
+        style: const TextStyle(fontSize: 13, fontFamily: 'Roboto'),
       )),
     );
   }
 }
 class Phrase {
-  String phrases = "";
+
   Phrase () {
     //phrases = "cat internet important gas camera hex target bamboo royal kitty lamp orange";
     phrases = bip39.generateMnemonic();
   }
-
+  String phrases = '';
   List<PhraseCard> getsecretphrases () {
     List<PhraseCard> listPhrase = <PhraseCard>[];
-    List<String> randomPhrase = phrases.split(" ");
-    for (var element in randomPhrase) {
+    List<String> randomPhrase = phrases.split(' ');
+    for (String element in randomPhrase) {
       listPhrase.add(PhraseCard(phrase: element));
     }
     return listPhrase;
   }
   List<String> stringList () {
-    return phrases.split(" ");
+    return phrases.split(' ');
   }
 
 }

@@ -1,4 +1,6 @@
 
+// ignore_for_file: lines_longer_than_80_chars, always_specify_types
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +30,7 @@ class PasswordConfirmationFieldValidator {
     }
     if (password !=
         value) {
-      return "Password does not match";
+      return 'Password does not match';
     }
     return null;
   }
@@ -65,7 +67,7 @@ class _CreateWalletState extends State<CreateWalletPage> {
   final AuthService _auth = AuthService();
 
   bool _passwordVisible = true;
-  String _showHide = "Show";
+  String _showHide = 'Show';
   int _currentstep = 0;
   int step_2 = 0;
 
@@ -110,7 +112,7 @@ class _CreateWalletState extends State<CreateWalletPage> {
     }
 
     List<Step> stepLiLt() =>
-        [
+        <Step>[
           Step(
             state: _currentstep <= 0 ? StepState.editing : StepState.complete,
             isActive: _currentstep >= 0,
@@ -118,19 +120,19 @@ class _CreateWalletState extends State<CreateWalletPage> {
               'Create password',
               overflow: TextOverflow.clip,
               style: TextStyle(
-                  fontSize: 6, fontFamily: "Roboto", color: Colors.blueAccent),
+                  fontSize: 6, fontFamily: 'Roboto', color: Colors.blueAccent),
             ),
             content: SingleChildScrollView(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
+                  children: <Widget>[
                     const Text(
                       'Create Password',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontSize: 16,
-                          fontFamily: "Roboto",
+                          fontFamily: 'Roboto',
                           fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(
@@ -139,7 +141,7 @@ class _CreateWalletState extends State<CreateWalletPage> {
                     const Text(
                       'This password will unlock your MetaMask wallet only on this device.',
                       textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 11, fontFamily: "Roboto"),
+                      style: TextStyle(fontSize: 11, fontFamily: 'Roboto'),
                     ),
                     const SizedBox(
                       height: 3,
@@ -148,7 +150,7 @@ class _CreateWalletState extends State<CreateWalletPage> {
                         padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
                         child: Form(
                             key: _formKey_1,
-                            child: Column(children: [
+                            child: Column(children: <Widget>[
                               const SizedBox(
                                 height: 15,
                               ),
@@ -159,14 +161,14 @@ class _CreateWalletState extends State<CreateWalletPage> {
                                   const Text(
                                     'New Password',
                                     style: TextStyle(
-                                        fontFamily: "Roboto", fontSize: 12),
+                                        fontFamily: 'Roboto', fontSize: 12),
                                   ),
                                   TextButton(
-                                    child: Text(_showHide,style: const TextStyle(fontFamily: "Roboto", fontSize: 12, color: Colors.black),),
+                                    child: Text(_showHide,style: const TextStyle(fontFamily: 'Roboto', fontSize: 12, color: Colors.black),),
                                     onPressed: () {
                                       setState(() {
                                           _passwordVisible = !_passwordVisible;
-                                          _showHide = _passwordVisible == true? "Show" : "Hide";
+                                          _showHide = _passwordVisible == true? 'Show' : 'Hide';
                                       });
                                     },
                                   )
@@ -180,7 +182,7 @@ class _CreateWalletState extends State<CreateWalletPage> {
                                     textAlign: TextAlign.left,
                                     keyboardType: TextInputType.text,
                                     decoration: buildInputDecoration(
-                                        10, "Password"),
+                                        10, 'Password'),
                                     validator: PasswordFieldValidator.validate,
                                   )
                               ),
@@ -194,7 +196,7 @@ class _CreateWalletState extends State<CreateWalletPage> {
                                   Text(
                                     'Confirm Password',
                                     style: TextStyle(
-                                        fontFamily: "Roboto", fontSize: 12),
+                                        fontFamily: 'Roboto', fontSize: 12),
                                   ),
                                   Text(''),
                                 ],
@@ -207,8 +209,8 @@ class _CreateWalletState extends State<CreateWalletPage> {
                                   obscureText: true,
                                   keyboardType: TextInputType.text,
                                   decoration: buildInputDecoration(
-                                      10, "Confirm Password"),
-                                  validator:(value) => PasswordConfirmationFieldValidator.validate(value, password.text),
+                                      10, 'Confirm Password'),
+                                  validator:(String? value) => PasswordConfirmationFieldValidator.validate(value, password.text),
                                 ),
                               ),
                               const SizedBox(
@@ -228,7 +230,7 @@ class _CreateWalletState extends State<CreateWalletPage> {
                                     'Create Password',
                                     style: TextStyle(
                                         fontSize: 12,
-                                        fontFamily: "Roboto",
+                                        fontFamily: 'Roboto',
                                         color: Colors.white),
                                   ),
                                   onPressed: onContinue
@@ -245,7 +247,7 @@ class _CreateWalletState extends State<CreateWalletPage> {
               'Secure wallet',
               overflow: TextOverflow.clip,
               style: TextStyle(
-                  fontSize: 6, fontFamily: "Roboto", color: Colors.blueAccent),
+                  fontSize: 6, fontFamily: 'Roboto', color: Colors.blueAccent),
             ),
             content: SingleChildScrollView(
                 child: step_2 == 0 ? Form(
@@ -253,13 +255,13 @@ class _CreateWalletState extends State<CreateWalletPage> {
                     child:Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
+                            children: <Widget>[
                               const Text(
                                 'Confirm your password',
                                 textAlign: TextAlign.left,
                                 style: TextStyle(
                                     fontSize: 20,
-                                    fontFamily: "Roboto",
+                                    fontFamily: 'Roboto',
                                     color: Colors.black),
                               ),
                               const SizedBox(
@@ -268,7 +270,7 @@ class _CreateWalletState extends State<CreateWalletPage> {
                               const Text(
                                 'Before continuing we need to confirm your password',
                                 textAlign: TextAlign.left,
-                                style: TextStyle(fontFamily: "Roboto", fontSize: 12),
+                                style: TextStyle(fontFamily: 'Roboto', fontSize: 12),
                               ),
                               const SizedBox(height: 5,),
                               TextFormField(
@@ -277,8 +279,8 @@ class _CreateWalletState extends State<CreateWalletPage> {
                                 obscureText: true,
                                 keyboardType: TextInputType.text,
                                 decoration: buildInputDecoration(
-                                    8, "Confirm Password"),
-                                validator: (value) => PasswordConfirmationFieldValidator.validate(value, password.text),
+                                    8, 'Confirm Password'),
+                                validator: (String? value) => PasswordConfirmationFieldValidator.validate(value, password.text),
                               ),
                               const SizedBox(
                                 height: 20,
@@ -295,7 +297,7 @@ class _CreateWalletState extends State<CreateWalletPage> {
                                   'Confirm',
                                   style: TextStyle(
                                       fontSize: 12,
-                                      fontFamily: "Roboto",
+                                      fontFamily: 'Roboto',
                                       color: Colors.white),
                                 ),
                                 onPressed: onContinue,
@@ -303,12 +305,12 @@ class _CreateWalletState extends State<CreateWalletPage> {
                             ],
                 )) : Column(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
+                  children: <Widget>[
                     const Text('Write down your Secret Recovery Phrase',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: 15,
-                            fontFamily: "Roboto",
+                            fontFamily: 'Roboto',
                             fontWeight: FontWeight.bold)),
                     const SizedBox(
                       height: 5,
@@ -316,7 +318,7 @@ class _CreateWalletState extends State<CreateWalletPage> {
                     const Text(
                       "This is your Secret Recovery Phrase. Write it down on a paper or keep in a safe place. You'll be asked to re-enter this phrase (in order) on the next step.",
                       textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 9, fontFamily: "Roboto"),
+                      style: TextStyle(fontSize: 9, fontFamily: 'Roboto'),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 10),
@@ -337,7 +339,7 @@ class _CreateWalletState extends State<CreateWalletPage> {
                           'Continue',
                           style: TextStyle(
                               fontSize: 12,
-                              fontFamily: "Roboto",
+                              fontFamily: 'Roboto',
                               color: Colors.white),
                         ),
                         onPressed: onContinue,
@@ -354,27 +356,27 @@ class _CreateWalletState extends State<CreateWalletPage> {
                   overflow: TextOverflow.clip,
                   style: TextStyle(
                       fontSize: 6,
-                      fontFamily: "Roboto",
+                      fontFamily: 'Roboto',
                       color: Colors.blueAccent)),
               content: SingleChildScrollView(
                 child: Form(
                     key: _formKeyPhrase,
                     child:Column(
                       mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
+                      children: <Widget>[
                       const Text('Confirm Secret Recovery Phrase',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: 15,
-                            fontFamily: "Roboto",
+                            fontFamily: 'Roboto',
                             fontWeight: FontWeight.bold)),
                         const SizedBox(
                           height: 5,
                         ),
                         const Text(
-                          "Select  each word in the order it was presented to you.",
+                          'Select  each word in the order it was presented to you.',
                           textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: 9, fontFamily: "Roboto"),
+                          style: TextStyle(fontSize: 9, fontFamily: 'Roboto'),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(top: 20),
@@ -396,7 +398,7 @@ class _CreateWalletState extends State<CreateWalletPage> {
                               'Continue',
                               style: TextStyle(
                                   fontSize: 12,
-                                  fontFamily: "Roboto",
+                                  fontFamily: 'Roboto',
                                   color: Colors.white),
                             ),
                             onPressed: () async {
@@ -407,10 +409,10 @@ class _CreateWalletState extends State<CreateWalletPage> {
                                   password.text,
                                   'Account',
                                 )
-                                    .then((value) async {
+                                    .then((bool value) async {
                                   User user = FirebaseAuth.instance.currentUser;
                                   await FirebaseFirestore.instance.collection(
-                                      "user")
+                                      'user')
                                       .doc(user.uid)
                                       .set({
                                     'uid': user.uid,
@@ -418,12 +420,12 @@ class _CreateWalletState extends State<CreateWalletPage> {
                                     'username': 'Account',
                                   });
                                   Navigator.push(context, MaterialPageRoute(
-                                      builder: (context) => const MyHomePage()));
+                                      builder: (BuildContext context) => const MyHomePage()));
                                 });
                                 } else {
-                                  const snackBar =  SnackBar(
+                                  const SnackBar snackBar =  SnackBar(
                                       content: Text('Your phrases are Wrong or not in right Order. Please re-enter or re-order your phrases',
-                                            style: TextStyle(fontSize: 12, fontFamily: "Roboto", color: Colors.red)));
+                                            style: TextStyle(fontSize: 12, fontFamily: 'Roboto', color: Colors.red)));
                                       ScaffoldMessenger.of(context).showSnackBar(snackBar);
                               }
                               },
@@ -444,7 +446,7 @@ class _CreateWalletState extends State<CreateWalletPage> {
                 const SizedBox(height: 25),
                 Row(mainAxisAlignment: MainAxisAlignment.start,
                     //crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
+                    children: <Widget>[
                       Expanded(
                           flex: 1,
                           child: IconButton(
@@ -464,7 +466,7 @@ class _CreateWalletState extends State<CreateWalletPage> {
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 16,
-                                fontFamily: "Roboto Mono",
+                                fontFamily: 'Roboto Mono',
                                 letterSpacing: 5,
                                 fontWeight: FontWeight.normal,
                               ))),
@@ -540,7 +542,6 @@ class _TxtViewState extends State<TxtView> {
   @override
   void initState() {
     super.initState();
-
     controller.addListener(() {
       if(controller.text.toLowerCase() == widget.slist[widget.index-1]) {
         setState(() {
@@ -569,7 +570,7 @@ class _TxtViewState extends State<TxtView> {
         ),
       ),
       controller: controller,
-      validator: (value) => PhrasesValidator.validate(value, widget.slist[widget.index-1]),
+      validator: (String? value) => PhrasesValidator.validate(value, widget.slist[widget.index-1]),
     );
   }
 }

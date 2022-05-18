@@ -1,37 +1,18 @@
+// ignore_for_file: always_specify_types
+
 import 'package:flutter/material.dart';
 import 'package:metamask_project/Models/Transaction.dart';
 import 'package:metamask_project/Screens/Home/Home.dart';
 import 'package:metamask_project/Services/Database.dart';
 
 class TransactionHistory extends StatelessWidget {
-  // List<Transaction> trans = [
-  //   Transaction("Buy", "BNB", "Confirm", "11:15PM", "Mar 10", "0x5388...4037",
-  //       "0xf357...Edl2", 0.001),
-  //   Transaction("Send", "Bcoin", "Confirm", "11:15PM", "Mar 10",
-  //       "0x5388...4037", "0xf357...Edl2", 20),
-  //   Transaction("Send", "BNB", "Confirm", "11:15PM", "Mar 10", "0x5388...4037",
-  //       "0xf357...Edl2", 0.5),
-  //   Transaction("Buy", "Bcoin", "Confirm", "11:15PM", "Mar 10", "0x5388...4037",
-  //       "0xf357...Edl2", 100),
-  //   Transaction("Send", "BNB", "Confirm", "11:15PM", "Mar 10", "0x5388...4037",
-  //       "0xf357...Edl2", 0.8),
-  //   Transaction("Send", "Bcoin", "Confirm", "11:15PM", "Mar 10",
-  //       "0x5388...4037", "0xf357...Edl2", 5.7),
-  //   Transaction("Send", "BNB", "Confirm", "11:15PM", "Mar 10", "0x5388...4037",
-  //       "0xf357...Edl2", 0.67),
-  //   Transaction("Send", "Bcoin", "Confirm", "11:15PM", "Mar 10",
-  //       "0x5388...4037", "0xf357...Edl2", 0.0034),
-  //   Transaction("Send", "BNB", "Confirm", "11:15PM", "Mar 10", "0x5388...4037",
-  //       "0xf357...Edl2", 0.647),
-  // ];
-
   const TransactionHistory({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<List<Trans>>(
       stream: DatabaseService().transList,
-      builder: (context, snapshot) {
+      builder: (BuildContext context, AsyncSnapshot<List<Trans>> snapshot) {
         if (snapshot.hasData) {
           List<Trans>? trans = snapshot.data;
           return Scaffold(
@@ -42,7 +23,8 @@ class TransactionHistory extends StatelessWidget {
                     icon: const Icon(Icons.arrow_back),
                     color: Colors.black,
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => const MyHomePage()));
+                      Navigator.push(context, MaterialPageRoute(builder:
+                          (BuildContext context) => const MyHomePage()));
                     }),
 
                 title: Column(children: const [
@@ -50,13 +32,13 @@ class TransactionHistory extends StatelessWidget {
                     'Transaction',
                     style: TextStyle(
                         fontSize: 16,
-                        fontFamily: "Roboto",
+                        fontFamily: 'Roboto',
                         color: Colors.black),
                   ),
                   Text(
                     'Smart chain',
                     style: TextStyle(
-                        fontSize: 9, fontFamily: "Roboto", color: Colors.grey),
+                        fontSize: 9, fontFamily: 'Roboto', color: Colors.grey),
                   )
                 ]),
                 actions: [
@@ -77,7 +59,7 @@ class TransactionHistory extends StatelessWidget {
               ),
               body: ListView.builder(
                 itemCount: trans?.length,
-                itemBuilder: (context, index) {
+                itemBuilder: (BuildContext context, int index) {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Material(
@@ -145,14 +127,14 @@ class TransTile extends StatelessWidget {
                       '${trans.type} ${trans.name}',
                       style: const TextStyle(
                           fontSize: 12,
-                          fontFamily: "Roboto",
+                          fontFamily: 'Roboto',
                           color: Colors.black),
                     ),
                     Text(
                       trans.status,
                       style: const TextStyle(
                           fontSize: 9,
-                          fontFamily: "Roboto",
+                          fontFamily: 'Roboto',
                           color: Colors.green),
                     )
                   ],
@@ -164,7 +146,7 @@ class TransTile extends StatelessWidget {
                   '${trans.amount}${trans.name}',
                   textAlign: TextAlign.right,
                   style: const TextStyle(
-                      fontSize: 12, fontFamily: "Roboto", color: Colors.black),
+                      fontSize: 12, fontFamily: 'Roboto', color: Colors.black),
                 ),
               ),
             ],
@@ -199,7 +181,7 @@ class TransTile extends StatelessWidget {
                   Align(
                     alignment: Alignment.center,
                     child: Text(
-                      "${trans.type} ${trans.name}",
+                      '${trans.type} ${trans.name}',
                       textAlign: TextAlign.center,
                       style: const TextStyle(
                         color: Color.fromRGBO(0, 0, 0, 1),
@@ -375,7 +357,7 @@ class TransTile extends StatelessWidget {
                                       fontSize: 7,
                                     )),
                               ),
-                              Text("#$index",
+                              Text('#$index',
                                   textAlign: TextAlign.left,
                                   style: const TextStyle(
                                     color: Colors.black,
