@@ -1,4 +1,4 @@
-// ignore_for_file: lines_longer_than_80_chars
+
 
 class Trans {
   Trans( this.type, this.name, this.status, this.time, this.date,
@@ -20,7 +20,8 @@ class Trans {
     if (type == 'Buy') {
       return 'Admin';
     }
-    return from.substring(0, 7) + '...' + from.substring(from.length -5, from.length);
+    return from.substring(0, 7) + '...' + from.substring(from.length -5,
+        from.length);
   }
   String shortTo() {
     return to.substring(0, 7) + '...' + to.substring(to.length -5, to.length);

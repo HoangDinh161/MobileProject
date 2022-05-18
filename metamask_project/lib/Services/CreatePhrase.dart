@@ -1,4 +1,3 @@
-// ignore_for_file: lines_longer_than_80_chars
 
 import 'package:flutter/material.dart';
 import 'package:bip39/bip39.dart' as bip39;
@@ -30,7 +29,8 @@ class PhraseCard extends StatelessWidget {
 class Phrase {
 
   Phrase () {
-    //phrases = "cat internet important gas camera hex target bamboo royal kitty lamp orange";
+    //phrases = "cat internet important gas camera hex target
+    // bamboo royal kitty lamp orange";
     phrases = bip39.generateMnemonic();
   }
   String phrases = '';

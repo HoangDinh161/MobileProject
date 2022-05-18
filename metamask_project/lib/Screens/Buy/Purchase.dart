@@ -1,4 +1,4 @@
-// ignore_for_file: always_specify_types, lines_longer_than_80_chars
+
 
 import 'package:flutter/material.dart';
 
@@ -94,7 +94,9 @@ class PurchasePage extends StatelessWidget {
               ),
               onPressed: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (BuildContext context) => const BuyPage()));
+                    // ignore: always_specify_types
+                    MaterialPageRoute(builder: (BuildContext context)
+                    => const BuyPage()));
               },
             ),
           ],

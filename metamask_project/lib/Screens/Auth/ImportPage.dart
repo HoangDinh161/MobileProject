@@ -1,4 +1,3 @@
-// ignore_for_file: lines_longer_than_80_chars, always_specify_types
 
 import 'package:flutter/material.dart';
 
@@ -80,14 +79,18 @@ class _ImportState extends State<ImportPage> {
                               children: <Widget>[
                                 const Text(
                                   'Secret Recovery Phrase',
-                                  style: TextStyle(fontFamily: 'Roboto', fontSize: 12),
+                                  style: TextStyle(fontFamily: 'Roboto',
+                                      fontSize: 12),
                                 ),
                                 TextButton(
-                                  child: Text(_showHide,style: const TextStyle(fontFamily: 'Roboto', fontSize: 12, color: Colors.black),),
+                                  child: Text(_showHide,style: const TextStyle(
+                                      fontFamily: 'Roboto', fontSize: 12,
+                                      color: Colors.black),),
                                   onPressed: () {
                                     setState(() {
                                       _passwordVisible = !_passwordVisible;
-                                      _showHide = _passwordVisible == true? 'Show' : 'Hide';
+                                      _showHide = _passwordVisible == true?
+                                      'Show' : 'Hide';
                                     });
                                   },
                                 )
@@ -109,7 +112,8 @@ class _ImportState extends State<ImportPage> {
                               children: const <Widget>[
                                 Text(
                                   'New Password',
-                                  style: TextStyle(fontFamily: 'Roboto', fontSize: 12),
+                                  style: TextStyle(fontFamily: 'Roboto',
+                                      fontSize: 12),
                                 ),
                                 Text('')
                               ],
@@ -129,7 +133,8 @@ class _ImportState extends State<ImportPage> {
                                   primary: Colors.blue,
                                   onPrimary: Colors.white,
                                   minimumSize: const Size(350, 35),
-                                  side: const BorderSide(width: 2, color: Colors.blue),
+                                  side: const BorderSide(width: 2,
+                                      color: Colors.blue),
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(30))),
                               child: const Text(
@@ -140,16 +145,22 @@ class _ImportState extends State<ImportPage> {
                                     color: Colors.white),
                               ),
                               onPressed: () async {
-                                if (await _auth.import(_phrases.text, _password.text)) {
+                                if (await _auth.import(_phrases.text,
+                                    _password.text)) {
                                   Navigator.push(
                                       context,
+                                      // ignore: always_specify_types
                                       MaterialPageRoute(
-                                          builder: (BuildContext context) => const MyHomePage()));
+                                          builder: (BuildContext context)
+                                          => const MyHomePage()));
                                 } else {
                                   const SnackBar snackBar =  SnackBar(
                                       content: Text('Your secret Phrases or Password is incorrect!',
-                                          style: TextStyle(fontSize: 12, fontFamily: 'Roboto', color: Colors.red)));
-                                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                          style: TextStyle(fontSize: 12,
+                                              fontFamily: 'Roboto',
+                                              color: Colors.red)));
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(snackBar);
                                 }
                               },
                             )

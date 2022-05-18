@@ -1,4 +1,3 @@
-// ignore_for_file: always_specify_types
 
 import 'package:firebase_auth/firebase_auth.dart';
 

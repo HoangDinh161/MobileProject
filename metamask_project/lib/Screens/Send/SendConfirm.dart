@@ -1,4 +1,4 @@
-// ignore_for_file: always_specify_types, lines_longer_than_80_chars
+
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

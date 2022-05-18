@@ -1,4 +1,4 @@
-// ignore_for_file: always_specify_types
+
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -112,6 +112,7 @@ class SideMenu extends StatelessWidget {
             title: const Text('Wallet'),
             onTap: () {
               Navigator.push(
+                  // ignore: always_specify_types
                   context, MaterialPageRoute(
                       builder: (BuildContext context) => const MyHomePage()));
             },
@@ -122,6 +123,7 @@ class SideMenu extends StatelessWidget {
             onTap: () {
               Navigator.push(
                   context,
+                  // ignore: always_specify_types
                   MaterialPageRoute(
                       builder: (BuildContext context)
                       => const TransactionHistory()));
@@ -136,8 +138,10 @@ class SideMenu extends StatelessWidget {
             leading: const Icon(Icons.logout_outlined),
             title: const Text('Log out'),
             onTap: () {
+              // ignore: always_specify_types
               FirebaseAuth.instance.signOut().then((value) => Navigator.push(
                   context,
+                  // ignore: always_specify_types
                   MaterialPageRoute(builder: (BuildContext context)
                   => const StartPage())));
             },

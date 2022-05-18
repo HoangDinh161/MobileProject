@@ -1,4 +1,4 @@
-// ignore_for_file: always_specify_types
+
 
 import 'package:flutter/material.dart';
 import 'package:metamask_project/Models/Transaction.dart';
@@ -23,11 +23,12 @@ class TransactionHistory extends StatelessWidget {
                     icon: const Icon(Icons.arrow_back),
                     color: Colors.black,
                     onPressed: () {
+                      // ignore: always_specify_types
                       Navigator.push(context, MaterialPageRoute(builder:
                           (BuildContext context) => const MyHomePage()));
                     }),
 
-                title: Column(children: const [
+                title: Column(children: const <Widget>[
                   Text(
                     'Transaction',
                     style: TextStyle(
@@ -41,7 +42,7 @@ class TransactionHistory extends StatelessWidget {
                         fontSize: 9, fontFamily: 'Roboto', color: Colors.grey),
                   )
                 ]),
-                actions: [
+                actions: <Widget>[
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: CircleAvatar(
@@ -82,6 +83,7 @@ class TransactionHistory extends StatelessWidget {
   }
 }
 
+
 class TransTile extends StatelessWidget {
   TransTile({required this.trans, required this.index, Key? key})
       : super(key: key);
@@ -109,7 +111,7 @@ class TransTile extends StatelessWidget {
             ),
           ),
           Row(
-            children: [
+            children: <Widget>[
               const Expanded(
                 flex: 1,
                 child: Icon(
@@ -122,7 +124,7 @@ class TransTile extends StatelessWidget {
                 flex: 6,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
+                  children: <Widget>[
                     Text(
                       '${trans.type} ${trans.name}',
                       style: const TextStyle(
@@ -174,10 +176,10 @@ class TransTile extends StatelessWidget {
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
-            children: [
+            children: <Widget>[
               Stack(
                 alignment: Alignment.center,
-                children: [
+                children: <Widget>[
                   Align(
                     alignment: Alignment.center,
                     child: Text(
@@ -211,16 +213,14 @@ class TransTile extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: Column(
-                  children: [
-                    Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
+                      children: <Widget>[
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
+                          children: <Widget>[
                             Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
+                                children: <Widget>[
                                   const Padding(
                                     padding:
                                         EdgeInsets.only(top: 13.0, bottom: 5),
@@ -247,7 +247,7 @@ class TransTile extends StatelessWidget {
                                 ]),
                             Column(
                                 crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
+                                children: <Widget>[
                                   const Padding(
                                     padding:
                                         EdgeInsets.only(top: 13.0, bottom: 5),
@@ -281,10 +281,10 @@ class TransTile extends StatelessWidget {
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
+                          children: <Widget>[
                             Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
+                                children: <Widget>[
                                   const Padding(
                                     padding:
                                         EdgeInsets.only(top: 13.0, bottom: 5),
@@ -311,7 +311,7 @@ class TransTile extends StatelessWidget {
                                 ]),
                             Column(
                                 crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
+                                children: <Widget>[
                                   const Padding(
                                     padding:
                                         EdgeInsets.only(top: 13.0, bottom: 5),
@@ -346,7 +346,7 @@ class TransTile extends StatelessWidget {
                         ),
                         Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
+                            children: <Widget>[
                               const Padding(
                                 padding: EdgeInsets.only(top: 13.0, bottom: 5),
                                 child: Text('NONCE',
@@ -377,13 +377,13 @@ class TransTile extends StatelessWidget {
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 10.0),
                               child: Column(
-                                children: [
+                                children: <Widget>[
                                   Padding(
                                     padding: const EdgeInsets.only(top: 12.0),
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
-                                      children: [
+                                      children: <Widget>[
                                         const Text('Amount',
                                             textAlign: TextAlign.left,
                                             style: TextStyle(
@@ -406,7 +406,7 @@ class TransTile extends StatelessWidget {
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
-                                      children: [
+                                      children: <Widget>[
                                         const Text('Estimated gas fee',
                                             textAlign: TextAlign.left,
                                             style: TextStyle(
@@ -433,7 +433,7 @@ class TransTile extends StatelessWidget {
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
-                                      children: [
+                                      children: <Widget>[
                                         const Text('Total amount',
                                             textAlign: TextAlign.left,
                                             style: TextStyle(
@@ -458,8 +458,6 @@ class TransTile extends StatelessWidget {
                         ) //theBox
                       ],
                     ),
-                  ],
-                ),
               ),
             ],
           ),

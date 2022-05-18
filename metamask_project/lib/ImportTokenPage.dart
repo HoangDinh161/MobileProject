@@ -1,4 +1,3 @@
-// ignore_for_file: always_specify_types
 
 import 'package:flutter/material.dart';
 import 'package:metamask_project/Screens/Home/Home.dart';
@@ -14,8 +13,8 @@ class ImportTokenPage extends StatefulWidget {
 }
 
 class _ImportTokenState extends State<ImportTokenPage> {
-  List<Coin> coinList = [];
-  List<Coin> foundTokens = [];
+  List<Coin> coinList = <Coin>[];
+  List<Coin> foundTokens = <Coin>[];
   Coin _tokenChose = Coin('id', 'name', 'symbol', 'image');
   int selectedIndex = -1;
   @override
@@ -31,7 +30,7 @@ class _ImportTokenState extends State<ImportTokenPage> {
   }
 
   void _runFilter(String enteredKeyword) {
-    List<Coin> results = [];
+    List<Coin> results = <Coin>[];
     if (enteredKeyword.isEmpty) {
       // if the search field is empty or only contains white-space,
       // we'll display all tokens
@@ -138,9 +137,10 @@ class _ImportTokenState extends State<ImportTokenPage> {
                                   ? const RoundedRectangleBorder(
                                   side: BorderSide(color: Colors.green))
                                   : null,
-                            key: ValueKey(foundTokens[index].id),
-                            elevation: 5,
-                            margin: const EdgeInsets.symmetric(vertical: 5),
+                              // ignore: always_specify_types
+                              key: ValueKey(foundTokens[index].id),
+                              elevation: 5,
+                              margin: const EdgeInsets.symmetric(vertical: 5),
                                 child: ListTile(
                                     leading: Image.network(
                                     foundTokens[index].image,
@@ -152,7 +152,7 @@ class _ImportTokenState extends State<ImportTokenPage> {
                   )
                       : const Text(
                     'No results found',
-                    style: TextStyle(fontSize: 16),
+                    style: TextStyle(fontSize: 15),
                   ),
                 ),
                 ElevatedButton(
@@ -173,6 +173,7 @@ class _ImportTokenState extends State<ImportTokenPage> {
                   onPressed: () {
                     // viết code xử lí import ở đây,
                     // import  _tokenChose vào walletList.
+                    // ignore: always_specify_types
                     Navigator.push(context, MaterialPageRoute(builder:
                         (BuildContext context)=> const MyHomePage()));
                   },

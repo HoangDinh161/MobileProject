@@ -1,4 +1,4 @@
-// ignore_for_file: lines_longer_than_80_chars, always_specify_types
+
 
 import 'package:flutter/material.dart';
 
@@ -35,7 +35,8 @@ class StartPage extends StatelessWidget {
                         const Text(
                           'Wallet Setup',
                           style: TextStyle(
-                              fontSize: 18, fontFamily: 'Roboto', fontWeight: FontWeight.bold),
+                              fontSize: 18, fontFamily: 'Roboto',
+                              fontWeight: FontWeight.bold),
                         ),
                         const SizedBox(height: 15),
                         const Text(
@@ -48,18 +49,23 @@ class StartPage extends StatelessWidget {
                         SizedBox(height: screensize.height * 0.58),
                         OutlinedButton(
                           style: OutlinedButton.styleFrom(
-                              side: const BorderSide(width: 2, color: Colors.blue),
+                              side: const BorderSide(width: 2,
+                                  color: Colors.blue),
                               minimumSize: const Size(250, 40),
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(30))),
                           child: const Text(
                             'Import using Secret Recovery Phrase',
                             style: TextStyle(
-                                fontSize: 12, fontFamily: 'Roboto', color: Colors.blue),
+                                fontSize: 12, fontFamily: 'Roboto',
+                                color: Colors.blue),
                           ),
                           onPressed: () {
                             Navigator.push(context,
-                                MaterialPageRoute(builder: (BuildContext context) => const ImportPage()));
+                                // ignore: always_specify_types
+                                MaterialPageRoute(builder:
+                                    (BuildContext context)
+                                => const ImportPage()));
                           },
                         ),
                         const SizedBox(
@@ -70,25 +76,30 @@ class StartPage extends StatelessWidget {
                               primary: Colors.blue,
                               onPrimary: Colors.white,
                               minimumSize: const Size(250, 40),
-                              side: const BorderSide(width: 2, color: Colors.blue),
+                              side: const BorderSide(width: 2,
+                                  color: Colors.blue),
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(30))),
                           child: const Text(
                             'Create a new wallet',
                             style: TextStyle(
-                                fontSize: 12, fontFamily: 'Roboto', color: Colors.white),
+                                fontSize: 12, fontFamily: 'Roboto',
+                                color: Colors.white),
                           ),
                           onPressed: () {
                             Navigator.push(
                                 context,
+                                // ignore: always_specify_types
                                 MaterialPageRoute(
-                                    builder: (BuildContext context) => const CreateWalletPage()));
+                                    builder: (BuildContext context)
+                                    => const CreateWalletPage()));
                           },
                         ),
                         const SizedBox(height: 30),
                         const Text('By proceeding, you agree to these Terms and Conditions',
                             style: TextStyle(
-                                fontSize: 11, fontFamily: 'Roboto', color: Colors.black26))
+                                fontSize: 11, fontFamily: 'Roboto',
+                                color: Colors.black26))
                       ],
                 )
             )

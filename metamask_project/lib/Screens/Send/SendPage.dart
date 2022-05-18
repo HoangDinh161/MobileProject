@@ -1,4 +1,3 @@
-// ignore_for_file: lines_longer_than_80_chars, always_specify_types
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -148,7 +147,8 @@ class _SendState extends State<SendPage> {
                             Expanded(
                               flex: 5,
                               child: Padding(
-                                padding: const EdgeInsets.only(top: 10, left: 5),
+                                padding: const EdgeInsets
+                                    .only(top: 10, left: 5),
                                 child: TextFormField(
                                     controller: _receiverController,
                                     keyboardType: TextInputType.text,
@@ -158,7 +158,8 @@ class _SendState extends State<SendPage> {
                                         'Receiver ID',
                                         textAlign: TextAlign.left,
                                         style: TextStyle(
-                                          color: Color.fromRGBO(153, 140, 140, 1),
+                                          color: Color.fromRGBO(153, 140,
+                                              140, 1),
                                           fontFamily: 'Roboto',
                                           fontSize: 12,
                                           fontWeight: FontWeight.normal,
@@ -170,7 +171,9 @@ class _SendState extends State<SendPage> {
                                         borderSide: BorderSide(width: 1.0),
                                       ),
                                     ),
-                                  validator: (String? value) => ReceiverFieldValidator.validate(value, FirebaseAuth.instance.currentUser.uid),
+                                  validator: (String? value)
+                                  => ReceiverFieldValidator.validate(value,
+                                      FirebaseAuth.instance.currentUser.uid),
                                 )
                             )),
                     ],
@@ -196,7 +199,8 @@ class _SendState extends State<SendPage> {
                                   dropdownValue = newValue!;
                                 });
                               },
-                              items: widget.wallets?.map<DropdownMenuItem<wallet>>((wallet value) {
+                              items: widget.wallets?.
+                              map<DropdownMenuItem<wallet>>((wallet value) {
                                 return DropdownMenuItem<wallet>(
                                   value: value,
                                   child: Row(
@@ -206,9 +210,12 @@ class _SendState extends State<SendPage> {
                                         width: 20,
                                       ),
                                       Padding(
-                                          padding: const EdgeInsets.only(top:5, left: 5),
+                                          padding: const EdgeInsets
+                                              .only(top:5, left: 5),
+                                          // ignore: lines_longer_than_80_chars
                                           child:Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                             children: <Widget>[
                                               Text(
                                                 value.coin.symbol.toUpperCase(),
@@ -217,20 +224,22 @@ class _SendState extends State<SendPage> {
                                                   color: Colors.black,
                                                   fontFamily: 'Roboto',
                                                   fontSize: 14,
-                                                  letterSpacing:
-                                                  0 /*percentages not used in flutter. defaulting to zero*/,
+                                                  letterSpacing: 0,
                                                   fontWeight: FontWeight.normal,
                                                 ),
                                               ),
+                                              // ignore: lines_longer_than_80_chars
                                               Text(
-                                                'Balance: ${value.amount} ${value.coin.symbol.toUpperCase()}',
+                                                'Balance: ${value.amount}'
+                                                    ' ${value.coin.symbol.
+                                                toUpperCase()}',
                                                 textAlign: TextAlign.left,
                                                 style: const TextStyle(
                                                   color: Colors.black,
                                                   fontFamily: 'Roboto',
                                                   fontSize: 14,
                                                   letterSpacing:
-                                                  0 /*percentages not used in flutter. defaulting to zero*/,
+                                                  0 ,
                                                   fontWeight: FontWeight.normal,
                                                 ),
                                               ),
@@ -257,28 +266,35 @@ class _SendState extends State<SendPage> {
                                   style: ElevatedButton.styleFrom(
                                       primary: Colors.white,
                                       onPrimary: Colors.blue,
-                                      side: const BorderSide(width: 2, color: Colors.blue),
+                                      side: const BorderSide(width: 2,
+                                          color: Colors.blue),
                                       shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(30))),
+                                          borderRadius: BorderRadius.
+                                          circular(30))),
                                   child: const Text(
                                     'Max', textAlign: TextAlign.center,
                                     style: TextStyle(
-                                        fontSize: 10, fontFamily: 'Roboto', color: Colors.blue),
+                                        fontSize: 10, fontFamily: 'Roboto',
+                                        color: Colors.blue),
                                   ),
                                   onPressed: () {
-                                    _amountController.text = dropdownValue.amount.toString();
+                                    _amountController.text = dropdownValue
+                                        .amount
+                                        .toString();
                                   }
                               )
                           ),
                           Expanded(
                               flex: 5,
                               child: Padding(
-                                  padding: const EdgeInsets.only(top: 10, left: 5),
+                                  padding: const EdgeInsets.only(top: 10,
+                                      left: 5),
                                   child:TextFormField(
                                     controller: _amountController,
                                     keyboardType: TextInputType.number,
                                     inputFormatters: <TextInputFormatter>[
-                                      FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                                      FilteringTextInputFormatter.allow(
+                                          RegExp(r'[0-9]')),
                                     ],
                                     enabled: true,
                                     decoration: const InputDecoration(
@@ -286,7 +302,8 @@ class _SendState extends State<SendPage> {
                                         'Amount',
                                         textAlign: TextAlign.left,
                                         style: TextStyle(
-                                          color: Color.fromRGBO(153, 140, 140, 1),
+                                          color: Color.fromRGBO(153, 140,
+                                              140, 1),
                                           fontFamily: 'Roboto',
                                           fontSize: 12,
                                           fontWeight: FontWeight.normal,
@@ -298,7 +315,9 @@ class _SendState extends State<SendPage> {
                                         borderSide: BorderSide(width: 1.0),
                                       ),
                                     ),
-                                    validator:(String? value) => AmountFieldValidator.validate(value, dropdownValue.amount),
+                                    validator:(String? value) =>
+                                        AmountFieldValidator.validate(value,
+                                            dropdownValue.amount),
                                   )
                               ))
                         ],
@@ -314,19 +333,29 @@ class _SendState extends State<SendPage> {
                       child: const Text(
                         'Next',
                         style: TextStyle(
-                            fontSize: 12, fontFamily: 'Roboto', color: Colors.white),
+                            fontSize: 12, fontFamily: 'Roboto',
+                            color: Colors.white),
                       ),
                       onPressed: () async {
-                        if (_formKey1.currentState!.validate() & _formKey.currentState!.validate()) {
+                        if (_formKey1.currentState!.validate() &
+                        _formKey.currentState!.validate()) {
                           if (await lookingForUser(_receiverController.text)) {
                               Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (BuildContext context) => SendConfirm(amount: double.parse(_amountController.text), receiver: _receiverController.text, coin: dropdownValue.coin,)));
+                              // ignore: always_specify_types
+                              MaterialPageRoute(builder:
+                                  (BuildContext context) => SendConfirm(amount:
+                                  double.parse(_amountController.text),
+                                    receiver: _receiverController.text,
+                                    coin: dropdownValue.coin,)));
                               } else {
                               const SnackBar snackBar =  SnackBar(
                                   content: Text('This receiver account is not exist. Please check that address again and re-enter it!',
-                                    style: TextStyle(fontSize: 12, fontFamily: 'Roboto', color: Colors.red)));
-                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                    style: TextStyle(fontSize: 12,
+                                        fontFamily: 'Roboto', color: Colors.red)
+                                  ));
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(snackBar);
                           }
                           }
                         }

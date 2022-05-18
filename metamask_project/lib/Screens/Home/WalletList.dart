@@ -1,4 +1,4 @@
- // ignore_for_file: always_specify_types
+
 
  import 'package:flutter/material.dart';
  import 'package:metamask_project/Models/wallet.dart';
@@ -60,6 +60,7 @@ class WalletList extends StatelessWidget{
                     ),
                     TextButton(
                         onPressed: () {Navigator.push(context,
+                            // ignore: always_specify_types
                             MaterialPageRoute(builder: (BuildContext context)
                             => const ImportTokenPage()));},
                         child: const Text(

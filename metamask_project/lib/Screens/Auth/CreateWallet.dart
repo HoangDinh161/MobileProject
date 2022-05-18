@@ -1,6 +1,4 @@
 
-// ignore_for_file: lines_longer_than_80_chars, always_specify_types
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -164,11 +162,15 @@ class _CreateWalletState extends State<CreateWalletPage> {
                                         fontFamily: 'Roboto', fontSize: 12),
                                   ),
                                   TextButton(
-                                    child: Text(_showHide,style: const TextStyle(fontFamily: 'Roboto', fontSize: 12, color: Colors.black),),
+                                    child: Text(_showHide,style: const
+                                    TextStyle(fontFamily: 'Roboto',
+                                        fontSize: 12,
+                                        color: Colors.black),),
                                     onPressed: () {
                                       setState(() {
                                           _passwordVisible = !_passwordVisible;
-                                          _showHide = _passwordVisible == true? 'Show' : 'Hide';
+                                          _showHide = _passwordVisible == true?
+                                          'Show' : 'Hide';
                                       });
                                     },
                                   )
@@ -270,7 +272,8 @@ class _CreateWalletState extends State<CreateWalletPage> {
                               const Text(
                                 'Before continuing we need to confirm your password',
                                 textAlign: TextAlign.left,
-                                style: TextStyle(fontFamily: 'Roboto', fontSize: 12),
+                                style: TextStyle(fontFamily: 'Roboto',
+                                    fontSize: 12),
                               ),
                               const SizedBox(height: 5,),
                               TextFormField(
@@ -280,7 +283,9 @@ class _CreateWalletState extends State<CreateWalletPage> {
                                 keyboardType: TextInputType.text,
                                 decoration: buildInputDecoration(
                                     8, 'Confirm Password'),
-                                validator: (String? value) => PasswordConfirmationFieldValidator.validate(value, password.text),
+                                validator: (String? value)
+                                => PasswordConfirmationFieldValidator
+                                    .validate(value, password.text),
                               ),
                               const SizedBox(
                                 height: 20,
@@ -290,9 +295,12 @@ class _CreateWalletState extends State<CreateWalletPage> {
                                     primary: Colors.blue,
                                     onPrimary: Colors.white,
                                     minimumSize: const Size(350, 35),
-                                    side: const BorderSide(width: 2, color: Colors.blue),
+                                    side: const BorderSide(width: 2,
+                                        color: Colors.blue),
                                     shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(30))),
+                                        borderRadius: BorderRadius.circular(30)
+                                    )
+                                ),
                                 child: const Text(
                                   'Confirm',
                                   style: TextStyle(
@@ -419,14 +427,19 @@ class _CreateWalletState extends State<CreateWalletPage> {
                                     'phrase': p.phrases,
                                     'username': 'Account',
                                   });
+                                  // ignore: always_specify_types
                                   Navigator.push(context, MaterialPageRoute(
-                                      builder: (BuildContext context) => const MyHomePage()));
+                                      builder: (BuildContext context)
+                                      => const MyHomePage()));
                                 });
                                 } else {
                                   const SnackBar snackBar =  SnackBar(
                                       content: Text('Your phrases are Wrong or not in right Order. Please re-enter or re-order your phrases',
-                                            style: TextStyle(fontSize: 12, fontFamily: 'Roboto', color: Colors.red)));
-                                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                            style: TextStyle(fontSize: 12,
+                                                fontFamily: 'Roboto',
+                                                color: Colors.red)));
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(snackBar);
                               }
                               },
                       ),
@@ -442,7 +455,7 @@ class _CreateWalletState extends State<CreateWalletPage> {
           body: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
+              children: <Widget>[
                 const SizedBox(height: 25),
                 Row(mainAxisAlignment: MainAxisAlignment.start,
                     //crossAxisAlignment: CrossAxisAlignment.start,
@@ -529,7 +542,8 @@ class TextListView extends StatelessWidget {
 }
 
 class TxtView extends StatefulWidget {
-  const TxtView({required this.index, required this.slist ,Key? key }) : super(key: key);
+  const TxtView({required this.index,
+    required this.slist ,Key? key }) : super(key: key);
   final int index;
   final List<String> slist;
   @override
@@ -570,7 +584,8 @@ class _TxtViewState extends State<TxtView> {
         ),
       ),
       controller: controller,
-      validator: (String? value) => PhrasesValidator.validate(value, widget.slist[widget.index-1]),
+      validator: (String? value) => PhrasesValidator.validate(value,
+          widget.slist[widget.index-1]),
     );
   }
 }

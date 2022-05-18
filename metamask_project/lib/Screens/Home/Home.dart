@@ -1,4 +1,3 @@
-// ignore_for_file: always_specify_types
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -166,6 +165,7 @@ class MyHomePage extends StatelessWidget {
                                   onTap: () {  },),
                                 ButtonInMenu(buttonText: 'buy', onTap: () {
                                   Navigator.push(context,
+                                      // ignore: always_specify_types
                                       MaterialPageRoute(builder:
                                           (BuildContext context)
                                       => const PurchasePage())); },
@@ -173,6 +173,7 @@ class MyHomePage extends StatelessWidget {
                                       color:Colors.white),),
                                 ButtonInMenu(buttonText: 'send',
                                   onTap: () { Navigator.push(context,
+                                      // ignore: always_specify_types
                                       MaterialPageRoute(builder: (
                                           BuildContext context)
                                       =>SendPage(wallets: wallets,))); },
@@ -256,7 +257,7 @@ class ButtonInMenu extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
-            children:[
+            children:<Widget>[
               SizedBox(
                   width: 35,
                   height: 35,
@@ -291,6 +292,7 @@ class CoinStream extends StatefulWidget {
 class _CoinStreamState extends State<CoinStream> {
   @override
   Widget build(BuildContext context) {
+    // ignore: always_specify_types
     return StreamBuilder(
       stream: FirebaseFirestore.instance
           .collection('Users')
