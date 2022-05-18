@@ -1,10 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:metamask_project/Screens/Auth/ReLogin.dart';
 import 'package:metamask_project/TransactionHistory.dart';
 
 import '../../Models/user.dart';
-import '../../Models/wallet.dart';
 import '../Auth/StartPage.dart';
 import 'Home.dart';
 

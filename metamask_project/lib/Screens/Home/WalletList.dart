@@ -91,6 +91,7 @@ class _WalletTileState extends State<WalletTile> {
 
   @override
   initState() {
+    super.initState();
     updateValues();
   }
 

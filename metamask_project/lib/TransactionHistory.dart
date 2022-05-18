@@ -25,7 +25,7 @@ class TransactionHistory extends StatelessWidget {
   //       "0xf357...Edl2", 0.647),
   // ];
 
-  TransactionHistory({Key? key}) : super(key: key);
+  const TransactionHistory({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

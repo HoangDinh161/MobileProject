@@ -16,10 +16,11 @@ class BuyPage extends StatefulWidget {
 class _BuyState extends State<BuyPage> {
   late Coin dropdownValue = Coin('id', 'name', 'symbol', 'image');
   List<Coin> coinList = [];
-  TextEditingController _amountController = TextEditingController();
+  final TextEditingController _amountController = TextEditingController();
 
   @override
   void initState() {
+    super.initState();
     getList();
   }
 
@@ -94,7 +95,7 @@ class _BuyState extends State<BuyPage> {
             ),
             Container(
               height: 80,
-              padding: EdgeInsets.fromLTRB(15,10,15,10),
+              padding: const EdgeInsets.fromLTRB(15,10,15,10),
               child:TextFormField(
               controller: _amountController,
               keyboardType: TextInputType.number,
@@ -133,7 +134,7 @@ class _BuyState extends State<BuyPage> {
               ),
               onPressed: () async {
                   await DatabaseService().buyCoin(dropdownValue, _amountController.text);
-                  Future.delayed(Duration(milliseconds: 300), () {
+                  Future.delayed(const Duration(milliseconds: 300), () {
                     Navigator.push(context, MaterialPageRoute(builder: (context) => const MyHomePage()));
                   });
               },

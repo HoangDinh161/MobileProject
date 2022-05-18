@@ -4,9 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:metamask_project/Screens/Buy/Purchase.dart';
 import 'package:metamask_project/Screens/Home/SideMenu.dart';
 import 'package:metamask_project/Services/CoinFromCoingecko.dart';
-import 'package:provider/provider.dart';
 
-import '../../ImportTokenPage.dart';
 import '../../Models/user.dart';
 import '../../Models/wallet.dart';
 import '../../Services/Database.dart';
@@ -263,14 +261,14 @@ class ButtonInMenu extends StatelessWidget {
   }
 }
 
-class coinStream extends StatefulWidget {
-  const coinStream({Key? key}) : super(key: key);
+class CoinStream extends StatefulWidget {
+  const CoinStream({Key? key}) : super(key: key);
 
   @override
-  State<coinStream> createState() => _coinStreamState();
+  State<CoinStream> createState() => _CoinStreamState();
 }
 
-class _coinStreamState extends State<coinStream> {
+class _CoinStreamState extends State<CoinStream> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(

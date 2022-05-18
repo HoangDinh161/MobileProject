@@ -494,7 +494,7 @@ class _CreateWalletState extends State<CreateWalletPage> {
 
 }
 class TextListView extends StatelessWidget {
-  TextListView({required this.p, Key? key }) : super(key: key);
+  const TextListView({required this.p, Key? key }) : super(key: key);
   final Phrase p;
 
   @override

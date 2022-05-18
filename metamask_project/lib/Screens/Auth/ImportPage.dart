@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:passwordfield/passwordfield.dart';
 
 import '../../Design/InputDeco_design.dart';
 import '../../Services/Auth.dart';
@@ -13,8 +12,8 @@ class ImportPage extends StatefulWidget {
 }
 
 class _ImportState extends State<ImportPage> {
-  TextEditingController _phrases = TextEditingController();
-  TextEditingController _password = TextEditingController();
+  final TextEditingController _phrases = TextEditingController();
+  final TextEditingController _password = TextEditingController();
   //TextEditingController _reNewPassword = TextEditingController();
 
   bool _passwordVisible = true;

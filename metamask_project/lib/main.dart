@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:metamask_project/Services/Database.dart';
-import 'package:passwordfield/passwordfield.dart';
-import 'Screens/Auth/CreateWallet.dart';
 import 'Screens/Auth/StartPage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -14,10 +12,12 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
   );
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
           create: (context) => context.read<AuthService>().authStateChanges,
         ),
       ],
-      child: MaterialApp(
+      child: const MaterialApp(
         title: "APP",
         home: AuthWrapper(),
       ),
@@ -39,16 +39,18 @@ class MyApp extends StatelessWidget {
 }
 
 class AuthWrapper extends StatelessWidget{
+  const AuthWrapper({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final user = context.watch<User>();
     if(user != null){
       return Provider<DatabaseService>(
           create: (_) => DatabaseService(),
-          child: MyHomePage()
+          child: const MyHomePage()
       );
     }
-    return StartPage();
+    return const StartPage();
   }
 
 }
