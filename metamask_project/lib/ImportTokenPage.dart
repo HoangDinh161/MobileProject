@@ -4,6 +4,7 @@ import 'package:metamask_project/Screens/Home/Home.dart';
 
 import 'Models/Coin.dart';
 import 'Services/CoinFromCoingecko.dart';
+import '../../Services/Database.dart';
 
 class ImportTokenPage extends StatefulWidget {
   const ImportTokenPage({Key? key}) : super(key: key);
@@ -170,12 +171,15 @@ class _ImportTokenState extends State<ImportTokenPage> {
                         fontFamily: 'Roboto',
                         color: Colors.white),
                   ),
-                  onPressed: () {
+                  onPressed: () async {
                     // viết code xử lí import ở đây,
                     // import  _tokenChose vào walletList.
                     // ignore: always_specify_types
-                    Navigator.push(context, MaterialPageRoute(builder:
-                        (BuildContext context)=> const MyHomePage()));
+                    bool a = await DatabaseService().importCoin(_tokenChose);
+                    if (a) {
+                      Navigator.push(context, MaterialPageRoute(builder:
+                          (BuildContext context)=> const MyHomePage()));
+                    }
                   },
                 ),
               ],
@@ -183,4 +187,5 @@ class _ImportTokenState extends State<ImportTokenPage> {
           )),
     );
   }
+
 }

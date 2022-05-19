@@ -23,24 +23,24 @@ class DatabaseService {
       user(
         username: snapshot.data()['username'],
         uid: snapshot.data()['uid'],
-    );
+      );
   }
 
   List<wallet> _walletListFromSnapshot(QuerySnapshot snapshot) {
-    return snapshot.docs.map((QueryDocumentSnapshot doc){
+    return snapshot.docs.map((QueryDocumentSnapshot doc) {
       //print(doc.data);
       return wallet(
-          coin: Coin(doc.data()['id'],
-              doc.data()['name'],
-              doc.data()['symbol'],
-              doc.data()['image']),
-          amount: doc.data()['amount'],
+        coin: Coin(doc.data()['id'],
+            doc.data()['name'],
+            doc.data()['symbol'],
+            doc.data()['image']),
+        amount: doc.data()['amount'],
       );
     }).toList();
   }
 
   List<Trans> _transListFromSnapshot(QuerySnapshot snapshot) {
-    return snapshot.docs.map((QueryDocumentSnapshot doc){
+    return snapshot.docs.map((QueryDocumentSnapshot doc) {
       //print(doc.data);
       return Trans(
         doc.data()['type'],
@@ -57,7 +57,7 @@ class DatabaseService {
     }).toList();
   }
 
-  Stream<List<Trans>> get transList  {
+  Stream<List<Trans>> get transList {
     return FirebaseFirestore.instance.collection('user')
         .doc(uid).collection('trans')
         .snapshots()
@@ -69,20 +69,22 @@ class DatabaseService {
         .doc(uid).snapshots()
         .map(_userDataFromSnapshot);
   }
-  Stream<List<wallet>> get walletList  {
+
+  Stream<List<wallet>> get walletList {
     return FirebaseFirestore.instance.collection('user').doc(uid)
         .collection('wallet')
         .snapshots()
         .map(_walletListFromSnapshot);
   }
+
   Future<bool> buyCoin(Coin coin, String value) async {
     try {
       bool added = false;
       double amount = double.parse(value);
       DateTime now = DateTime.now();
-      DateFormat formatterDate = DateFormat.MMMMd('en_US') ;
+      DateFormat formatterDate = DateFormat.MMMMd('en_US');
       DateFormat formatterTime = DateFormat.jm();
-      DateFormat formatterDoc1 = DateFormat.yMMMMd('en_US') ;
+      DateFormat formatterDoc1 = DateFormat.yMMMMd('en_US');
       DateFormat formatterDoc2 = DateFormat.Hms();
       String actualDate = formatterDate.format(now);
       String actualTime = formatterTime.format(now);
@@ -93,8 +95,8 @@ class DatabaseService {
           .doc(uid)
           .collection('wallet')
           .doc(coin.id);
-      FirebaseFirestore.instance.runTransaction((Transaction transaction)
-      async {
+      FirebaseFirestore.instance.runTransaction((
+          Transaction transaction) async {
         DocumentSnapshot snapshot = await transaction.get(documentReference);
         await FirebaseFirestore.instance.collection('user')
             .doc(uid).collection('trans')
@@ -133,13 +135,13 @@ class DatabaseService {
     }
   }
 
-  Future<bool> sendCoin(Coin coin,String receiver, String value) async {
+  Future<bool> sendCoin(Coin coin, String receiver, String value) async {
     try {
       double amount = double.parse(value);
       DateTime now = DateTime.now();
-      DateFormat formatterDate = DateFormat.MMMMd('en_US') ;
+      DateFormat formatterDate = DateFormat.MMMMd('en_US');
       DateFormat formatterTime = DateFormat.jm();
-      DateFormat formatterDoc1 = DateFormat.yMMMMd('en_US') ;
+      DateFormat formatterDoc1 = DateFormat.yMMMMd('en_US');
       DateFormat formatterDoc2 = DateFormat.Hms();
       String actualDate = formatterDate.format(now);
       String actualTime = formatterTime.format(now);
@@ -155,8 +157,8 @@ class DatabaseService {
           .doc(receiver)
           .collection('wallet')
           .doc(coin.id);
-      FirebaseFirestore.instance.runTransaction((Transaction transaction)
-      async {
+      FirebaseFirestore.instance.runTransaction((
+          Transaction transaction) async {
         DocumentSnapshot snapshot1 = await transaction.get(documentReference1);
         DocumentSnapshot snapshot2 = await transaction.get(documentReference2);
         double newAmount = snapshot1.data()['amount'] - amount;
@@ -167,7 +169,7 @@ class DatabaseService {
             'symbol': coin.symbol,
             'image': coin.image,
             'amount': amount});
-        }else {
+        } else {
           double newAmount = snapshot2.data()['amount'] + amount;
           transaction.update(documentReference2, {'amount': newAmount});
         }
@@ -183,8 +185,8 @@ class DatabaseService {
           'from': uid,
           'to': receiver,
           'Tamount': amount,
-          'amount': amount*0.9,
-          'fee': amount*0.1,
+          'amount': amount * 0.9,
+          'fee': amount * 0.1,
         });
         await FirebaseFirestore.instance.collection('user').doc(receiver)
             .collection('trans').doc(docName).set({
@@ -196,8 +198,8 @@ class DatabaseService {
           'from': uid,
           'to': receiver,
           'Tamount': amount,
-          'amount': amount*0.9,
-          'fee': amount*0.1,
+          'amount': amount * 0.9,
+          'fee': amount * 0.1,
         });
         return true;
       });
@@ -206,7 +208,27 @@ class DatabaseService {
       return false;
     }
   }
+
+  Future<bool> importCoin(Coin coin) async {
+    DocumentReference document = FirebaseFirestore.instance
+        .collection('user')
+        .doc(uid)
+        .collection('wallet')
+        .doc(coin.id);
+    DocumentSnapshot snapshot = await document.get();
+    if (!snapshot.exists) {
+      document.set(
+          {'id': coin.id,
+            'name': coin.name,
+            'symbol': coin.symbol,
+            'image': coin.image,
+            'amount': 0.0}
+      );
+    }
+    return true;
+  }
 }
+
 
 Future<bool> lookingForUser(String? receiver) async {
   if (receiver == null) {
