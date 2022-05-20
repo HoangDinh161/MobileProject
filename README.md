@@ -8,7 +8,7 @@
     git clone https://github.com/HoangDinh161/MobileProject
     ```
 2. Cài đặt Flutter và Android Studio theo hướng dẫn trên trang chủ [Flutter](https://docs.flutter.dev/get-started/install)
-3. Vì project có cài nhiều loại package nên khi cài đặt trước khi chạy thì thêm  args '--no-sound-null-safety' để run app.Run app tại file main.dart.
+3. Vì project có cài nhiều loại package nên khi cài đặt trước khi chạy thì thêm  args '--no-sound-null-safety'.Sau đó, Run app tại file main.dart.
 
 ### Test
 Link test project: [Test](https://github.com/HoangDinh161/MobileProject/tree/main/metamask_project/test)
