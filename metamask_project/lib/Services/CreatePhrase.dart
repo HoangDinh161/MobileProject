@@ -29,8 +29,7 @@ class PhraseCard extends StatelessWidget {
 class Phrase {
 
   Phrase () {
-    //phrases = "cat internet important gas camera hex target
-    // bamboo royal kitty lamp orange";
+    //phrases = 'cat internet important gas camera hex target bamboo royal kitty lamp orange';
     phrases = bip39.generateMnemonic();
   }
   String phrases = '';

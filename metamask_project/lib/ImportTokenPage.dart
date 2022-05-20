@@ -172,11 +172,10 @@ class _ImportTokenState extends State<ImportTokenPage> {
                         color: Colors.white),
                   ),
                   onPressed: () async {
-                    // viết code xử lí import ở đây,
-                    // import  _tokenChose vào walletList.
-                    // ignore: always_specify_types
+
                     bool a = await DatabaseService().importCoin(_tokenChose);
                     if (a) {
+                      // ignore: always_specify_types
                       Navigator.push(context, MaterialPageRoute(builder:
                           (BuildContext context)=> const MyHomePage()));
                     }

@@ -111,7 +111,7 @@ class _ImportState extends State<ImportPage> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: const <Widget>[
                                 Text(
-                                  'New Password',
+                                  'Password',
                                   style: TextStyle(fontFamily: 'Roboto',
                                       fontSize: 12),
                                 ),
