@@ -10,6 +10,8 @@ import '../Models/user.dart';
 import '../Models/Transaction.dart';
 import 'package:intl/intl.dart';
 
+import 'CoinFromCoingecko.dart';
+
 
 class DatabaseService {
 
@@ -35,6 +37,7 @@ class DatabaseService {
             doc.data()['symbol'],
             doc.data()['image']),
         amount: doc.data()['amount'],
+        value: doc.data()['value'],
       );
     }).toList();
   }
@@ -81,6 +84,7 @@ class DatabaseService {
     try {
       bool added = false;
       double amount = double.parse(value);
+      double v = await getUSD(coin.id);
       DateTime now = DateTime.now();
       DateFormat formatterDate = DateFormat.MMMMd('en_US');
       DateFormat formatterTime = DateFormat.jm();
@@ -120,11 +124,14 @@ class DatabaseService {
           }
           return true;
         } else {
-          documentReference.set({'id': coin.id,
+          documentReference.set({
+            'id': coin.id,
             'name': coin.name,
             'symbol': coin.symbol,
             'image': coin.image,
-            'amount': amount});
+            'amount': amount,
+            'value': v,
+          });
           added = true;
           return true;
         }

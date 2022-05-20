@@ -92,7 +92,6 @@ class WalletTile extends StatefulWidget{
 }
 
 class _WalletTileState extends State<WalletTile> {
-  double usd = 0.0;
 
   @override
   initState() {
@@ -101,15 +100,15 @@ class _WalletTileState extends State<WalletTile> {
   }
 
   updateValues() async {
-    usd = await getUSD(widget.w.coin.id);
+
+    widget.w.value = await getUSD(widget.w.coin.id);
+
+
     setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-    getValue(String id, double amount)  {
-      return (usd * amount).toStringAsFixed(2);
-    }
     // TODO: implement build
     return ListTile(
       dense:true,
@@ -124,7 +123,7 @@ class _WalletTileState extends State<WalletTile> {
 
       title: Text(widget.w.amount.toString() +
           ' ${widget.w.coin.symbol.toUpperCase()}'),
-      subtitle: Text('${getValue(widget.w.coin.id, widget.w.amount)} USD'),
+      subtitle: Text('${(widget.w.value * widget.w.amount).toStringAsFixed(2)} USD'),
       trailing: const Icon(Icons.arrow_right),
     );
   }

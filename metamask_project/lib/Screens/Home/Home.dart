@@ -4,7 +4,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:metamask_project/Screens/Buy/Purchase.dart';
 import 'package:metamask_project/Screens/Home/SideMenu.dart';
-import 'package:metamask_project/Services/CoinFromCoingecko.dart';
 import 'package:flutter/services.dart';
 
 import '../../Models/user.dart';
@@ -34,14 +33,23 @@ class MyApp extends StatelessWidget {
 }
 */
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
 //
-//   @override
-//   State<MyHomePage> createState() => _MyHomePageState();
-// }
-//
-// class _MyHomePageState extends State<MyHomePage> {
+   double cal(List<wallet>? wallets) {
+    double total = 0.0;
+
+    for(wallet w in wallets ?? [])  {
+      total += w.value * w.amount;
+    }
+    return total;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,10 +64,11 @@ class MyHomePage extends StatelessWidget {
                 AsyncSnapshot<List<wallet>> snapshot) {
               if(snapshot.hasData) {
                 List<wallet>? wallets = snapshot.data;
-                GetTotal total = GetTotal(wallets: wallets);
+                // GetTotal total = GetTotal(wallets: wallets);
+                cal(wallets);
                 return Scaffold(
                     drawer: SideMenu(userData: userData
-                        ,total: GetTotal(wallets: wallets)),
+                        ,total: cal(wallets)),
                     appBar: AppBar(
                       // The title text which will be shown on the action bar
                       toolbarHeight: 47,
@@ -113,7 +122,14 @@ class MyHomePage extends StatelessWidget {
                             padding: const EdgeInsets.only(top: 4.0),
                             child: SizedBox(
                                 width: 350,
-                              child: total,
+                              child: Text(
+                                '\$ ${cal(wallets).toStringAsFixed(2)}',
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                  color: Color(0xff998c8c),
+                                  fontSize: 9,
+                                ),
+                              ),
                             ),
                           ),
                           Padding(
@@ -326,42 +342,41 @@ class _CoinStreamState extends State<CoinStream> {
   }
 }
 
-class GetTotal extends StatefulWidget {
+// class GetTotal extends StatefulWidget {
+//
+//   GetTotal({required this.wallets,Key? key}) : super(key: key);
+//   List<wallet>? wallets;
+//   double total = 0.0;
+//   @override
+//   State<GetTotal> createState() => _GetTotalState();
+// }
 
-  GetTotal({required this.wallets,Key? key}) : super(key: key);
-  List<wallet>? wallets;
-  double total = 0.0;
-  @override
-  State<GetTotal> createState() => _GetTotalState();
-}
-
-class _GetTotalState extends State<GetTotal> {
-
-  @override
-  void initState() {
-    super.initState();
-    getTotal();
-  }
-
-  getTotal()  async {
-    // widget.total = 0.0;
-    for(var w in widget.wallets ?? [])  {
-      double a = await getUSD(w.coin.id);
-      widget.total += a*w.amount;
-    }
-    setState(() {});
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    return Text(
-      '\$ ${widget.total.toStringAsFixed(2)}',
-      textAlign: TextAlign.center,
-      style: const TextStyle(
-        color: Color(0xff998c8c),
-        fontSize: 9,
-      ),
-    );
-  }
-}
+// class _GetTotalState extends State<GetTotal> {
+//
+//   @override
+//   void initState() {
+//     super.initState();
+//     getTotal();
+//   }
+//
+//   getTotal()  async {
+//     widget.total = 0.0;
+//     for(var w in widget.wallets ?? [])  {
+//       widget.total += w.value * w.amount;
+//     }
+//     setState(() {});
+//   }
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     // TODO: implement build
+//     return Text(
+//       '\$ ${widget.total.toStringAsFixed(2)}',
+//       textAlign: TextAlign.center,
+//       style: const TextStyle(
+//         color: Color(0xff998c8c),
+//         fontSize: 9,
+//       ),
+//     );
+//   }
+// }

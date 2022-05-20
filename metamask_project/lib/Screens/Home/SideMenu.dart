@@ -12,7 +12,7 @@ class SideMenu extends StatelessWidget {
   SideMenu({required this.total,
     required this.userData,Key? key}) : super(key: key);
   user? userData;
-  GetTotal total;
+  double total;
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -63,7 +63,14 @@ class SideMenu extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 4.0),
                   child: SizedBox(
                     height: 10,
-                    child: total,
+                    child: Text(
+                      '\$ ${total.toStringAsFixed(2)}',
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        color: Color(0xff998c8c),
+                        fontSize: 9,
+                      ),
+                    ),
                   ),
                 ),
                 Padding(

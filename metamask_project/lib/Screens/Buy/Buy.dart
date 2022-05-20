@@ -27,7 +27,7 @@ class _BuyState extends State<BuyPage> {
   }
 
   getList() async {
-    while(coinList.isEmpty) {
+    while (coinList.isEmpty) {
       coinList = await getCoinList();
     }
     dropdownValue = coinList[0];
@@ -102,10 +102,18 @@ class _BuyState extends State<BuyPage> {
               height: 80,
               padding: const EdgeInsets.fromLTRB(15,10,15,10),
               child:TextFormField(
+                validator: (value)  {
+                  if (value == null|| value.isEmpty) {
+                    return 'Please enter amount';
+                  }
+                  return null;
+                },
                   controller: _amountController,
                   keyboardType: TextInputType.number,
                   inputFormatters: <TextInputFormatter>[
-                    FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                    FilteringTextInputFormatter.allow(RegExp(
+                        r'^[+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)$'
+                    )),
                   ],
               decoration: const InputDecoration(
                 label: Text(
@@ -138,12 +146,20 @@ class _BuyState extends State<BuyPage> {
                     fontSize: 12, fontFamily: 'Roboto', color: Colors.white),
               ),
               onPressed: () async {
-                  await DatabaseService().buyCoin(dropdownValue,
-                      _amountController.text);
-                  Future.delayed(const Duration(milliseconds: 500), () {
-                    Navigator.push(context, MaterialPageRoute(builder:
-                        (context) => const MyHomePage()));
-                  });
+                  if(await DatabaseService().buyCoin(dropdownValue,
+                      _amountController.text)) {
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                        builder: (BuildContext context) => const MyHomePage(),
+                      ),
+                          (route) => false,
+                    );
+                  }
+                  // Future.delayed(const Duration(milliseconds: 500), () {
+                  //   Navigator.push(context, MaterialPageRoute(builder:
+                  //       (context) => const MyHomePage()));
+                  // });
               },
             ),
           ],

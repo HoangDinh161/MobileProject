@@ -49,7 +49,7 @@ class _SendState extends State<SendPage> {
   final TextEditingController _amountController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final GlobalKey<FormState> _formKey1 = GlobalKey<FormState>();
-  wallet dropdownValue = wallet(coin: Coin('','','',''), amount: 0);
+  wallet dropdownValue = wallet(coin: Coin('','','',''), amount: 0, value:0);
 
   @override
   initState() {
@@ -294,7 +294,9 @@ class _SendState extends State<SendPage> {
                                     keyboardType: TextInputType.number,
                                     inputFormatters: <TextInputFormatter>[
                                       FilteringTextInputFormatter.allow(
-                                          RegExp(r'[0-9]')),
+                                          RegExp(
+                                              r'^[+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)$'
+                                          )),
                                     ],
                                     enabled: true,
                                     decoration: const InputDecoration(
