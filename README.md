@@ -2,6 +2,9 @@
 ## Ứng dụng MetaMask
 Ứng dụng được phát triển trên Flutter với ngôn ngữ Dart, mô phỏng lại một số chức năng của ví MetaMask
 
+### Báo cáo
+[Link đến bài báo cáo của nhóm](https://docs.google.com/document/d/10HS3zPU5-jdI4qknoELqDll4gDxSqgzrH2EIMhbKhyc/edit?usp=sharing)
+
 ### Cài đặt
 1. Clone repo:
     ```
