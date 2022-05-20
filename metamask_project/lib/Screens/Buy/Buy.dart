@@ -27,7 +27,9 @@ class _BuyState extends State<BuyPage> {
   }
 
   getList() async {
-    coinList = await getCoinList();
+    while(coinList.isEmpty) {
+      coinList = await getCoinList();
+    }
     dropdownValue = coinList[0];
     setState(() {});
   }
@@ -138,7 +140,7 @@ class _BuyState extends State<BuyPage> {
               onPressed: () async {
                   await DatabaseService().buyCoin(dropdownValue,
                       _amountController.text);
-                  Future.delayed(const Duration(milliseconds: 300), () {
+                  Future.delayed(const Duration(milliseconds: 500), () {
                     Navigator.push(context, MaterialPageRoute(builder:
                         (context) => const MyHomePage()));
                   });

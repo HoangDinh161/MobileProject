@@ -196,7 +196,10 @@ class TransTile extends StatelessWidget {
                       alignment: Alignment.centerRight,
                       child: IconButton(
                         onPressed: () {
-                          Navigator.pop(context);
+                          Future.delayed(const Duration(milliseconds: 500), () {
+                            Navigator.pop(context);
+                          });
+
                         },
                         icon: const Icon(Icons.close),
                         color: Colors.black,

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:metamask_project/Screens/Buy/Purchase.dart';
 import 'package:metamask_project/Screens/Home/SideMenu.dart';
 import 'package:metamask_project/Services/CoinFromCoingecko.dart';
+import 'package:flutter/services.dart';
 
 import '../../Models/user.dart';
 import '../../Models/wallet.dart';
@@ -117,13 +118,16 @@ class MyHomePage extends StatelessWidget {
                           ),
                           Padding(
                             padding: const EdgeInsets.only(top: 10.0),
-                            child: SizedBox(
-                              width: 98,
-                              height: 16,
-                              child: (
-                                  SizedBox(
-                                    width: 98,
-                                    height: 16,
+                            child: (
+                                SizedBox(
+                                  width: 98,
+                                  height: 16,
+                                  child: InkWell(
+                                    onTap: () async {
+                                      ClipboardData data =
+                                      ClipboardData(text: userData.uid);
+                                      await Clipboard.setData(data);
+                                    },
                                     child: Material(
                                       color: const Color(0xffc9def2),
                                       borderRadius: BorderRadius.circular(16),
@@ -147,8 +151,8 @@ class MyHomePage extends StatelessWidget {
                                         ),
                                       ),
                                     ),
-                                  )
-                              ),
+                                  ),
+                                )
                             ),
                           ),
 
@@ -340,7 +344,7 @@ class _GetTotalState extends State<GetTotal> {
   }
 
   getTotal()  async {
-    widget.total = 0.0;
+    // widget.total = 0.0;
     for(var w in widget.wallets ?? [])  {
       double a = await getUSD(w.coin.id);
       widget.total += a*w.amount;
