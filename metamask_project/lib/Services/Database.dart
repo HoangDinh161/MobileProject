@@ -228,6 +228,7 @@ class DatabaseService {
   }
 
   Future<bool> importCoin(Coin coin) async {
+    double v = await getUSD(coin.id);
     DocumentReference document = FirebaseFirestore.instance
         .collection('user')
         .doc(uid)
@@ -240,7 +241,9 @@ class DatabaseService {
             'name': coin.name,
             'symbol': coin.symbol,
             'image': coin.image,
-            'amount': 0.0}
+            'amount': 0.0,
+            'value': v,
+          }
       );
     }
     return true;

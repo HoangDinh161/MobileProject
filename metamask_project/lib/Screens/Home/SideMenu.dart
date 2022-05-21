@@ -10,10 +10,16 @@ import 'Home.dart';
 
 class SideMenu extends StatelessWidget {
   SideMenu({required this.total,
-    required this.userData,Key? key}) : super(key: key);
+    required this.userData, required this.uid,Key? key}) : super(key: key);
   user? userData;
   double total;
-  @override
+  String uid;
+
+  String short(String str) {
+    return str.substring(0, 7) + '...'
+        + str.substring(uid.length -5, uid.length);
+  }
+
   Widget build(BuildContext context) {
     return Drawer(
       child: ListView(
@@ -84,8 +90,8 @@ class SideMenu extends StatelessWidget {
                       child: Material(
                         color: const Color(0xffc9def2),
                         borderRadius: BorderRadius.circular(16),
-                        child: const Padding(
-                          padding: EdgeInsets.only(
+                        child: Padding(
+                          padding: const EdgeInsets.only(
                             left: 15,
                             right: 14,
                             top: 3,
@@ -95,9 +101,9 @@ class SideMenu extends StatelessWidget {
                             width: 68.48,
                             height: 14,
                             child: Text(
-                              '0x5368...4037',
+                              short(uid),
                               textAlign: TextAlign.center,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 9,
                               ),

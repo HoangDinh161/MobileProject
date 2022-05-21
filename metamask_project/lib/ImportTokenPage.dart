@@ -97,7 +97,7 @@ class _ImportTokenState extends State<ImportTokenPage> {
                     style: TextStyle(
                         fontSize: 20,
                         fontFamily: 'Roboto',
-                        color: Colors.deepPurpleAccent),
+                        color: Colors.blue),
                 ),
                 const Divider(
                   thickness: 1,

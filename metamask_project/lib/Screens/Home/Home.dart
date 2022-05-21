@@ -68,7 +68,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 cal(wallets);
                 return Scaffold(
                     drawer: SideMenu(userData: userData
-                        ,total: cal(wallets)),
+                        ,total: cal(wallets)
+                      ,uid: FirebaseAuth.instance.currentUser.uid),
                     appBar: AppBar(
                       // The title text which will be shown on the action bar
                       toolbarHeight: 47,
