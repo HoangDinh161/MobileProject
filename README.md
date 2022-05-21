@@ -48,6 +48,7 @@ Tại trang Home, bấm button “Buy” trên menu. Tại trang Purchase, nhấ
 Sau khi hoàn thất, app sẽ quay về màn hình chính.
 #### Thực hiện giao dịch
 Chọn button Send tại màn hình chính. Nhập các thông tin cần thiết: địa chỉ người nhận, token muốn chuyển và số lượng.
+
 ![](https://github.com/HoangDinh161/MobileProject/blob/2ecb9407677ce2d1514a994a06b46df50024d3d7/metamask_project/assets/demopic/Screenshot%20(334).png)
 ![](https://github.com/HoangDinh161/MobileProject/blob/2ecb9407677ce2d1514a994a06b46df50024d3d7/metamask_project/assets/demopic/Screenshot%20(335).png)
 ![](https://github.com/HoangDinh161/MobileProject/blob/2ecb9407677ce2d1514a994a06b46df50024d3d7/metamask_project/assets/demopic/Screenshot%20(336).png)
