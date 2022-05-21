@@ -41,10 +41,10 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  List<wallet>? wallets = [];
 //
    double cal(List<wallet>? wallets) {
     double total = 0.0;
-
     for(wallet w in wallets ?? [])  {
       total += w.value * w.amount;
     }
@@ -63,7 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
             builder: (BuildContext context,
                 AsyncSnapshot<List<wallet>> snapshot) {
               if(snapshot.hasData) {
-                List<wallet>? wallets = snapshot.data;
+                wallets = snapshot.data;
                 // GetTotal total = GetTotal(wallets: wallets);
                 cal(wallets);
                 return Scaffold(
