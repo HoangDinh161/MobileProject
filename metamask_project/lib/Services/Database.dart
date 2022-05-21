@@ -213,7 +213,7 @@ class DatabaseService {
             'name': coin.name,
             'symbol': coin.symbol,
             'image': coin.image,
-            'amount': amount,
+            'amount': amount*0.9,
             'value': v,
           });
           added = true;

@@ -5,7 +5,7 @@ class user {
 
 
   String short() {
-    return uid.substring(0, 7) + "..." + uid.substring(uid.length -5, uid.length);
+    return uid.substring(0, 7) + '...' + uid.substring(uid.length -5, uid.length);
   }
 
 }
