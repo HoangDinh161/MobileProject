@@ -12,7 +12,7 @@ void main() {
   test("non-empty but wrong format password ", () {
 
     final result = PasswordFieldValidator.validate('password');
-    expect(result, "Password must have at least 8 characters,one uppercase, one lowercase, one digit");
+    expect(result, 'Password must have at least 8 characters,one uppercase, one lowercase, one digit');
   });
 
   test("non-empty and right format password ", () {
@@ -33,7 +33,7 @@ void main() {
     expect(result, 'Password does not match');
   });
 
-  test('wrong password in confirm password ', () {
+  test('right password in confirm password ', () {
 
     final result = PasswordConfirmationFieldValidator.validate('TruongGiaBinh!@#12', 'TruongGiaBinh!@#12');
     expect(result, null);
