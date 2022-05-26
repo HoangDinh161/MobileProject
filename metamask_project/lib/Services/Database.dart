@@ -219,7 +219,6 @@ class DatabaseService {
           added = true;
           return true;
         }
-        return true;
       });
       return true;
     } catch (e) {
